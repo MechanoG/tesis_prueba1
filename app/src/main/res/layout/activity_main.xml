@@ -20,11 +20,11 @@
         app:layout_constraintVertical_bias="0.132" />
 
     <Button
-        android:id="@+id/button.01"
+        android:id="@+id/button01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="132dp"
-        android:text="Button"
+        android:text="Solicitar"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
