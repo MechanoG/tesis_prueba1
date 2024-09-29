@@ -20,6 +20,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -46,19 +48,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Se declara la url de el archivo php necesario para la conexion
-                String con= "https://127.0.0.1/Archivos_PHP_TESIS/db_conexion.php";
+                String con="http://10.0.2.2:80/php/db_conexion.php";
+                        /*"http://10.0.2.2:80/php/tesis_con.php/public";*/
 
                 StringRequest req = new StringRequest(Request.Method.GET, con,
                         new Response.Listener<String>(){
                     @Override
                     public  void onResponse(String response){
                         Toast.makeText(getApplicationContext(), "Conexion realizada",Toast.LENGTH_SHORT).show();
+                        Log.d("Mensaje" , "Conexion realizada");
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error){
                         Toast.makeText(getApplicationContext(), "Conexion fallida",Toast.LENGTH_SHORT).show();
-                        salida.setText(error.getMessage());
+                        salida.setText(error.toString());
+                        Log.i("Error", error.toString());
                     }
                 });
 
