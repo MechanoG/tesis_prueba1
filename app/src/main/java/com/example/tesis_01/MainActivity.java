@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button gatillo;
-        TextView salida;
+        /*TextView salida;*/
+        EditText user;
+        EditText cont;
 
 
 
@@ -39,17 +42,22 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
 
 
-        //Se inicializa el boton y el get text
+        //Se inicializa el boton y el textview
         gatillo = findViewById(R.id.button01);
-        salida = findViewById(R.id.prueba);
+       /* salida = findViewById(R.id.prueba);*/
+        cont = findViewById(R.id.in_user);
+        user = findViewById(R.id.in_pass);
+
 
         //Se define la funcion del boton gatillo
         gatillo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 //Se declara la url de el archivo php necesario para la conexion
-                String con="http://10.0.2.2:80/php/db_conexion.php";
-                        /*"http://10.0.2.2:80/php/tesis_con.php/public";*/
+                String con="http://10.0.2.2:80/tesis_con/public";
+                        /*"http://10.0.2.2:80/php/db_conexion.php";*/
+
 
                 StringRequest req = new StringRequest(Request.Method.GET, con,
                         new Response.Listener<String>(){
@@ -62,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error){
                         Toast.makeText(getApplicationContext(), "Conexion fallida",Toast.LENGTH_SHORT).show();
-                        salida.setText(error.toString());
+                        /*.setText(error.toString());*/
                         Log.i("Error", error.toString());
                     }
                 });
@@ -70,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
                 queue.add(req);
 
             }
+
+
+
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -99,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
 
-    }
+    }*/
 
-     */
+
 }

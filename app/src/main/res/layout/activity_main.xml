@@ -8,26 +8,69 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/prueba"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Prueba conexion"
+        android:id="@+id/encabezado"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:background="?android:attr/colorMultiSelectHighlight"
+        android:text="Cabs.CA"
+        android:textColor="@color/black"
         android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.132" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <Button
         android:id="@+id/button01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
+        android:backgroundTint="@color/black"
         android:text="Solicitar"
         android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prueba" />
+        app:layout_constraintTop_toBottomOf="@+id/in_pass"
+        app:layout_constraintVertical_bias="0.223" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="193dp"
+        android:layout_height="253dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/encabezado"
+        app:layout_constraintVertical_bias="0.058"
+        app:srcCompat="@drawable/login_usuario" />
+
+    <EditText
+        android:id="@+id/in_user"
+        android:layout_width="350sp"
+        android:layout_height="66dp"
+        android:layout_marginTop="30dp"
+        android:hint="Ingrese usuario"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <EditText
+        android:id="@+id/in_pass"
+        android:layout_width="350sp"
+        android:layout_height="66dp"
+        android:layout_marginTop="30dp"
+        android:hint="Ingrese constraseña"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/in_user" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
