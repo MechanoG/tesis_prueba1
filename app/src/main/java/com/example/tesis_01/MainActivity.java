@@ -1,5 +1,6 @@
 package com.example.tesis_01;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -96,12 +97,25 @@ public class MainActivity extends AppCompatActivity {
                                         //Se determina el tipo de usuario de la aplicacion
                                         String credencial = sharedPreferences.getString("tipo", "");
 
+                                        //Comienza nueva actividad en base a las credenciales
                                         if (credencial.equals("vendedor")){
                                             Log.d("Mensaje", "Se verifiva el acceso al vendedor");
+                                            Toast.makeText(getApplicationContext(), "Vendedor",
+                                                    Toast.LENGTH_LONG).show();
+
                                         } else if (credencial.equals("Gerente")) {
                                             Log.d("Mensaje", "Se verifiva el acceso al Gerente");
+                                            Toast.makeText(getApplicationContext(), "Gerente",
+                                                    Toast.LENGTH_LONG).show();
+                                            //Aqui va menu gerente
+                                            Intent intent = new Intent(MainActivity.this, menu_gerente.class);
+                                            startActivity(intent);
+
                                         }else{
                                             Log.d("Mensaje", "Proceso no completado");
+                                            Toast.makeText(getApplicationContext(), "Indefinido",
+                                                    Toast.LENGTH_LONG).show();
+
                                         }
 
                                         /* Manda advertencia a terminal con la infomracion de sharedpreferences
