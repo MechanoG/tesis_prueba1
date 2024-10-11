@@ -25,18 +25,16 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button gatillo;
+    /*TextView salida;*/
+    EditText user;
+    EditText cont;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-
-        Button gatillo;
-        /*TextView salida;*/
-        EditText user;
-        EditText cont;
-
-
 
         //Se declara e inicializa la url del archivo del servidor
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -45,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
         //Se inicializa el boton y el textview
         gatillo = findViewById(R.id.button01);
        /* salida = findViewById(R.id.prueba);*/
-        cont = findViewById(R.id.in_user);
-        user = findViewById(R.id.in_pass);
+        user = findViewById(R.id.in_user);
+        cont = findViewById(R.id.in_pass);
 
 
         //Se define la funcion del boton gatillo
@@ -54,22 +52,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                String usuario = user.getText().toString();
+                String contra = cont.getText().toString();
+
+                if (!usuario.isEmpty() && !contra.isEmpty()) {
+
+
                 //Se declara la url de el archivo php necesario para la conexion
-                String con="http://10.0.2.2:80/tesis_con/public";
-                        /*"http://10.0.2.2:80/php/db_conexion.php";*/
+                String con = "http://10.0.2.2:80/tesis_con/public";
+                /*"http://10.0.2.2:80/php/db_conexion.php";*/
 
 
                 StringRequest req = new StringRequest(Request.Method.GET, con,
-                        new Response.Listener<String>(){
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Toast.makeText(getApplicationContext(), "Conexion realizada", Toast.LENGTH_SHORT).show();
+                                Log.d("Mensaje", "Conexion realizada");
+                            }
+                        }, new Response.ErrorListener() {
                     @Override
-                    public  void onResponse(String response){
-                        Toast.makeText(getApplicationContext(), "Conexion realizada",Toast.LENGTH_SHORT).show();
-                        Log.d("Mensaje" , "Conexion realizada");
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error){
-                        Toast.makeText(getApplicationContext(), "Conexion fallida",Toast.LENGTH_SHORT).show();
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Conexion fallida", Toast.LENGTH_SHORT).show();
                         /*.setText(error.toString());*/
                         Log.i("Error", error.toString());
                     }
@@ -77,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
 
                 queue.add(req);
 
+                }else{
+                    Toast.makeText(getApplicationContext(), "No se pueden dejar campos vacios",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
 
 
@@ -90,27 +98,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /*
-    private void ejecutar_peticion (String url){
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>(){
-            @Override
-            public void onResponse(String response){
-                Log.d("Respuesta", response);
-                //Muestra un mensaje al usuario si la conexion fue exitosa
-                Toast.makeText(getApplicationContext(), "Conexion realizada",Toast.LENGTH_SHORT).show();
-            }
-        }, new Response.ErrorListener(){
-            @Override
-            public void onErrorResponse(VolleyError error){
-                Toast.makeText(getApplicationContext(), "Conexion fallida",Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        RequestQueue queue = Volley.newRequestQueue(this);
-        queue.add(stringRequest);
-
-    }*/
 
 
 }
