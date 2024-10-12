@@ -103,6 +103,10 @@ public class MainActivity extends AppCompatActivity {
                                             Toast.makeText(getApplicationContext(), "Vendedor",
                                                     Toast.LENGTH_LONG).show();
 
+                                            //Aqui se inicia el menu vendedor
+                                            Intent intentv = new Intent(MainActivity.this, Menu_Vendedor.class);
+                                            startActivity(intentv);
+
                                         } else if (credencial.equals("Gerente")) {
                                             Log.d("Mensaje", "Se verifiva el acceso al Gerente");
                                             Toast.makeText(getApplicationContext(), "Gerente",
