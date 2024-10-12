@@ -1,9 +1,13 @@
 package com.example.tesis_01;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +19,7 @@ public class menu_gerente extends AppCompatActivity {
 
     //Inicio textViews
     TextView id, empleado, usuario, contraseña, tipo;
+    Button pedidos, inventario, clientes, empleados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,11 @@ public class menu_gerente extends AppCompatActivity {
         contraseña = findViewById(R.id.sp_contraseña);
         tipo = findViewById(R.id.sp_tipo);
 
+        //Inicializa los botones
+        pedidos = findViewById(R.id.boG_pedidos);
+        inventario = findViewById(R.id.boG_Inventario);
+        clientes = findViewById(R.id.boG_Clientes);
+        empleados = findViewById(R.id.boG_Empleados);
 
         //Carga informacion del usuario
         SharedPreferences sharedPreferences =
@@ -47,6 +57,35 @@ public class menu_gerente extends AppCompatActivity {
         contraseña.setText(Et_cont);
         tipo.setText(Et_tipo);
 
+        //Funcionalidad de los botones
+        pedidos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(menu_gerente.this, Gerente_Pedidos.class);
+                startActivity(intent);
+            }
+        });
+
+        inventario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Inventario", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        clientes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Clientes", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        empleados. setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Toast.makeText(getApplicationContext(), "Empleados", Toast.LENGTH_LONG).show();
+            }
+        });
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
