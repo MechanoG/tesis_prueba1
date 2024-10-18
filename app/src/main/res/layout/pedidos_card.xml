@@ -14,7 +14,7 @@
             android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/id_pedido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
@@ -22,6 +22,30 @@
             android:textSize="20sp"
             android:padding="5dp"
             />
+
+        <TextView
+            android:id="@+id/id_cliente"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/id_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/total_pedido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/estado_pedido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
 
     </LinearLayout>
 

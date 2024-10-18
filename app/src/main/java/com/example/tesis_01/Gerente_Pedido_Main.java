@@ -12,11 +12,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+
+import java.lang.ref.ReferenceQueue;
 import java.util.ArrayList;
 
 public class Gerente_Pedido_Main extends Fragment {
     ArrayList<Pedidos_lista> pedidosLista;
     RecyclerView lista_pedidos;
+
+    //Variable para la url a donde se realizara la consulta
+    String url="http://localhost/tesis_con/public/pedidos";
 
     /*
     @Override
@@ -43,16 +55,32 @@ public class Gerente_Pedido_Main extends Fragment {
         lista_pedidos.setLayoutManager(new LinearLayoutManager(getContext()/*this*/));
 
         pedidosLista = new ArrayList<Pedidos_lista>();
-        pedidosLista.add(new Pedidos_lista( "Por favor funciona"));
+        pedidosLista.add(new Pedidos_lista(1, 565.1f, 1, 1, "Vigente"));
+        for (int i=0; i<=10; i++){
+            pedidosLista.add(new Pedidos_lista(1, 565.1f, 1, 1, "Vigente"));
 
-        for (int i=20; i>0; i-- ){
-            pedidosLista.add(new Pedidos_lista("Soy el maximo mamahuevo"));
         }
-
-        pedidosLista.add(new Pedidos_lista("Fin"));
+        pedidosLista.add(new Pedidos_lista(1, 565.1f, 1, 1, "Ulti"));
 
 
         Pedidos_lista_Adapter adaptador_pedidos = new Pedidos_lista_Adapter(pedidosLista, getContext());
         lista_pedidos.setAdapter(adaptador_pedidos);
     }
+
+    /*
+    //funcion que recupera los datos de la base de datos y los muestra en el recycle view
+    private void mostrar_pedidos (){
+        //Se crea nueva variable para  nuestro request que
+        //en forma de un array asi que estamos haciendo un json array quest
+        //debajo de esa linea hacemos un json array
+        //request y entonces extraemos data de cada objeto json
+
+        String url="http://localhost/tesis_con/public/pedidos";
+        RequestQueue conect = Volley.newRequestQueue(getActivity());
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, Response.Listener<JSONArray>(){
+
+        })
+
+
+    } */
 }
