@@ -33,14 +33,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Gerente_Pedido_Main extends Fragment {
+    //Array que almacena los pedidos
     ArrayList<Pedidos_lista> pedidosLista;
+
     RecyclerView lista_pedidos;
     Button ingresar_pedido;
 
     //Se inicializan controlle y navhost para fragments
     NavController navController;
     NavHostFragment navHostFragment;
-
 
 
     //Variable para la url a donde se realizara la consulta
@@ -66,7 +67,7 @@ public class Gerente_Pedido_Main extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        
+        //iNICIALIZA EL RECYCLREVIREW
         lista_pedidos=view.findViewById(R.id.pedidos_lista);
 
         //Se crea el array para los pedidos
@@ -169,7 +170,7 @@ public class Gerente_Pedido_Main extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error){
                 Toast.makeText(getContext(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
-                Log.d("Error", error.getMessage());
+                Log.d("Error", "" + error.getMessage());
             }
         });
         queue.add(jsonArrayRequest);
