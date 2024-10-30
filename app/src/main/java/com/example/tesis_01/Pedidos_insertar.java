@@ -1,5 +1,8 @@
 package com.example.tesis_01;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,32 +29,63 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSelectedListener {
     NavController navController;
-    TextView header;
+//
+    TextView header, total_pedidos, empleado_txt;;
+//
     Button cancelar, ingresar;
-    Spinner pedido_inv;
+
+
+    //Espiners de la pantalla
+    Spinner pedido_inv, cliente_pedido;
+    //Espiner de Adaptador de espiner de productos
     ArrayAdapter inv_list_adap;
+    //Adaptador de spinner de clientes
+    ArrayAdapter cli_list_adap;
 
-    //Arrray que almacena los productos para el spinner
-    ArrayList <String> productos_spinner;
 
-    //Array que almacena los productos para guardado
+//    //Arrray que almacena los productos para el spinner de productos
+    ArrayList<String> productos_spinner;
+//
+//    //Array que almacena los productos para guardado
     ArrayList <Producto> productos;
 
     //Array para mostrar los productos en el recycler view
     ArrayList <Producto> productos_recycleview;
 
+
+    //Alamcenamiento del empleado
+    ArrayList<Cliente> clientes;
+
+    //Array del spiner de clientes
+    ArrayList<String> clientes_spinner;
+
+    //Se guarda el id del cliente
+    int id_cliente_set;
+
+
+
+
     //Url para obtener informacion de la base de datos
-    String url_recibir = "http://10.0.2.2:80/tesis_con/public/productos";
+    String url_recibir_productos = "http://10.0.2.2:80/tesis_con/public/productos";
+    //URL para obtener la informacion de clientes de la base de datos
+    String url_recibir_clientes = "http://10.0.2.2:80/tesis_con/public/clientes";
+    //URL para insertar los pedidos  a la base de datos.
+    String url_insertar_pedido =  "http://10.0.2.2:80/tesis_con/public/pedidos/create";
+
 
     //Recycleview
     RecyclerView recy_pedidos;
@@ -74,62 +108,75 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //Inicializa  el array del recycle view
+        //Inicializa  el view del recycle view
         recy_pedidos = view.findViewById(R.id.recycle_pedidos);
 
         //Inicializa el array del recycle view
         productos_recycleview = new ArrayList<Producto>();
 
-        //Inicializa el array de datos del spinner
+        //Inicializa el array de datos del spinner de productos
         productos_spinner = new ArrayList<String>();
 
+        //Inicializa el array de datos del spinner de clientes
+        clientes_spinner = new ArrayList<String>();
+
         //Inicializa el array de datos
-        productos = new ArrayList<Producto>();
-
-        //pRUEBA RECYCLE VIEW
-        productos_recycleview.add(new Producto("Hola", 15.5f,55, "Saludo" ));
-        productos_recycleview.add(new Producto("Hola", 15.5f,55, "Saludo" ));
-        productos_recycleview.add(new Producto("Hola", 15.5f,55, "Saludo" ));
-        productos_recycleview.add(new Producto("Hola", 15.5f,55, "Saludo" ));
-
-        buildRecyclerView();
+        productos = new ArrayList<Producto>(); //No es esto lo que cuelga spinner
+        clientes = new ArrayList<Cliente>();
 
         //Se solicita la infformacion para los array
         obtener_productos();
+        obtener_clientes();
 
-
-
-        //Crear el reciclerview
-        //productos_pedido = view.findViewById(R.id.productos_pedidos_recycle);
-
-
-        //Crea el spiner y le aplica OnItemSelectedListener, que le
+        //Cream los espiner el spiner y le aplica OnItemSelectedListener, que le
         //cual item del spinner is clicked
 
+        //Creacion y adaptacion de los spinner y OnItemSelectedListener
+        //Del Spinner productos
         pedido_inv = view.findViewById(R.id.spin_Gped_inv);
         pedido_inv.setOnItemSelectedListener(this);
 
-        //Crea instancia de ArrayAdapter
+        //Del spinner cliente
+        cliente_pedido=view.findViewById(R.id.spin_Gclientes);
+        cliente_pedido.setOnItemSelectedListener(this);
+
+        //Crea instancia de los ArrayAdapter
         //having the list odf courses
 
-        inv_list_adap = new ArrayAdapter (getContext(), android.R.layout.simple_spinner_item,
+        //Adapter de spinner de productos
+        inv_list_adap = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,
                 productos_spinner);
 
-        //on the spiner whic binds data to spinner
-        pedido_inv.setAdapter(inv_list_adap);
+        //Adapter de spinner de clientes
+        cli_list_adap = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,
+                clientes_spinner);
 
-        //set un layout resource file para cada item del Spinner
 
+        //set un layout resource file para cada item del los Spinner
+        //layout resource del espiner clientes
         inv_list_adap.setDropDownViewResource(
                 android.R.layout.simple_spinner_dropdown_item
         );
 
-        //Set the ArrayAdapter (inv_list_adapt) data
+        //layout resource del espiner productos
+        cli_list_adap.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item
+        );
 
+        //Set the ArrayAdapter (inv_list_adapt) data }
+        //Set productos adapter
+        pedido_inv.setAdapter(inv_list_adap);
+        //Set clientes adapter
+        cliente_pedido.setAdapter(cli_list_adap);
+
+
+        empleado_txt = view.findViewById(R.id.txtEmpleado);
         header = view.findViewById(R.id.nuevo_pedido);
+        total_pedidos = view.findViewById(R.id.txtTotalPedido);
 
         //Se cra nevegador del fragment
         navController = Navigation.findNavController(view);
+
 
         //Se inicializa boton cancelar.
         cancelar = view.findViewById(R.id.Pedido_Cancelar);
@@ -141,7 +188,19 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
             }
         });
 
+        ingresar = view.findViewById(R.id.realizar_pedido);
+        ingresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                realizar_pedido();
+            }
+        });
+
+
+        buildRecyclerView();
+        id_usuario();
+        //on the spiner whic binds data to spinner
 
 
     }
@@ -150,24 +209,43 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
     //que esseleccionado en el spiner
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        Toast.makeText(getContext(), productos_spinner.get(i), Toast.LENGTH_SHORT ).show();
+        //Identifica desde cual spinner se llama la funcion
+        if(adapterView.getId()==R.id.spin_Gped_inv) {
+            Toast.makeText(getActivity().getApplicationContext(), productos_spinner.get(i),
+                    Toast.LENGTH_LONG).show();
+            Log.d("Mensaje", "Se llamo a onItemSelected");
+            productos_recycleview.add(productos.get(i));
+            buildRecyclerView();
+        }else{
+            String mensaje = clientes.get(i).razon_social;
+            Toast.makeText(getActivity().getApplicationContext(), mensaje,
+                    Toast.LENGTH_LONG).show();
+            id_cliente_set = clientes.get(i).cliente_id;
+            empleado_txt.setText(String.valueOf(id_cliente_set));
+
+        }
 
     }
+
+
+
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
 
+
     //Obtiene la informacion de los productos
-    private void obtener_productos(){
+    private void obtener_productos(){           // Esto no rompe el spinner
 
         //Se crea nueva variable para  nuestro request que
         RequestQueue queue = Volley.newRequestQueue(getContext());
 
+
         //en forma de un array asi que estamos haciendo un json array quest
         //debajo de esa linea hacemos un json array
         //request y entonces extraemos data de cada objeto json
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url_recibir, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url_recibir_productos, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 for(int i = 0; i<response.length(); i++) {
@@ -184,26 +262,28 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
                         int cantidad = responseObj.getInt("cantidad");
                         String s = responseObj.getString("precio");
                         float precio =  Float.parseFloat(s);
+
                         /*
                         Log.d("codigo_producto", codigo_producto);
                         Log.d("descripcion", descripcion);
                         Log.d("cantidad", Integer.toString(cantidad));
                         Log.d("precio", s);
                         */
+
                         String insertar =codigo_producto+"   " + descripcion +"   "+ Integer.toString(cantidad) +
                                 "   " + s;
 
                         //Envio la informacion productos al spinner
                         productos_spinner.add(insertar);
+                        inv_list_adap.notifyDataSetChanged();  //Fundamental, sino tendre problemas para poder llenar el spinner
 
                         //Informacion de los productos
                         productos.add(new Producto(codigo_producto, precio, cantidad, descripcion));
 
-                        log_productos();
+                        //Se pasa la informacion de la array de guardao al recycle view
+                        buildRecyclerView();
 
-                        /*
-                        pedidosLista.add(new Pedidos_lista(pedido_id, pedido_total, pedido_id_cli, pedido_id_user, estado ));
-                        buildRecycleview(); */
+
 
                     }catch (JSONException e){
                         e.printStackTrace();
@@ -221,21 +301,100 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
         queue.add(jsonArrayRequest);
     }
 
-    private void log_productos() {
-        for (int i=0; i<productos.size(); i++){
+    //Obtiene la informacion de los clientes
+    private void obtener_clientes(){           // Esto no rompe el spinner
 
-            String cod = productos.get(i).getCodigo();
-            String desc = productos.get(i).getDescripcion();
-            String can = Integer.toString(productos.get(i).getCantidad());
-            String pre = Float.toString(productos.get(i).getPrecio());
+        //Se crea nueva variable para  nuestro request que
+        RequestQueue queue = Volley.newRequestQueue(getContext());
 
-            Log.d("codigo_producto", cod );
-            Log.d("descripcion", desc );
-            Log.d("cantidad", can);
-            Log.d("precio", pre);
 
-        }
+        //en forma de un array asi que estamos haciendo un json array quest
+        //debajo de esa linea hacemos un json array
+        //request y entonces extraemos data de cada objeto json
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url_recibir_clientes, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                for(int i = 0; i<response.length(); i++) {
+                    //Se crea nuevo objeto json
+                    //se toma cada objeto del json array
+                    try{
+                        //obtenemos cada objeto del json object
+                        JSONObject responseObj = response.getJSONObject(i);
+                        //Obtenemos la respuesta de la api in formato json
+                        //abajo extraemos un string con su key value from our json object
+                        //extraemos todos los datos from our json
+
+                        int id_cliente = responseObj.getInt("id");
+                        String rif = responseObj.getString("rif");
+                        String razon_social = responseObj.getString("razon_social");
+
+
+
+                        Log.d("ID CLIENTE", String.valueOf(id_cliente));
+                        Log.d("DESCRIPCION CLIENTE", rif);
+                        Log.d("RAZON SOCIAL CLIENTE", razon_social);
+
+
+                        String insertar =Integer.toString(id_cliente)+ "" + rif + "" + razon_social;
+
+                        //Envio la informacion productos al spinner
+                        clientes_spinner.add(insertar);
+                        cli_list_adap.notifyDataSetChanged();  //Fundamental, sino tendre problemas para poder llenar el spinner
+
+
+                        //Informacion de los productos
+                        clientes.add(new Cliente(rif, razon_social, id_cliente));
+
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                        Log.d("Error", e.getMessage());
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error){
+                Toast.makeText(getContext(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
+                Log.d("Error", error.getMessage());
+            }
+        });
+        queue.add(jsonArrayRequest);
     }
+
+
+    private void realizar_pedido(){
+        float final_pedido = Float.parseFloat((String.valueOf(total_pedidos.getText())));
+
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+
+        //Se crea un JSONObject con los datos que se desean enviar
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("id_cliente",id_cliente_set);
+            jsonObject.put("id_usuario",id_usuario());
+            jsonObject.put("total_pedido",final_pedido);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        //Crear solicitud post
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.POST, url_insertar_pedido, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("Mensaje", response.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Error", error.toString());
+            }
+        });
+
+        queue.add(jsonObjectRequest);
+
+    }
+
 
     private void buildRecyclerView(){
         //Se inicia el adaptador de de la clase
@@ -250,6 +409,41 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
 
         //Se establece el adaptador al recycle View
         recy_pedidos.setAdapter(adaptadorProductos);
+
+        total_pedido();
     }
 
+
+
+    private void total_pedido(){
+        if (productos_recycleview.isEmpty()){
+            total_pedidos.setText(String.valueOf(0.00f));
+        }
+        else{
+            float conteo = 0;
+            for (int z=0; z < productos_recycleview.size();z++){
+                conteo = conteo + productos_recycleview.get(z).getPrecio();
+            }
+
+
+            total_pedidos.setText(String.valueOf(conteo));
+        }
+
+    }
+
+    private int id_usuario(){
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MySharedPref",
+                MODE_PRIVATE);
+        int usuario_id = sharedPreferences.getInt("id", 0);
+
+        String Et_id = Integer.toString(usuario_id);
+
+        Log.d("ID Uduarios", Et_id);
+
+        return usuario_id;
+    }
+
+
 }
+
