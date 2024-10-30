@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,6 +69,8 @@ public class menu_gerente extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Inventario", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(menu_gerente.this, Activity_gerente_inventario.class);
+                startActivity((intent));
             }
         });
 
