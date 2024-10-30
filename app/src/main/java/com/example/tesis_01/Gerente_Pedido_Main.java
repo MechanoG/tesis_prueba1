@@ -1,5 +1,6 @@
 package com.example.tesis_01;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -37,7 +38,7 @@ public class Gerente_Pedido_Main extends Fragment {
     ArrayList<Pedidos_lista> pedidosLista;
 
     RecyclerView lista_pedidos;
-    Button ingresar_pedido;
+    Button ingresar_pedido, volver;
 
     //Se inicializan controlle y navhost para fragments
     NavController navController;
@@ -108,6 +109,13 @@ public class Gerente_Pedido_Main extends Fragment {
                 public void onClick(View view) {
                     Log.d("Accion", "Se presiono el boton");
                     navController.navigate(R.id.action_gerente_Pedido_Main_to_pedidos_insertar2);
+                }
+            });
+            volver = view.findViewById(R.id.bt_regresar);
+            volver.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getActivity().finish();
                 }
             });
 
