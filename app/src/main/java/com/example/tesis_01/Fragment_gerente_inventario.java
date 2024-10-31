@@ -8,11 +8,24 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -24,6 +37,9 @@ public class Fragment_gerente_inventario extends Fragment {
     RecyclerView inventario_recy;
 
     ArrayList<Producto> productos;
+
+    //Url para obtener informacion de productos de la base de datos
+    String url_recibir_productos = "http://10.0.2.2:80/tesis_con/public/productos";
 
     /*
     @Override
@@ -57,8 +73,70 @@ public class Fragment_gerente_inventario extends Fragment {
         inventario_recy = view.findViewById(R.id.inven_recyView);
 
         productos.add(new Producto("Caraoatas", 15635.00f, 55, "1kILO CARAOTAS"));
+        obtener_productos();
         build_products_recycleview();
 
+    }
+
+    //Recibe la informacion de los productos
+    private void obtener_productos(){           // Esto no rompe el spinner
+
+        //Se crea nueva variable para  nuestro request que
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+
+
+        //en forma de un array asi que estamos haciendo un json array quest
+        //debajo de esa linea hacemos un json array
+        //request y entonces extraemos data de cada objeto json
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url_recibir_productos, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                for(int i = 0; i<response.length(); i++) {
+                    //Se crea nuevo objeto json
+                    //se toma cada objeto del json array
+                    try{
+                        //obtenemos cada objeto del json object
+                        JSONObject responseObj = response.getJSONObject(i);
+                        //Obtenemos la respuesta de la api in formato json
+                        //abajo extraemos un string con su key value from our json object
+                        //extraemos todos los datos from our json
+                        String codigo_producto = responseObj.getString("codigo");
+                        String descripcion = responseObj.getString("descripcion");
+                        int cantidad = responseObj.getInt("cantidad");
+                        String s = responseObj.getString("precio");
+                        float precio =  Float.parseFloat(s);
+
+                        /*
+                        Log.d("codigo_producto", codigo_producto);
+                        Log.d("descripcion", descripcion);
+                        Log.d("cantidad", Integer.toString(cantidad));
+                        Log.d("precio", s);
+                        */
+
+
+
+                        //Informacion de los productos
+                        productos.add(new Producto(codigo_producto, precio, cantidad, descripcion));
+
+                        //Se pasa la informacion de la array de guardao al recycle view
+                        build_products_recycleview();
+
+
+
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                        Log.d("Error", e.getMessage());
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error){
+                Toast.makeText(getContext(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
+                Log.d("Error", error.getMessage());
+            }
+        });
+        queue.add(jsonArrayRequest);
     }
 
     //Se encvarga de mandar el recycleview
