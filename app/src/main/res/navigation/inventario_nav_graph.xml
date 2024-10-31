@@ -9,5 +9,18 @@
         android:id="@+id/fragment_gerente_inventario"
         android:name="com.example.tesis_01.Fragment_gerente_inventario"
         android:label="fragment_gerente_inventario"
-        tools:layout="@layout/fragment_gerente_inventario" />
+        tools:layout="@layout/fragment_gerente_inventario" >
+        <action
+            android:id="@+id/action_fragment_gerente_inventario_to_fragment_gerente_inventario_insertar"
+            app:destination="@id/fragment_gerente_inventario_insertar" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_gerente_inventario_insertar"
+        android:name="com.example.tesis_01.Fragment_gerente_inventario_insertar"
+        android:label="fragment_gerente_inventario_insertar"
+        tools:layout="@layout/fragment_gerente_inventario_insertar" >
+        <action
+            android:id="@+id/action_fragment_gerente_inventario_insertar_to_fragment_gerente_inventario"
+            app:destination="@id/fragment_gerente_inventario" />
+    </fragment>
 </navigation>

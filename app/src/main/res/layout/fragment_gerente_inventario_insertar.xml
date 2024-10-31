@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment_gerente_inventario_insertar">
+
+
+    <LinearLayout
+        android:layout_width="416dp"
+        android:layout_height="643dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/producto_nuevo">
+
+
+        <TextView
+            android:id="@+id/cod_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="10sp"
+            android:text="Ingresar codigo"
+            app:layout_constraintBottom_toTopOf="@+id/editTextText"
+            app:layout_constraintTop_toBottomOf="@+id/producto_nuevo"
+            app:layout_constraintVertical_bias="0.15"
+            tools:layout_editor_absoluteX="158dp" />
+
+        <EditText
+            android:id="@+id/cod_input"
+            android:layout_width="391dp"
+            android:layout_height="72dp"
+            android:layout_marginBottom="20dp"
+            android:ems="10"
+            android:hint="Codigo"
+            android:inputType="text"
+            app:layout_constraintBottom_toTopOf="@+id/descri_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cod_label" />
+
+        <TextView
+            android:id="@+id/descri_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:paddingLeft="10sp"
+            android:text="Ingresar descripcion"
+            app:layout_constraintBottom_toTopOf="@+id/descrip_input"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/descrip_input"
+            android:layout_width="394dp"
+            android:layout_height="74dp"
+            android:layout_marginBottom="20dp"
+            android:ems="10"
+            android:hint="Descripcion"
+            android:inputType="text"
+            app:layout_constraintBottom_toTopOf="@+id/precio_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/precio_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:paddingLeft="10sp"
+            android:text="Ingresar precio"
+            app:layout_constraintBottom_toTopOf="@+id/precio_input"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/precio_input"
+            android:layout_width="393dp"
+            android:layout_height="61dp"
+            android:layout_marginBottom="12dp"
+            android:ems="10"
+            android:hint="Precio"
+            android:inputType="text"
+            app:layout_constraintBottom_toTopOf="@+id/cant_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/cant_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:paddingLeft="10sp"
+            android:text="Ingresar cantidad"
+            app:layout_constraintBottom_toTopOf="@+id/cant_input"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <EditText
+            android:id="@+id/cant_input"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:ems="10"
+            android:hint="Cantidad"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="625dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cancelar" />
+
+            <Button
+                android:id="@+id/ingresar_producto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Ingresar" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/producto_nuevo"
+        android:layout_width="365dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:text="Ingresar Nuevo Producto"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.409"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,7 +35,7 @@ import java.util.ArrayList;
 public class Fragment_gerente_inventario extends Fragment {
     //iNICIALIZA ELEMENTOS VISUALES
     TextView cabecera;
-    Button retroceder, ingresar;
+    Button retroceder, ingresar_producto;
     RecyclerView inventario_recy;
 
     //dECLARA ARRAY DE RECYCLEVIEW
@@ -41,6 +43,11 @@ public class Fragment_gerente_inventario extends Fragment {
 
     //Url para obtener informacion de productos de la base de datos
     String url_recibir_productos = "http://10.0.2.2:80/tesis_con/public/productos";
+
+
+    //Se inicializan controlle y navhost para fragments
+    NavController navController;
+    NavHostFragment navHostFragment;
 
     /*
     @Override
@@ -67,6 +74,14 @@ public class Fragment_gerente_inventario extends Fragment {
 
         cabecera=view.findViewById(R.id.inventario_head);
 
+
+
+        inventario_recy = view.findViewById(R.id.inven_recyView);
+
+        productos.add(new Producto("Caraoatas", 15635.00f, 55, "1kILO CARAOTAS"));
+        obtener_productos();
+        build_products_recycleview();
+
         retroceder = view.findViewById(R.id.inv_volver);
         retroceder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,13 +90,27 @@ public class Fragment_gerente_inventario extends Fragment {
             }
         });
 
-        ingresar = view.findViewById(R.id.ingresar_pro);
+        try{
+            //se crea el nav controles
+            //navController=NavHostFragment.findNavController(this);
+                                                                                                //fragmentContInventarioGerente es el ide del fagmentr view de la activity
+            navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentContInventarioGerente);
+            navController = navHostFragment.getNavController();          //se crea el boton
+            ingresar_producto = view.findViewById(R.id.ingresar_pro);
 
-        inventario_recy = view.findViewById(R.id.inven_recyView);
+            ingresar_producto.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d("Accion", "Se presiono el boton");
+                    navController.navigate(R.id.action_fragment_gerente_inventario_to_fragment_gerente_inventario_insertar);
+                }
+            });
 
-        productos.add(new Producto("Caraoatas", 15635.00f, 55, "1kILO CARAOTAS"));
-        obtener_productos();
-        build_products_recycleview();
+        }catch (java.lang.IllegalStateException e){
+            Toast.makeText(getContext(), "Eror View", Toast.LENGTH_SHORT).show();
+            Log.d("Error", e.getMessage());
+
+        }
 
     }
 
