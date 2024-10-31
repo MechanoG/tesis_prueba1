@@ -31,11 +31,12 @@ import java.util.ArrayList;
 
 
 public class Fragment_gerente_inventario extends Fragment {
-
+    //iNICIALIZA ELEMENTOS VISUALES
     TextView cabecera;
     Button retroceder, ingresar;
     RecyclerView inventario_recy;
 
+    //dECLARA ARRAY DE RECYCLEVIEW
     ArrayList<Producto> productos;
 
     //Url para obtener informacion de productos de la base de datos
@@ -67,6 +68,12 @@ public class Fragment_gerente_inventario extends Fragment {
         cabecera=view.findViewById(R.id.inventario_head);
 
         retroceder = view.findViewById(R.id.inv_volver);
+        retroceder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
 
         ingresar = view.findViewById(R.id.ingresar_pro);
 
