@@ -88,7 +88,7 @@
             android:layout_marginBottom="12dp"
             android:ems="10"
             android:hint="Precio"
-            android:inputType="text"
+            android:inputType="numberDecimal"
             app:layout_constraintBottom_toTopOf="@+id/cant_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -111,7 +111,7 @@
             android:layout_height="63dp"
             android:ems="10"
             android:hint="Cantidad"
-            android:inputType="text"
+            android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"

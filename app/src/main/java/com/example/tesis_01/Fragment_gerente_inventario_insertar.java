@@ -5,7 +5,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class Fragment_gerente_inventario_insertar extends Fragment {
@@ -23,8 +36,12 @@ public class Fragment_gerente_inventario_insertar extends Fragment {
 
     private Button cancelar, ingresar;
 
+
+
     //URL para enviar productos
-    String url_enviar_pro = "http://10.0.2.2:80/tesis_con/public/productos/create";
+    private String url_enviar_pro = "http://10.0.2.2:80/tesis_con/public/productos/create";
+
+    NavController navController;
 
     /*
     @Override
@@ -57,20 +74,28 @@ public class Fragment_gerente_inventario_insertar extends Fragment {
         codigo_in=view.findViewById(R.id.cod_input);
         desc_in=view.findViewById(R.id.descrip_input);
         precio_in=view.findViewById(R.id.precio_input);
-        cant_lab=view.findViewById(R.id.cant_input);
+        cant_int=view.findViewById(R.id.cant_input);
 
         //Botones
         cancelar=view.findViewById(R.id.cancelar);
+
+        navController = Navigation.findNavController(view);
+
         ingresar=view.findViewById(R.id.ingresar_producto);
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 insertar_pedido();
+                navController.navigate(R.id.action_fragment_gerente_inventario_insertar_to_fragment_gerente_inventario);
             }
         });
 
-
-
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navController.navigate(R.id.action_fragment_gerente_inventario_insertar_to_fragment_gerente_inventario);
+            }
+        });
 
     }
 
@@ -79,17 +104,56 @@ public class Fragment_gerente_inventario_insertar extends Fragment {
         String codigo = codigo_in.getText().toString().trim();
         String descripcion = desc_in.getText().toString().trim();
         String precio = precio_in.getText().toString().trim();
-        String cantidad = cant_lab.getText().toString().trim();
+        String cantidad = cant_int.getText().toString().trim();
 
         if(!codigo.isEmpty() && !descripcion.isEmpty() && !cantidad.isEmpty() && !precio.isEmpty()){
 
-            Toast.makeText(getContext(), "Datos Validados", Toast.LENGTH_SHORT).show();
+            float preciop = Float.parseFloat(precio);
+            int cantidadp = Integer.parseInt(cantidad);
+
+            RequestQueue queue = Volley.newRequestQueue(getContext());
+
+            //Se crea un JSONObject con los datos que se desean enviar
+            JSONObject jsonObject = new JSONObject();
+            try{
+                jsonObject.put("cod_producto",codigo);
+                jsonObject.put("des_producto",descripcion);
+                jsonObject.put("pre_producto",preciop);
+                jsonObject.put("can_producto", cantidadp);
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+
+            //Crear solicitud post
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.POST, url_enviar_pro, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.d("Mensaje", response.toString());
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("Error", error.toString());
+                }
+            });
+
+            queue.add(jsonObjectRequest);
+
         }else {
             Toast.makeText(getContext(), "Campos Vacios", Toast.LENGTH_SHORT).show();
         }
 
 
     }
+    /*
+    private void clear(){
+        codigo_in=view.findViewById(R.id.cod_input);
+        desc_in=view.findViewById(R.id.descrip_input);
+        precio_in
+        cant_int
+
+    }*/
 
 
 
