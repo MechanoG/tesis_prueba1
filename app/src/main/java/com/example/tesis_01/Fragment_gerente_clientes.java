@@ -81,6 +81,14 @@ public class Fragment_gerente_clientes extends Fragment {
         navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentContClientGerente);
         navController = navHostFragment.getNavController();          //se crea el boton
 
+        ingresar_cliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navController.navigate(R.id.action_fragment_gerente_clientes_to_fragment_gerente_clientes_insertar);
+            }
+        });
+
+
         retroceder= view.findViewById(R.id.bttn_volver);
         retroceder.setOnClickListener(new View.OnClickListener() {
             @Override

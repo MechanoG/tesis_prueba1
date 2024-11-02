@@ -9,5 +9,18 @@
         android:id="@+id/fragment_gerente_clientes"
         android:name="com.example.tesis_01.Fragment_gerente_clientes"
         android:label="fragment_gerente_clientes"
-        tools:layout="@layout/fragment_gerente_clientes" />
+        tools:layout="@layout/fragment_gerente_clientes" >
+        <action
+            android:id="@+id/action_fragment_gerente_clientes_to_fragment_gerente_clientes_insertar"
+            app:destination="@id/fragment_gerente_clientes_insertar" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_gerente_clientes_insertar"
+        android:name="com.example.tesis_01.Fragment_gerente_clientes_insertar"
+        android:label="fragment_gerente_clientes_insertar"
+        tools:layout="@layout/fragment_gerente_clientes_insertar" >
+        <action
+            android:id="@+id/action_fragment_gerente_clientes_insertar_to_fragment_gerente_clientes"
+            app:destination="@id/fragment_gerente_clientes" />
+    </fragment>
 </navigation>

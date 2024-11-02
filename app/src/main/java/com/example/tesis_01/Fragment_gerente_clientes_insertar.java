@@ -28,105 +28,99 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class Fragment_gerente_inventario_insertar extends Fragment {
+public class Fragment_gerente_clientes_insertar extends Fragment {
 
-    private TextView header, cod_lab, desc_lab, precio_lab, cant_lab;
+    private TextView cabezera, rif_lab, raz_lab, encar_lab, encar_num_lab;
 
-    private EditText codigo_in, desc_in, precio_in, cant_int;
+    private EditText rif_in, raz_in, encar_in, encar_num_int;
 
     private Button cancelar, ingresar;
 
-
-
-    //URL para enviar productos
-    private String url_enviar_pro = "http://10.0.2.2:80/tesis_con/public/productos/create";
-
     NavController navController;
 
-    /*
+    //URL DE CONEXION A BASE DE DATOS
+    String url_insertar_cliente = "http://10.0.2.2:80/tesis_con/public/clientes/create";
+
+/*
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_gerente_inventario_insertar, container, false);
+        return inflater.inflate(R.layout.fragment_gerente_clientes_insertar, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         //Labels
-        header=view.findViewById(R.id.cliente_nuevo);
-        cod_lab=view.findViewById(R.id.cod_label);
-        desc_lab=view.findViewById(R.id.descri_label);
-        precio_lab=view.findViewById(R.id.encargado_label);
-        cant_lab=view.findViewById(R.id.cant_label);
+        cabezera = view.findViewById(R.id.cliente_nuevo);
+        rif_lab = view.findViewById(R.id.rift_label);
+        raz_lab = view.findViewById(R.id.raz_soc_label);
+        encar_lab = view.findViewById(R.id.encargado_label);
+        encar_num_lab= view.findViewById(R.id.encargado_num_label);
 
         //Inputs
-        codigo_in=view.findViewById(R.id.rift_input);
-        desc_in=view.findViewById(R.id.raz_soc_input);
-        precio_in=view.findViewById(R.id.encargado_num_input);
-        cant_int=view.findViewById(R.id.cant_input);
+        rif_in = view.findViewById(R.id.rift_input);
+        raz_in = view.findViewById(R.id.raz_soc_input);
+        encar_in = view.findViewById(R.id.encargado_input);
+        encar_num_int = view.findViewById(R.id.encargado_num_input);
 
         //Botones
-        cancelar=view.findViewById(R.id.cancelar);
+        cancelar = view.findViewById(R.id.cancelar);
+        ingresar = view.findViewById(R.id.ingresar_cliente);
 
         navController = Navigation.findNavController(view);
 
-        ingresar=view.findViewById(R.id.ingresar_cliente);
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                insertar_producto();
-                navController.navigate(R.id.action_fragment_gerente_inventario_insertar_to_fragment_gerente_inventario);
+                insertar_cliente();
+                navController.navigate(R.id.action_fragment_gerente_clientes_insertar_to_fragment_gerente_clientes);
             }
         });
 
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_fragment_gerente_inventario_insertar_to_fragment_gerente_inventario);
+                navController.navigate(R.id.action_fragment_gerente_clientes_insertar_to_fragment_gerente_clientes);
             }
         });
-
     }
 
-    private void insertar_producto(){
+    //Manda solicitud para insertar nuevo cliente
+
+    private void insertar_cliente(){
         //Se declaran los varoles.
-        String codigo = codigo_in.getText().toString().trim();
-        String descripcion = desc_in.getText().toString().trim();
-        String precio = precio_in.getText().toString().trim();
-        String cantidad = cant_int.getText().toString().trim();
+        String rif = rif_in.getText().toString().trim();
+        String raz_soc = raz_in.getText().toString().trim();
 
-        if(!codigo.isEmpty() && !descripcion.isEmpty() && !cantidad.isEmpty() && !precio.isEmpty()){
 
-            float preciop = Float.parseFloat(precio);
-            int cantidadp = Integer.parseInt(cantidad);
+        if(!rif.isEmpty() && !raz_soc.isEmpty()){
+            Toast.makeText(getContext(),"Ingresar Cliente", Toast.LENGTH_SHORT).show();
 
             RequestQueue queue = Volley.newRequestQueue(getContext());
 
             //Se crea un JSONObject con los datos que se desean enviar
             JSONObject jsonObject = new JSONObject();
             try{
-                jsonObject.put("cod_producto",codigo);
-                jsonObject.put("des_producto",descripcion);
-                jsonObject.put("pre_producto",preciop);
-                jsonObject.put("can_producto", cantidadp);
+                jsonObject.put("rif_cliente",rif);
+                jsonObject.put("razon_social",raz_soc);
+
             }catch (JSONException e){
                 e.printStackTrace();
             }
 
             //Crear solicitud post
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                    Request.Method.POST, url_enviar_pro, jsonObject, new Response.Listener<JSONObject>() {
+                    Request.Method.POST, url_insertar_cliente, jsonObject, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     Log.d("Mensaje", response.toString());
@@ -140,23 +134,14 @@ public class Fragment_gerente_inventario_insertar extends Fragment {
 
             queue.add(jsonObjectRequest);
 
+
+
         }else {
             Toast.makeText(getContext(), "Campos Vacios", Toast.LENGTH_SHORT).show();
         }
 
 
     }
-    /*
-    private void clear(){
-
-
-        codigo_in=view.findViewById(R.id.cod_input);
-        desc_in=view.findViewById(R.id.descrip_input);
-        precio_in
-        cant_int
-
-    }*/
-
 
 
 

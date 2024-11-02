@@ -9,24 +9,25 @@
 
 
     <LinearLayout
-        android:layout_width="416dp"
-        android:layout_height="643dp"
+        android:layout_width="411dp"
+        android:layout_height="640dp"
         android:layout_marginTop="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cliente_nuevo">
+        app:layout_constraintTop_toBottomOf="@+id/cliente_nuevo"
+        app:layout_constraintVertical_bias="1.0">
 
 
         <TextView
-            android:id="@+id/cod_label"
+            android:id="@+id/rift_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:paddingLeft="10sp"
-            android:text="Ingresar codigo"
+            android:text="Ingresar Rift"
             app:layout_constraintBottom_toTopOf="@+id/editTextText"
             app:layout_constraintTop_toBottomOf="@+id/cliente_nuevo"
             app:layout_constraintVertical_bias="0.15"
@@ -38,7 +39,7 @@
             android:layout_height="72dp"
             android:layout_marginBottom="20dp"
             android:ems="10"
-            android:hint="Codigo"
+            android:hint="Rift"
             android:inputType="text"
             app:layout_constraintBottom_toTopOf="@+id/descri_label"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +48,7 @@
             app:layout_constraintTop_toBottomOf="@+id/cod_label" />
 
         <TextView
-            android:id="@+id/descri_label"
+            android:id="@+id/raz_soc_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -64,7 +65,7 @@
             android:layout_height="74dp"
             android:layout_marginBottom="20dp"
             android:ems="10"
-            android:hint="Descripcion"
+            android:hint="Razon Social"
             android:inputType="text"
             app:layout_constraintBottom_toTopOf="@+id/encargado_label"
             app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +77,30 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:paddingLeft="10sp"
-            android:text="Ingresar precio"
+            android:text="Ingresar encargado"
+            app:layout_constraintBottom_toTopOf="@+id/encargado_num_input"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/encargado_input"
+            android:layout_width="393dp"
+            android:layout_height="61dp"
+            android:layout_marginBottom="12dp"
+            android:ems="10"
+            android:hint="Encargado"
+            android:inputType="text"
+            app:layout_constraintBottom_toTopOf="@+id/cant_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/encargado_num_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:paddingLeft="10sp"
+            android:text="Ingresar encargado num"
             app:layout_constraintBottom_toTopOf="@+id/encargado_num_input"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -87,35 +111,12 @@
             android:layout_height="61dp"
             android:layout_marginBottom="12dp"
             android:ems="10"
-            android:hint="Precio"
-            android:inputType="numberDecimal"
+            android:hint="Contacto Encargado"
+            android:inputType="text"
             app:layout_constraintBottom_toTopOf="@+id/cant_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/cant_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:paddingLeft="10sp"
-            android:text="Ingresar cantidad"
-            app:layout_constraintBottom_toTopOf="@+id/cant_input"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-
-        <EditText
-            android:id="@+id/cant_input"
-            android:layout_width="match_parent"
-            android:layout_height="63dp"
-            android:ems="10"
-            android:hint="Cantidad"
-            android:inputType="number"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="625dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -145,7 +146,7 @@
         android:layout_width="365dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
-        android:text="Ingresar Nuevo Producto"
+        android:text="Ingresar Nuevo Cliente"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.409"
