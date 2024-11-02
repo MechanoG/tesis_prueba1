@@ -78,6 +78,8 @@ public class menu_gerente extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Clientes", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(menu_gerente.this,Activity_gerente_clientes.class );
+                startActivity(intent);
             }
         });
 
