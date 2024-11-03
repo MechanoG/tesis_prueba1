@@ -65,16 +65,16 @@ public class Fragment_gerente_inventario_insertar extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //Labels
         header=view.findViewById(R.id.cliente_nuevo);
-        cod_lab=view.findViewById(R.id.cod_label);
-        desc_lab=view.findViewById(R.id.descri_label);
-        precio_lab=view.findViewById(R.id.encargado_label);
-        cant_lab=view.findViewById(R.id.cant_label);
+        cod_lab=view.findViewById(R.id.nom_label);
+        desc_lab=view.findViewById(R.id.ape_label);
+        precio_lab=view.findViewById(R.id.ced_label);
+        cant_lab=view.findViewById(R.id.tel_label);
 
         //Inputs
-        codigo_in=view.findViewById(R.id.rift_input);
-        desc_in=view.findViewById(R.id.raz_soc_input);
-        precio_in=view.findViewById(R.id.encargado_num_input);
-        cant_int=view.findViewById(R.id.cant_input);
+        codigo_in=view.findViewById(R.id.nom_input);
+        desc_in=view.findViewById(R.id.ape_input);
+        precio_in=view.findViewById(R.id.ced_input);
+        cant_int=view.findViewById(R.id.sex_input);
 
         //Botones
         cancelar=view.findViewById(R.id.cancelar);

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment_gerente_empleados_insertar">
+
+
+    <TextView
+        android:id="@+id/cabecera_nuevo_emp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="Nuevo empleado"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="73dp" />
+
+    <ScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="560dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
+        app:layout_constraintTop_toTopOf="@+id/guideline6"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="43dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.428"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cliente_nuevo">
+
+
+
+            <TextView
+                android:id="@+id/nom_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ingresar codigo"
+                app:layout_constraintBottom_toTopOf="@+id/editTextText"
+                app:layout_constraintTop_toBottomOf="@+id/cliente_nuevo"
+                app:layout_constraintVertical_bias="0.15"
+                tools:layout_editor_absoluteX="158dp" />
+
+            <EditText
+                android:id="@+id/nom_input"
+                android:layout_width="391dp"
+                android:layout_height="72dp"
+               android:ems="10"
+                android:hint="Codigo"
+                android:inputType="text"
+                app:layout_constraintBottom_toTopOf="@+id/ape_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.502"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nom_label" />
+
+            <TextView
+                android:id="@+id/ape_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Ingresar descripcion"
+                app:layout_constraintBottom_toTopOf="@+id/ape_input"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/ape_input"
+                android:layout_width="394dp"
+                android:layout_height="74dp"
+                android:ems="10"
+                android:hint="Descripcion"
+                android:inputType="text"
+                app:layout_constraintBottom_toTopOf="@+id/ced_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/ced_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Ingresar precio"
+                app:layout_constraintBottom_toTopOf="@+id/ced_input"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/ced_input"
+                android:layout_width="393dp"
+                android:layout_height="61dp"
+                android:ems="10"
+                android:hint="Precio"
+                android:inputType="numberDecimal"
+                app:layout_constraintBottom_toTopOf="@+id/tel_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/sex_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:text="Ingresar cantidad"
+                app:layout_constraintBottom_toTopOf="@+id/sex_input"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <EditText
+                android:id="@+id/sex_input"
+                android:layout_width="match_parent"
+                android:layout_height="63dp"
+                android:ems="10"
+                android:hint="Cantidad"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="625dp" />
+
+
+            <TextView
+                android:id="@+id/tel_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:text="Ingresar cantidad"
+                app:layout_constraintBottom_toTopOf="@+id/sex_input"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <EditText
+                android:id="@+id/tel_input"
+                android:layout_width="match_parent"
+                android:layout_height="63dp"
+                android:ems="10"
+                android:hint="Cantidad"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="625dp" />
+
+            <TextView
+                android:id="@+id/usu_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Ingresar cantidad"
+                app:layout_constraintBottom_toTopOf="@+id/sex_input"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <EditText
+                android:id="@+id/usu_input"
+                android:layout_width="match_parent"
+                android:layout_height="63dp"
+                android:ems="10"
+                android:hint="Cantidad"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="625dp" />
+
+            <TextView
+                android:id="@+id/cont_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Ingresar cantidad"
+                app:layout_constraintBottom_toTopOf="@+id/sex_input"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <EditText
+                android:id="@+id/cont_input"
+                android:layout_width="match_parent"
+                android:layout_height="63dp"
+                android:ems="10"
+                android:hint="Cantidad"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="625dp" />
+
+            <TextView
+                android:id="@+id/tipo_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:paddingLeft="10sp"
+                android:text="Ingresar cantidad"
+                app:layout_constraintBottom_toTopOf="@+id/sex_input"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <EditText
+                android:id="@+id/tipo_input"
+                android:layout_width="match_parent"
+                android:layout_height="63dp"
+                android:ems="10"
+                android:hint="Cantidad"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="625dp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="649dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+        app:layout_constraintVertical_bias="0.5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

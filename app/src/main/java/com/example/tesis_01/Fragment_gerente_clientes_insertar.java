@@ -64,14 +64,14 @@ public class Fragment_gerente_clientes_insertar extends Fragment {
         cabezera = view.findViewById(R.id.cliente_nuevo);
         rif_lab = view.findViewById(R.id.rift_label);
         raz_lab = view.findViewById(R.id.raz_soc_label);
-        encar_lab = view.findViewById(R.id.encargado_label);
+        encar_lab = view.findViewById(R.id.ced_label);
         encar_num_lab= view.findViewById(R.id.encargado_num_label);
 
         //Inputs
-        rif_in = view.findViewById(R.id.rift_input);
-        raz_in = view.findViewById(R.id.raz_soc_input);
+        rif_in = view.findViewById(R.id.nom_input);
+        raz_in = view.findViewById(R.id.ape_input);
         encar_in = view.findViewById(R.id.encargado_input);
-        encar_num_int = view.findViewById(R.id.encargado_num_input);
+        encar_num_int = view.findViewById(R.id.ced_input);
 
         //Botones
         cancelar = view.findViewById(R.id.cancelar);

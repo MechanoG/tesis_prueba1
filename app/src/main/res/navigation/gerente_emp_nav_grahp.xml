@@ -9,5 +9,18 @@
         android:id="@+id/fragment_gerente_empleados"
         android:name="com.example.tesis_01.Fragment_gerente_empleados"
         android:label="fragment_gerente_empleados"
-        tools:layout="@layout/fragment_gerente_empleados" />
+        tools:layout="@layout/fragment_gerente_empleados" >
+        <action
+            android:id="@+id/action_fragment_gerente_empleados_to_fragment_gerente_empleados_insertar"
+            app:destination="@id/fragment_gerente_empleados_insertar" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_gerente_empleados_insertar"
+        android:name="com.example.tesis_01.Fragment_gerente_empleados_insertar"
+        android:label="fragment_gerente_empleados_insertar"
+        tools:layout="@layout/fragment_gerente_empleados_insertar" >
+        <action
+            android:id="@+id/action_fragment_gerente_empleados_insertar_to_fragment_gerente_empleados"
+            app:destination="@id/fragment_gerente_empleados" />
+    </fragment>
 </navigation>

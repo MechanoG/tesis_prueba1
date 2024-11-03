@@ -21,7 +21,7 @@
 
 
         <TextView
-            android:id="@+id/cod_label"
+            android:id="@+id/nom_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -33,80 +33,80 @@
             tools:layout_editor_absoluteX="158dp" />
 
         <EditText
-            android:id="@+id/rift_input"
+            android:id="@+id/nom_input"
             android:layout_width="391dp"
             android:layout_height="72dp"
             android:layout_marginBottom="20dp"
             android:ems="10"
             android:hint="Codigo"
             android:inputType="text"
-            app:layout_constraintBottom_toTopOf="@+id/descri_label"
+            app:layout_constraintBottom_toTopOf="@+id/ape_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cod_label" />
+            app:layout_constraintTop_toBottomOf="@+id/nom_label" />
 
         <TextView
-            android:id="@+id/descri_label"
+            android:id="@+id/ape_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:paddingLeft="10sp"
             android:text="Ingresar descripcion"
-            app:layout_constraintBottom_toTopOf="@+id/raz_soc_input"
+            app:layout_constraintBottom_toTopOf="@+id/ape_input"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
-            android:id="@+id/raz_soc_input"
+            android:id="@+id/ape_input"
             android:layout_width="394dp"
             android:layout_height="74dp"
             android:layout_marginBottom="20dp"
             android:ems="10"
             android:hint="Descripcion"
             android:inputType="text"
-            app:layout_constraintBottom_toTopOf="@+id/encargado_label"
+            app:layout_constraintBottom_toTopOf="@+id/ced_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/encargado_label"
+            android:id="@+id/ced_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:paddingLeft="10sp"
             android:text="Ingresar precio"
-            app:layout_constraintBottom_toTopOf="@+id/encargado_num_input"
+            app:layout_constraintBottom_toTopOf="@+id/ced_input"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
-            android:id="@+id/encargado_num_input"
+            android:id="@+id/ced_input"
             android:layout_width="393dp"
             android:layout_height="61dp"
             android:layout_marginBottom="12dp"
             android:ems="10"
             android:hint="Precio"
             android:inputType="numberDecimal"
-            app:layout_constraintBottom_toTopOf="@+id/cant_label"
+            app:layout_constraintBottom_toTopOf="@+id/tel_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/cant_label"
+            android:id="@+id/tel_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:paddingLeft="10sp"
             android:text="Ingresar cantidad"
-            app:layout_constraintBottom_toTopOf="@+id/cant_input"
+            app:layout_constraintBottom_toTopOf="@+id/sex_input"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
 
         <EditText
-            android:id="@+id/cant_input"
+            android:id="@+id/sex_input"
             android:layout_width="match_parent"
             android:layout_height="63dp"
             android:ems="10"

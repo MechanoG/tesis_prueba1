@@ -91,7 +91,9 @@ public class Fragment_gerente_empleados extends Fragment {
         ingresar_empleado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().finish();
+                navController.navigate(R.id.action_fragment_gerente_empleados_to_fragment_gerente_empleados_insertar);
+
+
             }
         });
 
@@ -99,6 +101,7 @@ public class Fragment_gerente_empleados extends Fragment {
             @Override
             public void onClick(View view) {
 
+                getActivity().finish();
             }
         });
 
