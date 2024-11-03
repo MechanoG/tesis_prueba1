@@ -87,6 +87,9 @@ public class menu_gerente extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 Toast.makeText(getApplicationContext(), "Empleados", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(menu_gerente.this,Activity_gerentes_empleado.class );
+                startActivity(intent);
+
             }
         });
 

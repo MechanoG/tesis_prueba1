@@ -31,79 +31,84 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-
-public class Fragment_gerente_clientes extends Fragment {
-    TextView cabecera;
-    Button ingresar_cliente, retroceder;
-    RecyclerView clientes_recy;
-
-    //Array clientes
-    ArrayList <Cliente> clientes;
-
-    //Se inicializan controlle y navhost para fragments
-    NavController navController;
-    NavHostFragment navHostFragment;
-
-    //URL para obtener la informacion de clientes de la base de datos
-    String url_recibir_clientes = "http://10.0.2.2:80/tesis_con/public/clientes";
+public class Fragment_gerente_empleados extends Fragment {
 
     /*
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
     */
+
+    //iNICIALIZA ELEMENTOS VISUALES
+    TextView cabecera;
+    Button retroceder, ingresar_empleado;
+    RecyclerView empleado_recy;
+
+    //dECLARA ARRAY DE RECYCLEVIEW
+    ArrayList<Empleado> empleados;
+
+    //Url para obtener informacion de empleados de la base de datos
+    String url_recibir_empleados = "http://10.0.2.2:80/tesis_con/public/usuarios/user_employ";
+
+
+
+    //Se inicializan controlle y navhost para fragments
+    NavController navController;
+    NavHostFragment navHostFragment;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_gerente_clientes, container, false);
+        return inflater.inflate(R.layout.fragment_gerente_empleados, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        clientes = new ArrayList<Cliente>();
+        empleados = new ArrayList<Empleado>();
+
+        empleados.add(new Empleado("04249684242","Masculino","27710157","asd","asdas","asdasd","asdasdas",
+                "asdasd"));
 
         cabecera = view.findViewById(R.id.emple_head);
 
-        clientes_recy = view.findViewById(R.id.emple_recy);
+        empleado_recy = view.findViewById(R.id.emple_recy);
 
-        ingresar_cliente = view.findViewById(R.id.bttn_volver);
+        ingresar_empleado = view.findViewById(R.id.bttn_nuevo);
 
-        navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentContClientGerente);
+        retroceder = view.findViewById(R.id.bttn_volver);
+
+        navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentContEmpleadosGerente);
         navController = navHostFragment.getNavController();
 
-        ingresar_cliente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navController.navigate(R.id.action_fragment_gerente_clientes_to_fragment_gerente_clientes_insertar);
-            }
-        });
-
-
-        retroceder= view.findViewById(R.id.bttn_nuevo);
-        retroceder.setOnClickListener(new View.OnClickListener() {
+        ingresar_empleado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().finish();
             }
         });
 
-        obtener_clientes();
-        build_clientes_recycleview();
+        retroceder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        obtener_empleados();
+        build_emp_recycleview();
 
     }
 
-    //Obtiene la informacion de los clientes
-    private void obtener_clientes(){           // Esto no rompe el spinner
+    //Recibe la informacion de los productos
+    private void obtener_empleados(){           // Esto no rompe el spinner
 
         //Se crea nueva variable para  nuestro request que
         RequestQueue queue = Volley.newRequestQueue(getContext());
@@ -112,7 +117,7 @@ public class Fragment_gerente_clientes extends Fragment {
         //en forma de un array asi que estamos haciendo un json array quest
         //debajo de esa linea hacemos un json array
         //request y entonces extraemos data de cada objeto json
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url_recibir_clientes, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url_recibir_empleados, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 for(int i = 0; i<response.length(); i++) {
@@ -124,16 +129,33 @@ public class Fragment_gerente_clientes extends Fragment {
                         //Obtenemos la respuesta de la api in formato json
                         //abajo extraemos un string con su key value from our json object
                         //extraemos todos los datos from our json
+                        String nombre_emp = responseObj.getString("nombre");
+                        String apell_emp = responseObj.getString("apellido");
+                        String cedula_emp = responseObj.getString("cedula");
+                        String sexo_emp = responseObj.getString("sexo");
+                        String telefono_emp = responseObj.getString("telefono");
+                        String usuario_emp = responseObj.getString("usuario");
+                        String cont_emp = responseObj.getString("contraseña");
+                        String tipo_emp = responseObj.getString("tipo");
 
-                        int id_cliente = responseObj.getInt("id");
-                        String rif = responseObj.getString("rif");
-                        String razon_social = responseObj.getString("razon_social");
+
+
+                        /*
+                        Log.d("codigo_producto", codigo_producto);
+                        Log.d("descripcion", descripcion);
+                        Log.d("cantidad", Integer.toString(cantidad));
+                        Log.d("precio", s);
+                        */
+
 
 
                         //Informacion de los productos
-                        clientes.add(new Cliente(rif, razon_social, id_cliente));
+                        empleados.add(new Empleado(telefono_emp, sexo_emp,cedula_emp, usuario_emp,
+                                cont_emp, tipo_emp, nombre_emp, apell_emp));
 
-                        build_clientes_recycleview ();
+                        //Se pasa la informacion de la array de guardao al recycle view
+                        build_emp_recycleview();
+
 
 
                     }catch (JSONException e){
@@ -152,28 +174,22 @@ public class Fragment_gerente_clientes extends Fragment {
         queue.add(jsonArrayRequest);
     }
 
+    //Se encvarga de mandar el recycleview
+    private void build_emp_recycleview(){
 
-
-    private void build_clientes_recycleview (){
-        Clientes_RecAdapter clientes_view = new Clientes_RecAdapter(clientes, getContext());
+        //se inicia el adaptador de la clase
+        Empleados_RecAdapter empleados_view = new Empleados_RecAdapter(empleados, getContext());
 
         //agregar layout manager
         //al recycle view
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        clientes_recy.setHasFixedSize(true);
+        empleado_recy.setHasFixedSize(true);
 
         //se le da el layout managerr al recycle view
-        clientes_recy.setLayoutManager(manager);
+        empleado_recy.setLayoutManager(manager);
 
         //Se establece el adaptador al recycle View
-        clientes_recy.setAdapter(clientes_view);
-
+        empleado_recy.setAdapter(empleados_view);
 
     }
-
-
-
-
-
-
 }

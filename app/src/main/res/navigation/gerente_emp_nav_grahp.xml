@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/gerente_emp_nav_grahp"
+    app:startDestination="@id/fragment_gerente_empleados">
+
+    <fragment
+        android:id="@+id/fragment_gerente_empleados"
+        android:name="com.example.tesis_01.Fragment_gerente_empleados"
+        android:label="fragment_gerente_empleados"
+        tools:layout="@layout/fragment_gerente_empleados" />
+</navigation>

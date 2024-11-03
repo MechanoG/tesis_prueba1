@@ -7,7 +7,7 @@
     tools:context=".Fragment_gerente_clientes">
 
     <TextView
-        android:id="@+id/client_head"
+        android:id="@+id/emple_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -17,14 +17,14 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/client_recy"
+        android:id="@+id/emple_recy"
         android:layout_width="412dp"
         android:layout_height="562dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/client_head" />
+        app:layout_constraintTop_toBottomOf="@+id/emple_head" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -34,23 +34,23 @@
         app:layout_constraintGuide_begin="58dp" />
 
     <Button
-        android:id="@+id/bttn_new_client"
+        android:id="@+id/bttn_volver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Nuevo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bttn_volver"
+        app:layout_constraintStart_toEndOf="@+id/bttn_nuevo"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <Button
-        android:id="@+id/bttn_volver"
+        android:id="@+id/bttn_nuevo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Regresar"
-        app:layout_constraintEnd_toStartOf="@+id/bttn_new_client"
+        app:layout_constraintEnd_toStartOf="@+id/bttn_volver"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"

@@ -55,9 +55,9 @@ public class Productos_RecAdapter extends RecyclerView.Adapter<Productos_RecAdap
             super(itemView);
             //se inicializan vistas con ids
 
-            producto_cod = itemView.findViewById(R.id.codigo_pro);
-            producto_des = itemView.findViewById(R.id.descripcion_pro);
-            producto_can =itemView.findViewById(R.id.cantidad_pro);
+            producto_cod = itemView.findViewById(R.id.nom_emp);
+            producto_des = itemView.findViewById(R.id.ape_emp);
+            producto_can =itemView.findViewById(R.id.ced_emp);
             producto_pre=itemView.findViewById(R.id.precio_pro);
 
         }
