@@ -51,8 +51,8 @@ public class Fragment_gerente_empleados extends Fragment {
     //dECLARA ARRAY DE RECYCLEVIEW
     ArrayList<Empleado> empleados;
 
-    //Url para obtener informacion de empleados de la base de datos
-    String url_recibir_empleados = "http://10.0.2.2:80/tesis_con/public/usuarios/user_employ";
+    //Url para obtener informacion de empleados de la base de datos http://10.0.2.2:80/tesis_con/public/usuarios/user_employ
+    String url_recibir_empleados = "http://192.168.0.4/tesis_con/public/usuarios/user_employ";
 
 
 

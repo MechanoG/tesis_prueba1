@@ -38,8 +38,8 @@ public class Fragment_gerente_clientes_insertar extends Fragment {
 
     NavController navController;
 
-    //URL DE CONEXION A BASE DE DATOS
-    String url_insertar_cliente = "http://10.0.2.2:80/tesis_con/public/clientes/create";
+    //URL DE CONEXION A BASE DE DATOS "http://10.0.2.2:80/tesis_con/public/clientes/create";
+    String url_insertar_cliente = "http://192.168.0.4/tesis_con/public/clientes/create";
 
 /*
 

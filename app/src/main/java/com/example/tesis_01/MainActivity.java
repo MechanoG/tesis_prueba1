@@ -66,8 +66,10 @@ public class MainActivity extends AppCompatActivity {
                 if (!usuario.isEmpty() && !contra.isEmpty()) {
 
                     //Se declara la url de el archivo php necesario para la conexion
-                    String con ="http://10.0.2.2:80/tesis_con/public/usuarios/login";
-                    /*"http://10.0.2.2:80/tesis_con/public"; */
+                    String con ="http://192.168.0.4/tesis_con/public/usuarios/login";
+
+                    /*"http://10.0.2.2:80/tesis_con/public/usuarios/login"
+                    "http://10.0.2.2:80/tesis_con/public"; */
                     /*"http://10.0.2.2:80/php/db_conexion.php";*/
 
 

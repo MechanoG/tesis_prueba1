@@ -41,8 +41,8 @@ public class Fragment_gerente_inventario extends Fragment {
     //dECLARA ARRAY DE RECYCLEVIEW
     ArrayList<Producto> productos;
 
-    //Url para obtener informacion de productos de la base de datos
-    String url_recibir_productos = "http://10.0.2.2:80/tesis_con/public/productos";
+    //Url para obtener informacion de productos de la base de datos http://10.0.2.2:80/tesis_con/public/productos
+    String url_recibir_productos = "http://192.168.0.4/tesis_con/public/productos";
 
 
     //Se inicializan controlle y navhost para fragments

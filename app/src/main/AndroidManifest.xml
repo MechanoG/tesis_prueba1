@@ -23,10 +23,6 @@
             android:name=".Activity_gerente_clientes"
             android:exported="false" />
         <activity
-            android:name=".ui.login.LoginActivity"
-            android:exported="false"
-            android:label="@string/title_activity_login" />
-        <activity
             android:name=".Activity_gerente_inventario"
             android:exported="false" />
         <activity
