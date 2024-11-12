@@ -47,7 +47,8 @@ public class Fragment_gerente_empleados_insertar extends Fragment {
     private Button cancelar, ingresar;
 
     //URL PARA INSERTAR EMPLEADO Y USUARIO
-    String insertar_user_emp = "http://10.0.2.2:80/tesis_con/public/usuarios/creatEmployUser";
+    //"http://10.0.2.2:80/tesis_con/public/usuarios/creatEmployUser";
+    String insertar_user_emp = "http://192.168.0.4/tesis_con/public/usuarios/creatEmployUser";
 
 
     NavController navController;
