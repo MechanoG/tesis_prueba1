@@ -40,7 +40,7 @@ dependencies {
     //dEPENDENCIAS NAVIGTION
     implementation("androidx.navigation:navigation-fragment:2.8.2")
     implementation("androidx.navigation:navigation-ui:2.8.2")
-
+    implementation("com.google.android.material:material:1.13.0-alpha07")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

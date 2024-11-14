@@ -56,7 +56,7 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
-            emp_nombre = itemView.findViewById(R.id.nom_emp);
+            emp_nombre = itemView.findViewById(R.id.cod_producto);
             emp_ape = itemView.findViewById(R.id.ape_emp);
             emp_cedula = itemView.findViewById(R.id.ced_emp);
             emp_sexo = itemView.findViewById(R.id.sex_emp);

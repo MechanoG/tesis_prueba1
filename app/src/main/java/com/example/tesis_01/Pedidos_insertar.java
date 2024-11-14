@@ -48,6 +48,7 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
 //
     Button cancelar, ingresar;
 
+    private HashMap<String, Integer > producto_cantidad = new HashMap<>();
 
     //Espiners de la pantalla
     Spinner pedido_inv, cliente_pedido;
@@ -221,6 +222,8 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
             Log.d("Mensaje", "Se llamo a onItemSelected");
             productos_recycleview.add(productos.get(i));
             buildRecyclerView();
+            total_pedido();
+
         }else{
             String mensaje = clientes.get(i).razon_social;
             Toast.makeText(getActivity().getApplicationContext(), mensaje,
@@ -387,8 +390,11 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
                 Request.Method.POST, url_insertar_pedido, jsonObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+
                 Log.d("Mensaje", response.toString());
+                Toast.makeText(getContext(), response.toString(), Toast.LENGTH_SHORT).show();
             }
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -403,7 +409,9 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
 
     private void buildRecyclerView(){
         //Se inicia el adaptador de de la clase
-        Productos_RecAdapter adaptadorProductos = new Productos_RecAdapter(productos_recycleview, getContext());
+        total_pedido();
+
+        Productos_Insertar_RecAdapter adaptadorProductos = new Productos_Insertar_RecAdapter(productos_recycleview, producto_cantidad, this);
 
         //Se agrega Layout managetr al recycleview
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
@@ -414,22 +422,20 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
 
         //Se establece el adaptador al recycle View
         recy_pedidos.setAdapter(adaptadorProductos);
-
-        total_pedido();
     }
 
 
 
-    private void total_pedido(){
+    void total_pedido(){
         if (productos_recycleview.isEmpty()){
             total_pedidos.setText(String.valueOf(0.00f));
         }
         else{
             float conteo = 0;
-            for (int z=0; z < productos_recycleview.size();z++){
-                conteo = conteo + productos_recycleview.get(z).getPrecio();
+            for (Producto producto : productos_recycleview){
+                int cantidad = producto_cantidad.getOrDefault(producto.getCodigo(),1);
+                conteo += producto.getPrecio()*cantidad;
             }
-
 
             total_pedidos.setText(String.valueOf(conteo));
         }

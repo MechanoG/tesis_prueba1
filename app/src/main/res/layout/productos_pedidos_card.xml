@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    >
-
+    app:cardElevation="18dp"
+    app:cardCornerRadius="28dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,51 +17,52 @@
             android:id="@+id/cod_producto"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="TextView" />
+            android:layout_gravity="center"
+            android:text="TextView"
+            android:textAlignment="center" />
 
         <TextView
-            android:id="@+id/ape_emp"
+            android:id="@+id/des_producto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_gravity="center"
+            android:text="TextView"
+            android:textAlignment="center" />
 
         <TextView
-            android:id="@+id/ced_emp"
+            android:id="@+id/cantidad_pro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textAlignment="center" />
 
         <TextView
-            android:id="@+id/sex_emp"
+            android:id="@+id/precio_pro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_gravity="center"
+            android:text="TextView"
+            android:textAlignment="center" />
 
-        <TextView
-            android:id="@+id/tel_emp"
+        <EditText
+            android:id="@+id/cantidad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_marginLeft="15sp"
+            android:layout_marginTop="15sp"
+            android:layout_marginRight="15sp"
+            android:layout_marginBottom="15sp"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="0" />
 
-        <TextView
-            android:id="@+id/user_emp"
+        <Button
+            android:id="@+id/eliminar_pro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Eliminar" />
 
-        <TextView
-            android:id="@+id/con_emp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/tipo_emp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
 
     </LinearLayout>
-
 
 </androidx.cardview.widget.CardView>
