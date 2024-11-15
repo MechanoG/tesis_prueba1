@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/gerente_Pedido_Main">
+    <fragment
+        android:id="@+id/gerente_Pedido_Main"
+        android:name="com.example.tesis_01.Gerente_Pedido_Main"
+        android:label="fragment_gerente__pedido__main"
+        tools:layout="@layout/fragment_gerente__pedido__main" >
+        <action
+            android:id="@+id/action_gerente_Pedido_Main_to_pedidos_insertar2"
+            app:destination="@id/pedidos_insertar" />
+    </fragment>
+    <fragment
+        android:id="@+id/pedidos_insertar"
+        android:name="com.example.tesis_01.Pedidos_insertar"
+        android:label="fragment_pedidos_insertar"
+        tools:layout="@layout/fragment_pedidos_insertar" >
+        <action
+            android:id="@+id/action_pedidos_insertar_to_gerente_Pedido_Main"
+            app:destination="@id/gerente_Pedido_Main" />
+    </fragment>
+</navigation>
