@@ -391,6 +391,11 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
             for (Producto producto : productos_recycleview ){
                 //Se crea un JSON para cada producto
                 JSONObject productos_pedido = new JSONObject();
+
+                //De obtiene el ide del producto
+                productos_pedido.put("id_pro", producto.getId());
+
+                //Se obtene el ide del producto
                 productos_pedido.put("codigo", producto.getCodigo());
 
                 //se obtiene la cantidad d producto pedido del hasmap (o se asigna 0 en caso de que no se encuentre)
