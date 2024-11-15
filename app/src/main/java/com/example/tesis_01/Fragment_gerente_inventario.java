@@ -43,7 +43,7 @@ public class Fragment_gerente_inventario extends Fragment {
 
     //Url para obtener informacion de productos de la base de datos http://10.0.2.2:80/tesis_con/public/productos
     //"http://192.168.0.4/tesis_con/public/productos";
-    String url_recibir_productos = "http://192.168.0.4/tesis_con/public/productos";
+    String url_recibir_productos = "http://192.168.0.3/tesis_con/public/productos";
 
 
     //Se inicializan controlle y navhost para fragments
@@ -79,7 +79,7 @@ public class Fragment_gerente_inventario extends Fragment {
 
         inventario_recy = view.findViewById(R.id.inven_recyView);
 
-        productos.add(new Producto("Caraoatas", 15635.00f, 55, "1kILO CARAOTAS"));
+
         obtener_productos();
         build_products_recycleview();
 
@@ -137,6 +137,8 @@ public class Fragment_gerente_inventario extends Fragment {
                         //Obtenemos la respuesta de la api in formato json
                         //abajo extraemos un string con su key value from our json object
                         //extraemos todos los datos from our json
+
+                        int id= responseObj.getInt("id");
                         String codigo_producto = responseObj.getString("codigo");
                         String descripcion = responseObj.getString("descripcion");
                         int cantidad = responseObj.getInt("cantidad");
@@ -153,7 +155,7 @@ public class Fragment_gerente_inventario extends Fragment {
 
 
                         //Informacion de los productos
-                        productos.add(new Producto(codigo_producto, precio, cantidad, descripcion));
+                        productos.add(new Producto(id, precio, cantidad, descripcion, codigo_producto));
 
                         //Se pasa la informacion de la array de guardao al recycle view
                         build_products_recycleview();

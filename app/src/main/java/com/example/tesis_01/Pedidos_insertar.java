@@ -30,6 +30,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -82,15 +83,15 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
 
     //Url para obtener informacion de la base de datos http://10.0.2.2:80/tesis_con/public/productos
     //"http://192.168.0.4/tesis_con/public/productos"; -> por local
-    String url_recibir_productos = "http://192.168.0.4/tesis_con/public/productos";
+    String url_recibir_productos = "http://192.168.0.3/tesis_con/public/productos";
 
     //URL para obtener la informacion de clientes de la base de datos http://10.0.2.2:80/tesis_con/public/clientes
     //"http://192.168.0.4/tesis_con/public/clientes";
-    String url_recibir_clientes = "http://192.168.0.4/tesis_con/public/clientes";
+    String url_recibir_clientes = "http://192.168.0.3/tesis_con/public/clientes";
 
     //URL para insertar los pedidos  a la base de datos. http://10.0.2.2:80/tesis_con/public/pedidos/create
     // "http://192.168.0.4/tesis_con/public/pedidos/create";
-    String url_insertar_pedido =  "http://192.168.0.4/tesis_con/public/pedidos/create";
+    String url_insertar_pedido =  "http://192.168.0.3/tesis_con/public/pedidos/create";
 
 
     //Recycleview
@@ -265,6 +266,7 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
                         //Obtenemos la respuesta de la api in formato json
                         //abajo extraemos un string con su key value from our json object
                         //extraemos todos los datos from our json
+                        int id= responseObj.getInt("id");
                         String codigo_producto = responseObj.getString("codigo");
                         String descripcion = responseObj.getString("descripcion");
                         int cantidad = responseObj.getInt("cantidad");
@@ -286,7 +288,7 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
                         inv_list_adap.notifyDataSetChanged();  //Fundamental, sino tendre problemas para poder llenar el spinner
 
                         //Informacion de los productos
-                        productos.add(new Producto(codigo_producto, precio, cantidad, descripcion));
+                        productos.add(new Producto(id,precio,cantidad, descripcion,codigo_producto ));
 
                         //Se pasa la informacion de la array de guardao al recycle view
                         buildRecyclerView();
@@ -381,6 +383,29 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
             jsonObject.put("id_cliente",id_cliente_set);
             jsonObject.put("id_usuario",id_usuario());
             jsonObject.put("total_pedido",final_pedido);
+
+            //Se crea un JSONARRAY para los productos en el carrito y agegarcada uno al array
+            JSONArray productos_array = new JSONArray();
+
+            //Recorre la lista de procductos en el carrito y agregar cada uno al array
+            for (Producto producto : productos_recycleview ){
+                //Se crea un JSON para cada producto
+                JSONObject productos_pedido = new JSONObject();
+                productos_pedido.put("codigo", producto.getCodigo());
+
+                //se obtiene la cantidad d producto pedido del hasmap (o se asigna 0 en caso de que no se encuentre)
+                int cantidad = producto_cantidad.getOrDefault(producto.getCodigo(), 0);
+
+                //Se agrega el objeto del producto al array del producto
+                productos_pedido.put("cantidad", cantidad);
+
+                //Se agrega el objeto al  array de producto
+                productos_array.put(productos_pedido);
+            }
+
+            //Se agrega el array de productos al ojeto JSON principal
+            jsonObject.put("productos",productos_array);
+
         }catch (JSONException e){
             e.printStackTrace();
         }
