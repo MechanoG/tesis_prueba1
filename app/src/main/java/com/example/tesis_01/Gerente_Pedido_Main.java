@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -26,6 +27,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,11 +41,13 @@ public class Gerente_Pedido_Main extends Fragment {
     ArrayList<Pedidos_lista> pedidosLista;
 
     RecyclerView lista_pedidos;
-    Button ingresar_pedido, volver;
+    Button ingresar_pedido;
 
     //Se inicializan controlle y navhost para fragments
     NavController navController;
     NavHostFragment navHostFragment;
+
+    MaterialToolbar appbar;
 
 
     //Variable para la url a donde se realizara la consulta
@@ -68,6 +73,9 @@ public class Gerente_Pedido_Main extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+
 
         //iNICIALIZA EL RECYCLREVIREW
         lista_pedidos=view.findViewById(R.id.pedidos_lista);
@@ -97,6 +105,8 @@ public class Gerente_Pedido_Main extends Fragment {
 
         */
 
+
+
         try{
             //se crea el nav controles
             //navController=NavHostFragment.findNavController(this);
@@ -112,13 +122,16 @@ public class Gerente_Pedido_Main extends Fragment {
                     navController.navigate(R.id.action_gerente_Pedido_Main_to_pedidos_insertar2);
                 }
             });
-            volver = view.findViewById(R.id.bt_regresar);
-            volver.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    getActivity().finish();
-                }
-            });
+
+            //manejo del appbar
+            appbar = view.findViewById(R.id.topAppBar);
+
+            appbar.setNavigationOnClickListener(v ->
+                    getActivity().finish()
+            );
+
+
+
 
         }catch (java.lang.IllegalStateException e){
             Toast.makeText(getContext(), "Eror View", Toast.LENGTH_SHORT).show();
@@ -210,4 +223,4 @@ public class Gerente_Pedido_Main extends Fragment {
         buildRecycleview();
     }
 
-}
+ }

@@ -39,11 +39,15 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
         Pedidos_lista lista = lista_pedidos.get(position);
 
-        holder.id_ped.setText(Integer.toString(lista.getId_pe()));
-        holder.id_cli.setText(Integer.toString(lista.getId_cli()));
-        holder.id_use.setText(Integer.toString(lista.getId_use()));
-        holder.total_ped.setText(Float.toString(lista.getPe_total()));
-        holder.estado.setText(lista.getEstado());
+
+
+        holder.id_ped.setText("Pedido-" + Integer.toString(lista.getId_pe()));
+        holder.id_cli.setText("Cliente:" + Integer.toString(lista.getId_cli()));
+        holder.id_use.setText("Vendedor:" + Integer.toString(lista.getId_use()));
+        holder.total_ped.setText("Total" + Float.toString(lista.getPe_total()));
+        holder.estado.setText("Estado" + lista.getEstado());
+
+
 
 
     }
