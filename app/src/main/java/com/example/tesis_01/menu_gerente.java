@@ -17,8 +17,17 @@ import androidx.core.view.WindowInsetsCompat;
 public class menu_gerente extends AppCompatActivity {
 
     //Inicio textViews
-    TextView id, empleado, usuario, contraseña, tipo;
+    TextView id, empleado, usuario;
     Button pedidos, inventario, clientes, empleados;
+
+    /*
+                                iMAGEMN
+                    ¡Saludos <usuario>¡
+                    Bienvenido a CABS,CA
+     */
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +36,10 @@ public class menu_gerente extends AppCompatActivity {
         setContentView(R.layout.activity_menu_gerente);
 
         //Inicializa textviwews
-        id = findViewById(R.id.sp_id);
+
         empleado = findViewById(R.id.sp_idemp);
         usuario = findViewById(R.id.sp_usuario);
-        contraseña = findViewById(R.id.sp_contraseña);
-        tipo = findViewById(R.id.sp_tipo);
+
 
         //Inicializa los botones
         pedidos = findViewById(R.id.boG_pedidos);
@@ -44,17 +52,16 @@ public class menu_gerente extends AppCompatActivity {
                 getSharedPreferences("MySharedPref",MODE_PRIVATE);
 
         String Et_id = Integer.toString(sharedPreferences.getInt("id", 0));
-        String Et_empid = Integer.toString(sharedPreferences.getInt("id_empleado", 0));
+        //String Et_empid = Integer.toString(sharedPreferences.getInt("id_empleado", 0));
         String Et_usuario = sharedPreferences.getString("usuario", "");
-        String Et_cont = sharedPreferences.getString("contraseña", "");
-        String Et_tipo = sharedPreferences.getString("tipo", "");
+        //String Et_cont = sharedPreferences.getString("contraseña", "");
+        //String Et_tipo = sharedPreferences.getString("tipo", "");
 
         //Muestra la informacion del usuario
-        id.setText(Et_id);
-        empleado.setText(Et_empid);
+        //id.setText(Et_id);
+
         usuario.setText(Et_usuario);
-        contraseña.setText(Et_cont);
-        tipo.setText(Et_tipo);
+
 
         //Funcionalidad de los botones
         pedidos.setOnClickListener(new View.OnClickListener() {

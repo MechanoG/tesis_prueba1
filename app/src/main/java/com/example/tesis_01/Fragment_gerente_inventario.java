@@ -34,7 +34,7 @@ import java.util.ArrayList;
 
 public class Fragment_gerente_inventario extends Fragment {
     //iNICIALIZA ELEMENTOS VISUALES
-    TextView cabecera;
+
     Button retroceder, ingresar_producto;
     RecyclerView inventario_recy;
 
@@ -73,7 +73,7 @@ public class Fragment_gerente_inventario extends Fragment {
 
         productos = new ArrayList<Producto>();
 
-        cabecera=view.findViewById(R.id.inventario_head);
+
 
 
 
@@ -82,7 +82,7 @@ public class Fragment_gerente_inventario extends Fragment {
 
         obtener_productos();
         build_products_recycleview();
-
+        /*
         retroceder = view.findViewById(R.id.inv_volver);
         retroceder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +91,8 @@ public class Fragment_gerente_inventario extends Fragment {
             }
         });
 
+
+         */
         try{
             //se crea el nav controles
             //navController=NavHostFragment.findNavController(this);

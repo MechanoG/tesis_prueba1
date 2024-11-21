@@ -13,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textview.MaterialTextView;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -46,10 +48,10 @@ public class Productos_Insertar_RecAdapter extends
         String cod_product = lista.getCodigo();
 
 
-        holder.producto_cod.setText(lista.getCodigo());
+        holder.producto_cod.setText("COD: " + lista.getCodigo());
         holder.producto_des.setText(lista.getDescripcion());
-        holder.producto_ex.setText(Integer.toString((lista.getCantidad())));
-        holder.producto_pre.setText(Float.toString(lista.getPrecio()));
+        holder.producto_ex.setText("Existencias: "+Integer.toString((lista.getCantidad()))+"UNI");
+        holder.producto_pre.setText("Precio: "+Float.toString(lista.getPrecio())+"$");
 
         int cantidad_actual = cantidad_producto.getOrDefault(cod_product, 1);
         holder.cantidad_ped.setText(String.valueOf(cantidad_actual));
@@ -111,9 +113,11 @@ public class Productos_Insertar_RecAdapter extends
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         //Se crean las variables
-        private TextView producto_cod, producto_des, producto_ex, producto_pre;
+        private TextView producto_cod, producto_des, producto_ex, producto_pre, costo;
         private EditText cantidad_ped;
         private Button remo_pro;
+
+
 
         public ViewHolder (@NonNull View itemView){
             super (itemView);
@@ -123,6 +127,8 @@ public class Productos_Insertar_RecAdapter extends
             producto_pre = itemView.findViewById(R.id.precio_pro);
             cantidad_ped = itemView.findViewById(R.id.cantidad);
             remo_pro = itemView.findViewById(R.id.eliminar_pro);
+
+
 
 
         }

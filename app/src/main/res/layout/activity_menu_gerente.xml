@@ -1,110 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".menu_gerente">
 
-    <TextView
-        android:id="@+id/sp_id"
-        android:layout_width="172dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="40dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.appbar.AppBarLayout
 
-    <TextView
-        android:id="@+id/sp_idemp"
-        android:layout_width="172dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="20dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sp_id" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/sp_usuario"
-        android:layout_width="171dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="12dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sp_idemp" />
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/colorMultiSelectHighlight"
+            android:backgroundTint="#0089C0"
 
-    <TextView
-        android:id="@+id/sp_contraseña"
-        android:layout_width="169dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="28dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.474"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sp_usuario" />
+            android:minHeight="?attr/actionBarSize"
+            app:layout_anchorGravity="center"
+            app:navigationIcon="@drawable/go_back_24"
+            app:title="Menu Principal" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:id="@+id/sp_tipo"
-        android:layout_width="165dp"
-        android:layout_height="47dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.476"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sp_contraseña"
-        app:layout_constraintVertical_bias="0.069" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_height="match_parent"
+        >
 
-    <Button
-        android:id="@+id/boG_pedidos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Pedidos"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sp_tipo" />
+        <ImageView
+            android:id="@+id/my_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cabsca"
 
-    <Button
-        android:id="@+id/boG_Inventario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Inventario"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/boG_pedidos" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
 
-    <Button
-        android:id="@+id/boG_Clientes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Clientes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/boG_Inventario" />
+            />
 
-    <Button
-        android:id="@+id/boG_Empleados"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="Empleados"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/boG_Clientes"
-        app:layout_constraintVertical_bias="0.0" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/sp_idemp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="¡Buenos dias!"
+            android:textSize="30dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/my_image_view" />
+
+        <TextView
+            android:id="@+id/sp_usuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="#007AAD"
+            android:textSize="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sp_idemp" />
+
+        <TextView
+            android:id="@+id/mensaje2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="Bienvenido a CABS,CA"
+            android:textSize="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sp_usuario" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mensaje2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:columnCount="2"
+            android:rowCount="3"
+            >
+
+            <Button
+                android:id="@+id/boG_pedidos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:backgroundTint="#0086C0"
+                android:text="Pedidos"
+                android:textSize="16sp"
+                app:cornerRadius="30sp"
+                app:icon="@drawable/baseline_pedidos_24"
+                app:iconGravity="start"
+                app:iconPadding="2dp"
+                app:iconSize="50dp" />
+
+            <Button
+                android:id="@+id/boG_Inventario"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:backgroundTint="#0086C0"
+                android:text="Inventario"
+                android:textSize="16sp"
+                app:cornerRadius="30sp"
+                app:icon="@drawable/baseline_inventory_24"
+                app:iconGravity="start"
+                app:iconPadding="2dp"
+                app:iconSize="50dp"
+                 />
+
+            <Button
+                android:id="@+id/boG_Clientes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:backgroundTint="#0086C0"
+                android:text="Clientes"
+                app:cornerRadius="30sp"
+                android:textSize="16sp"
+                app:icon="@drawable/baseline_pedidos_24"
+                app:iconGravity="start"
+                app:iconPadding="2dp"
+                app:iconSize="50dp" />
+
+            <Button
+                android:id="@+id/boG_Empleados"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:backgroundTint="#0086C0"
+                android:text="Empleados"
+                app:cornerRadius="30sp"
+                android:textSize="16sp"
+                app:icon="@drawable/baseline_pedidos_24"
+                app:iconGravity="start"
+                app:iconPadding="2dp"
+                app:iconSize="50dp" />
+
+            <Button
+                android:id="@+id/boG_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:backgroundTint="#0086C0"
+                android:text="Informacion"
+                android:textSize="16sp"
+                app:cornerRadius="30sp"
+                app:icon="@drawable/baseline_info_24"
+                app:iconGravity="start"
+                app:iconPadding="2dp"
+                app:iconSize="50dp" />
+
+            <Button
+                android:id="@+id/boG_loggout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:backgroundTint="#7C0000"
+                android:text="Logout"
+                app:cornerRadius="30sp"
+                android:textSize="16sp"
+                app:icon="@drawable/baseline_logout_24"
+                app:iconGravity="start"
+                app:iconPadding="2dp"
+                app:iconSize="50dp" />
+
+        </GridLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

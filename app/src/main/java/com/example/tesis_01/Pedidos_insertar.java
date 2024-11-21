@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -42,10 +43,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSelectedListener {
+public class Pedidos_insertar extends Fragment  {
     NavController navController;
 //
-    TextView header, total_pedidos, empleado_txt;;
+    TextView  total_pedidos, subtotal;
 //
     Button cancelar, ingresar;
 
@@ -97,6 +98,14 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
     //Recycleview
     RecyclerView recy_pedidos;
 
+    //autocomplete TextView
+    AutoCompleteTextView pro_ped;
+
+    //autocomplete TextView
+    AutoCompleteTextView cli_ped;
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +133,7 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
         //Inicializa el array de datos del spinner de productos
         productos_spinner = new ArrayList<String>();
 
+
         //Inicializa el array de datos del spinner de clientes
         clientes_spinner = new ArrayList<String>();
 
@@ -135,51 +145,75 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
         obtener_productos();
         obtener_clientes();
 
-        //Cream los espiner el spiner y le aplica OnItemSelectedListener, que le
-        //cual item del spinner is clicked
-
-        //Creacion y adaptacion de los spinner y OnItemSelectedListener
-        //Del Spinner productos
-        pedido_inv = view.findViewById(R.id.spin_Gped_inv);
-        pedido_inv.setOnItemSelectedListener(this);
-
-        //Del spinner cliente
-        cliente_pedido=view.findViewById(R.id.spin_Gclientes);
-        cliente_pedido.setOnItemSelectedListener(this);
-
         //Crea instancia de los ArrayAdapter
         //having the list odf courses
 
-        //Adapter de spinner de productos
-        inv_list_adap = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,
-                productos_spinner);
+        //////////////////////////////////////////////////////////////////////////////////
+        ArrayList<String> tipo_pago =new ArrayList<>();
 
-        //Adapter de spinner de clientes
-        cli_list_adap = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,
-                clientes_spinner);
+        tipo_pago.add("Divisas");
+        tipo_pago.add("Tasa del dia");
 
+        Spinner sel_tip_tipo_pago = view.findViewById(R.id.spinner_pago);
 
-        //set un layout resource file para cada item del los Spinner
-        //layout resource del espiner clientes
-        inv_list_adap.setDropDownViewResource(
-                android.R.layout.simple_spinner_dropdown_item
-        );
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                getContext(),
+                android.R.layout.simple_spinner_item,
+                tipo_pago);
 
-        //layout resource del espiner productos
-        cli_list_adap.setDropDownViewResource(
-                android.R.layout.simple_spinner_dropdown_item
-        );
-
-        //Set the ArrayAdapter (inv_list_adapt) data }
-        //Set productos adapter
-        pedido_inv.setAdapter(inv_list_adap);
-        //Set clientes adapter
-        cliente_pedido.setAdapter(cli_list_adap);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sel_tip_tipo_pago.setAdapter(adapter);
 
 
-        empleado_txt = view.findViewById(R.id.txtEmpleado);
-        header = view.findViewById(R.id.nuevo_pedido);
+        //////////////////////////////////////////////////////////////////////////////////
+
+        subtotal = view.findViewById(R.id.ped_subtotal);
         total_pedidos = view.findViewById(R.id.txtTotalPedido);
+
+
+        //Se crea el autocomplete Text vie2 de pedidos
+        pro_ped=view.findViewById(R.id.pruebas_view);
+
+        //Adaptador arrayadapter con los elementos para el autocomplete text
+        ArrayAdapter<String> proped_adapter = new ArrayAdapter<>(
+                getContext(), android.R.layout.simple_spinner_dropdown_item, productos_spinner
+
+
+        );
+        //Se establece el adapter del pro_per
+        pro_ped.setAdapter(proped_adapter);
+
+        //Se establece que pasa al cliclear en un item de pro ped
+        pro_ped.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                productos_recycleview.add(productos.get(i));
+                buildRecyclerView();
+                total_pedido();
+            }
+        });
+
+        //Se crea el auto complete view para clientes
+        cli_ped = view.findViewById(R.id.clientes_auto);
+
+        //Adaptado con los elementos para el autocomplete text
+        ArrayAdapter<String> cliped_adapter = new ArrayAdapter<> (
+                getContext(), android.R.layout.simple_spinner_dropdown_item, clientes_spinner
+        );
+        //Adapter de cle ped
+        cli_ped.setAdapter(cliped_adapter);
+
+        //Se determina que pasa al cxliclear un elemento del cliped
+        cli_ped.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String mensaje = clientes.get(i).razon_social;
+                Toast.makeText(getActivity().getApplicationContext(), mensaje,
+                        Toast.LENGTH_LONG).show();
+                id_cliente_set = clientes.get(i).cliente_id;
+
+            }
+        });
 
         //Se cra nevegador del fragment
         navController = Navigation.findNavController(view);
@@ -200,7 +234,7 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
             @Override
             public void onClick(View view) {
 
-                realizar_pedido();
+
             }
         });
 
@@ -211,38 +245,6 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
 
 
     }
-
-    //Make a toar con el nombre del string
-    //que esseleccionado en el spiner
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        //Identifica desde cual spinner se llama la funcion
-        if(adapterView.getId()==R.id.spin_Gped_inv) {
-            Toast.makeText(getActivity().getApplicationContext(), productos_spinner.get(i),
-                    Toast.LENGTH_LONG).show();
-            Log.d("Mensaje", "Se llamo a onItemSelected");
-            productos_recycleview.add(productos.get(i));
-            buildRecyclerView();
-            total_pedido();
-
-        }else{
-            String mensaje = clientes.get(i).razon_social;
-            Toast.makeText(getActivity().getApplicationContext(), mensaje,
-                    Toast.LENGTH_LONG).show();
-            id_cliente_set = clientes.get(i).cliente_id;
-            empleado_txt.setText(String.valueOf(id_cliente_set));
-
-        }
-
-    }
-
-
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }
-
 
     //Obtiene la informacion de los productos
     private void obtener_productos(){           // Esto no rompe el spinner
@@ -280,12 +282,12 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
                         Log.d("precio", s);
                         */
 
-                        String insertar =codigo_producto+"   " + descripcion +"   "+ Integer.toString(cantidad) +
-                                "   " + s;
+                        String insertar =codigo_producto+"   " + descripcion +"   "+ Integer.toString(cantidad) + " UNI " +
+                                "   " + s +"$";
 
                         //Envio la informacion productos al spinner
                         productos_spinner.add(insertar);
-                        inv_list_adap.notifyDataSetChanged();  //Fundamental, sino tendre problemas para poder llenar el spinner
+
 
                         //Informacion de los productos
                         productos.add(new Producto(id,precio,cantidad, descripcion,codigo_producto ));
@@ -349,7 +351,7 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
 
                         //Envio la informacion productos al spinner
                         clientes_spinner.add(insertar);
-                        cli_list_adap.notifyDataSetChanged();  //Fundamental, sino tendre problemas para poder llenar el spinner
+
 
 
                         //Informacion de los productos
@@ -467,7 +469,8 @@ public class Pedidos_insertar extends Fragment implements AdapterView.OnItemSele
                 conteo += producto.getPrecio()*cantidad;
             }
 
-            total_pedidos.setText(String.valueOf(conteo));
+            subtotal.setText("Subtotal:" + String.valueOf(conteo));
+            total_pedidos.setText("Total: " + String.valueOf(conteo + conteo*0.16f));
         }
 
     }

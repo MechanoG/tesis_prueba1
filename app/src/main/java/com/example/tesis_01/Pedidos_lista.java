@@ -3,17 +3,21 @@ package com.example.tesis_01;
 public class Pedidos_lista {
 
     private int id_pe;
-    private int id_cli;
-    private int id_use;
+    private String  Cliente;
+    private String vendedor;
     private float pe_total;
+    private String ti_pago;
+    private String vencimiento;
     private String estado;
 
-    public Pedidos_lista(int id_pe, float pe_total, int id_cli, int id_use, String estado) {
+    public Pedidos_lista(int id_pe, String estado, String vencimiento, float pe_total, String ti_pago, String vendedor, String cliente) {
         this.id_pe = id_pe;
-        this.pe_total = pe_total;
-        this.id_cli = id_cli;
-        this.id_use = id_use;
         this.estado = estado;
+        this.vencimiento = vencimiento;
+        this.pe_total = pe_total;
+        this.ti_pago = ti_pago;
+        this.vendedor = vendedor;
+        Cliente = cliente;
     }
 
     public int getId_pe() {
@@ -32,6 +36,22 @@ public class Pedidos_lista {
         this.estado = estado;
     }
 
+    public String getVencimiento() {
+        return vencimiento;
+    }
+
+    public void setVencimiento(String vencimiento) {
+        this.vencimiento = vencimiento;
+    }
+
+    public String getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(String vendedor) {
+        this.vendedor = vendedor;
+    }
+
     public float getPe_total() {
         return pe_total;
     }
@@ -40,19 +60,19 @@ public class Pedidos_lista {
         this.pe_total = pe_total;
     }
 
-    public int getId_cli() {
-        return id_cli;
+    public String getTi_pago() {
+        return ti_pago;
     }
 
-    public void setId_cli(int id_cli) {
-        this.id_cli = id_cli;
+    public void setTi_pago(String ti_pago) {
+        this.ti_pago = ti_pago;
     }
 
-    public int getId_use() {
-        return id_use;
+    public String getCliente() {
+        return Cliente;
     }
 
-    public void setId_use(int id_use) {
-        this.id_use = id_use;
+    public void setCliente(String cliente) {
+        Cliente = cliente;
     }
 }

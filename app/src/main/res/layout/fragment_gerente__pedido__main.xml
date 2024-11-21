@@ -16,7 +16,7 @@
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?android:attr/colorMultiSelectHighlight"
+            android:background="#0089C0"
             android:minHeight="?attr/actionBarSize"
             app:layout_anchor="@+id/appBarLayout"
             app:layout_anchorGravity="center"
@@ -29,7 +29,8 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
 
         <com.google.android.material.button.MaterialButton

@@ -36,10 +36,10 @@ public class Productos_RecAdapter extends RecyclerView.Adapter<Productos_RecAdap
 
         Producto lista = productos_recyclerview.get(position);
 
-        holder.producto_cod.setText(lista.getCodigo());
-        holder.producto_des.setText(lista.getDescripcion());
-        holder.producto_can.setText(Integer.toString(lista.getCantidad()));
-        holder.producto_pre.setText(Float.toString(lista.getPrecio()));
+        holder.producto_cod.setText("COD:" + lista.getCodigo());
+        holder.producto_des.setText("Nombre" + lista.getDescripcion());
+        holder.producto_can.setText("Existencias" + Integer.toString(lista.getCantidad()));
+        holder.producto_pre.setText("Precio" + Float.toString(lista.getPrecio()));
 
     }
 

@@ -74,36 +74,22 @@ public class Gerente_Pedido_Main extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-
-
         //iNICIALIZA EL RECYCLREVIREW
         lista_pedidos=view.findViewById(R.id.pedidos_lista);
 
         //Se crea el array para los pedidos
         pedidosLista = new ArrayList<Pedidos_lista>();
-        mostrar_pedidos();
+
+
+        //
+        pedidosLista.add(new Pedidos_lista(15, "vigente", "24-05-11", 100.00f,
+                "Divisas","Juan Gomez", "Cocacola"));
+        pedidosLista.add(new Pedidos_lista(15, "vigente", "24-06-11", 100.00f,
+                "Tasa del dia","Juan Gomez", "Cocacola"));
+
+
         buildRecycleview();
 
-        /*
-
-        lista_pedidos=view.findViewById(R.id.pedidos_lista);
-        lista_pedidos.setHasFixedSize(true);
-        lista_pedidos.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        pedidosLista = new ArrayList<Pedidos_lista>();
-        pedidosLista.add(new Pedidos_lista(1, 565.1f, 1, 1, "Vigente"));
-        for (int i=0; i<=10; i++){
-            pedidosLista.add(new Pedidos_lista(1, 565.1f, 1, 1, "Vigente"));
-
-        }
-        pedidosLista.add(new Pedidos_lista(1, 565.1f, 1, 1, "Ulti"));
-
-
-        Pedidos_lista_Adapter adaptador_pedidos = new Pedidos_lista_Adapter(pedidosLista, getContext());
-        lista_pedidos.setAdapter(adaptador_pedidos);
-
-        */
 
 
 
@@ -143,7 +129,7 @@ public class Gerente_Pedido_Main extends Fragment {
     }
 
 
-
+/*
     //funcion que recupera los datos de la base de datos y los muestra en el recycle view
     private void mostrar_pedidos (){
         //Se crea nueva variable para  nuestro request que
@@ -197,10 +183,11 @@ public class Gerente_Pedido_Main extends Fragment {
         });
         queue.add(jsonArrayRequest);
     }
+ */
 
     private void buildRecycleview(){
         //se inicia el adaptador de la clase
-        Pedidos_lista_Adapter adaptador_pedidos = new Pedidos_lista_Adapter(pedidosLista, getContext());
+        Pedidos_lista_Adapter adaptador_pedidos = new Pedidos_lista_Adapter(pedidosLista, getContext(), getParentFragmentManager());
 
         //agregar layout manager
         //al recycle view
@@ -213,14 +200,6 @@ public class Gerente_Pedido_Main extends Fragment {
         //Se establece el adaptador al recycle View
         lista_pedidos.setAdapter(adaptador_pedidos);
 
-    }
-
-    private void actualizar(){
-        //inserta nuevo elemento en las views;
-        pedidosLista.add(new Pedidos_lista(11, 55.55f,69, 69, "Huevon" ));
-
-        //actualiza el view.
-        buildRecycleview();
     }
 
  }

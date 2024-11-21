@@ -6,61 +6,68 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     app:cardElevation="18dp"
-    app:cardCornerRadius="28dp">
+    app:cardCornerRadius="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <TextView
             android:id="@+id/cod_producto"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_gravity="center"
             android:text="TextView"
-            android:textAlignment="center" />
+            android:textAlignment="textStart"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/des_producto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:text="TextView"
-            android:textAlignment="center" />
+            android:textAlignment="textStart"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/cantidad_pro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textAlignment="center" />
+            android:textAlignment="textStart"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/precio_pro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:text="TextView"
-            android:textAlignment="center" />
+            android:textAlignment="textStart"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/cantidad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15sp"
-            android:layout_marginTop="15sp"
-            android:layout_marginRight="15sp"
-            android:layout_marginBottom="15sp"
+            android:layout_margin="5dp"
             android:ems="10"
+            android:hint="0"
             android:inputType="number"
-            android:hint="0" />
+            android:textAlignment="textStart"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/eliminar_pro"
+            style="@style/Widget.Material3.Button.ElevatedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Eliminar" />
+            android:backgroundTint="#7C0000"
+            android:text="Remover"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:icon="@drawable/baseline_remove_24"
+            app:iconTint="@color/white" />
 
 
     </LinearLayout>
