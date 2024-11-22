@@ -17,6 +17,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Activity_gerente_info"
+            android:exported="false" />
+        <activity
             android:name=".Activity_gerentes_empleado"
             android:exported="false" />
         <activity

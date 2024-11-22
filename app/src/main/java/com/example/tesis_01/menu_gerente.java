@@ -18,7 +18,7 @@ public class menu_gerente extends AppCompatActivity {
 
     //Inicio textViews
     TextView id, empleado, usuario;
-    Button pedidos, inventario, clientes, empleados;
+    Button pedidos, inventario, clientes, empleados, info;
 
     /*
                                 iMAGEMN
@@ -46,6 +46,7 @@ public class menu_gerente extends AppCompatActivity {
         inventario = findViewById(R.id.boG_Inventario);
         clientes = findViewById(R.id.boG_Clientes);
         empleados = findViewById(R.id.boG_Empleados);
+        info= findViewById(R.id.boG_info);
 
         //Carga informacion del usuario
         SharedPreferences sharedPreferences =
@@ -99,6 +100,16 @@ public class menu_gerente extends AppCompatActivity {
 
             }
         });
+
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Informacion", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(menu_gerente.this, Activity_gerente_info.class);
+                startActivity(intent);
+            }
+        });
+
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

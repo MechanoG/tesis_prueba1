@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="?attr/colorSurface"
+    tools:context=".Fragment_pedidosDetalles_Dialog"
     >
 
     <!-- Header -->
@@ -31,12 +33,14 @@
             android:src="@drawable/ic_close"
             android:contentDescription="Cerrar"
             android:padding="8dp" />
+
+
     </LinearLayout>
 
     <!-- Contenido -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1">
 
         <LinearLayout
@@ -48,41 +52,118 @@
                 android:id="@+id/pedidoId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Pedido ID: "
+                android:paddingBottom="8dp"
+                android:text="Pedido- "
                 android:textAppearance="?attr/textAppearanceBodyLarge"
-                android:paddingBottom="8dp" />
+                android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/userId"
+                android:id="@+id/vendedor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Usuario ID: "
+                android:paddingBottom="8dp"
+                android:text="Vendedor: "
                 android:textAppearance="?attr/textAppearanceBodyLarge"
-                android:paddingBottom="8dp" />
+                android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/clienteId"
+                android:id="@+id/clienteRif"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cliente ID: "
+                android:paddingBottom="8dp"
+                android:text="Cliente Rif:"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:paddingBottom="8dp" />
+                android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/totalPedido"
+                android:id="@+id/clienteRaz"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Total: "
+                android:paddingBottom="8dp"
+                android:text="Cliente:"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:paddingBottom="8dp" />
+                android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/estadoPedido"
+                android:id="@+id/forma_pago"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:text="Pago: "
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/fec_ini"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:text="Realizado: "
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/fec_lim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:text="Vence: "
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/estado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
                 android:text="Estado: "
                 android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:paddingBottom="8dp" />
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/subtotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:text="Subtotal: "
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:text="Total: "
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/productos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:text="Productos: "
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textSize="16sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pro_lis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:scrollbars="vertical"/>
+
+
+
+
+
+
+
+
+
+
+
         </LinearLayout>
     </ScrollView>
 
