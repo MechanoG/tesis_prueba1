@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -184,7 +183,7 @@ public class Fragment_gerente_inventario extends Fragment {
     private void build_products_recycleview(){
 
         //se inicia el adaptador de la clase
-        Productos_RecAdapter productos_view = new Productos_RecAdapter(productos, getContext());
+        Gerente_Productos_RecAdapter productos_view = new Gerente_Productos_RecAdapter(productos, getContext());
 
         //agregar layout manager
         //al recycle view

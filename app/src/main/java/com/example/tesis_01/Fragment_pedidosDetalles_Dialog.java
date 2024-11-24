@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -127,7 +126,7 @@ public class Fragment_pedidosDetalles_Dialog extends DialogFragment {
     private void build_products_recycleview(){
 
         //se inicia el adaptador de la clase
-        Productos_RecAdapter productos_view = new Productos_RecAdapter(pro_p_pedido, getContext());
+        Vendedor_Productos_RecAdapter productos_view = new Vendedor_Productos_RecAdapter(pro_p_pedido, getContext());
 
         //agregar layout manager
         //al recycle view

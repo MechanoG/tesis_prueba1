@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class Productos_RecAdapter extends RecyclerView.Adapter<Productos_RecAdapter.ViewHolder>{
+public class Vendedor_Productos_RecAdapter extends RecyclerView.Adapter<Vendedor_Productos_RecAdapter.ViewHolder>{
 
     //Array en el que se guardaran cada elemento de la lista
     private ArrayList<Producto> productos_recyclerview;
     private Context context;
 
 
-    public Productos_RecAdapter(ArrayList<Producto> productos_recyclerview, Context context) {
+    public Vendedor_Productos_RecAdapter(ArrayList<Producto> productos_recyclerview, Context context) {
         this.productos_recyclerview = productos_recyclerview;
         this.context = context;
     }
@@ -26,13 +26,13 @@ public class Productos_RecAdapter extends RecyclerView.Adapter<Productos_RecAdap
     //referencia a productos card
     @NonNull
     @Override
-    public Productos_RecAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.producto_card, parent, false);
+    public Vendedor_Productos_RecAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.producto_vendedor_card, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Productos_RecAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull Vendedor_Productos_RecAdapter.ViewHolder holder, int position) {
 
         Producto lista = productos_recyclerview.get(position);
 
