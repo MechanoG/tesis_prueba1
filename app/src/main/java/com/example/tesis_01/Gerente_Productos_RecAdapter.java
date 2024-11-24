@@ -1,11 +1,14 @@
 package com.example.tesis_01;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -73,6 +76,7 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
                 @Override
                 public void onClick(View view) {
                     Log.d("Botton", "Agregar existencias");
+                    masProDia();
 
                 }
             });
@@ -91,6 +95,27 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
                 }
             });
 
+
+        }
+
+        private void masProDia(){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("Ingrese cantidad a agregar");
+
+            //Cuadro de texto
+            final EditText input = new EditText(context);
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            builder.setView(input);
+
+            builder.setPositiveButton("Agregar", (dialogInterface, which)->{
+                String numero = input.getText().toString();
+                Log.d("Recivido", numero );
+
+                    });
+
+            builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
+            builder.show();
 
         }
 
