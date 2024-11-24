@@ -22,7 +22,7 @@
             app:layout_anchor="@+id/appBarLayout"
             app:layout_anchorGravity="center"
             app:navigationIcon="@drawable/go_back_24"
-            app:title="Nuevo Producto"
+            app:title="Nuevo Cliente"
             app:titleTextColor="@color/black" />
 
     </com.google.android.material.appbar.AppBarLayout>
