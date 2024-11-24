@@ -34,7 +34,7 @@ import java.util.ArrayList;
 
 public class Fragment_gerente_clientes extends Fragment {
     TextView cabecera;
-    Button ingresar_cliente, retroceder;
+    Button ingresar_cliente;
     RecyclerView clientes_recy;
 
     //Array clientes
@@ -91,13 +91,6 @@ public class Fragment_gerente_clientes extends Fragment {
         });
 
 
-        retroceder= view.findViewById(R.id.bttn_nuevo);
-        retroceder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().finish();
-            }
-        });
 
         obtener_clientes();
         build_clientes_recycleview();
