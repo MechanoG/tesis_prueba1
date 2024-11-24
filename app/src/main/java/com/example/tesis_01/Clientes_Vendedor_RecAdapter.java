@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class Clientes_RecAdapter extends RecyclerView.Adapter<Clientes_RecAdapter.ViewHolder> {
+public class Clientes_Vendedor_RecAdapter extends RecyclerView.Adapter<Clientes_Vendedor_RecAdapter.ViewHolder> {
 
     ////Array en el que se guardaran cada elemento de la lista
     private ArrayList<Cliente> clientes_recyclerview;
     private Context context;
 
-    public Clientes_RecAdapter(ArrayList<Cliente> clientes_recyclerview, Context context) {
+    public Clientes_Vendedor_RecAdapter(ArrayList<Cliente> clientes_recyclerview, Context context) {
         this.clientes_recyclerview = clientes_recyclerview;
         this.context = context;
     }
@@ -27,13 +27,13 @@ public class Clientes_RecAdapter extends RecyclerView.Adapter<Clientes_RecAdapte
 
     @NonNull
     @Override
-    public Clientes_RecAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.clientes_card, parent, false );
+    public Clientes_Vendedor_RecAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.clientes_vendedor_card, parent, false );
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Clientes_RecAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull Clientes_Vendedor_RecAdapter.ViewHolder holder, int position) {
 
         Cliente lista = clientes_recyclerview.get(position);
 
