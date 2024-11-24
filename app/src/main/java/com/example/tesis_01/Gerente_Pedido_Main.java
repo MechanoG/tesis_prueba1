@@ -51,7 +51,7 @@ public class Gerente_Pedido_Main extends Fragment {
 
 
     //Variable para la url a donde se realizara la consulta
-    String url="http://192.168.0.3/tesis_con/public/pedidos";
+    String url="http://192.168.0.4/tesis_con/public/pedidos";
     //"http://192.168.0.4/tesis_con/public/pedidos";
 //"http://10.0.2.2:80/tesis_con/public/pedidos"
 
@@ -152,9 +152,9 @@ public class Gerente_Pedido_Main extends Fragment {
                         int pedido_id = responseObj.getInt("id");
                         int pedido_id_cli = responseObj.getInt("fk_id_cliente");
                         int pedido_id_user = responseObj.getInt("fk_id_usuario");
-                        String s = responseObj.getString("total");
+                       String s = responseObj.getString("total");
                         float pedido_total =  Float.parseFloat(s);
-                                //String pedido_total = responseObj.getString("estado");
+                                 //String pedido_total = responseObj.getString("estado");
                         String estado = responseObj.getString("estado");
 
                         pedidosLista.add(new Pedidos_lista(pedido_id, pedido_total, pedido_id_cli, pedido_id_user, estado ));

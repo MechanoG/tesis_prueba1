@@ -84,7 +84,7 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
          Pedidos_lista pedido;
 
-        String url_pedidos_detalle = "http://192.168.0.3/tesis_con/public/pedidos/pedidos_detalle";
+        String url_pedidos_detalle = "http://192.168.0.4/tesis_con/public/pedidos/pedidos_detalle";
 
 
         public ViewHolder(@NonNull View itemView) {
