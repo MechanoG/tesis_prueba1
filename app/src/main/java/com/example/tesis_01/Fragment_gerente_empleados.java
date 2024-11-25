@@ -75,9 +75,6 @@ public class Fragment_gerente_empleados extends Fragment {
 
         empleados = new ArrayList<Empleado>();
 
-        empleados.add(new Empleado("04249684242","Masculino","27710157","asd","asdas","asdasd","asdasdas",
-                "asdasd"));
-
         cabecera = view.findViewById(R.id.emple_head);
 
         empleado_recy = view.findViewById(R.id.emple_recy);
@@ -133,6 +130,7 @@ public class Fragment_gerente_empleados extends Fragment {
                         //Obtenemos la respuesta de la api in formato json
                         //abajo extraemos un string con su key value from our json object
                         //extraemos todos los datos from our json
+                        int id_emp = responseObj.getInt("id");
                         String nombre_emp = responseObj.getString("nombre");
                         String apell_emp = responseObj.getString("apellido");
                         String cedula_emp = responseObj.getString("cedula");
@@ -144,18 +142,9 @@ public class Fragment_gerente_empleados extends Fragment {
 
 
 
-                        /*
-                        Log.d("codigo_producto", codigo_producto);
-                        Log.d("descripcion", descripcion);
-                        Log.d("cantidad", Integer.toString(cantidad));
-                        Log.d("precio", s);
-                        */
-
-
-
                         //Informacion de los productos
-                        empleados.add(new Empleado(telefono_emp, sexo_emp,cedula_emp, usuario_emp,
-                                cont_emp, tipo_emp, nombre_emp, apell_emp));
+                        empleados.add(new Empleado(id_emp, usuario_emp, cont_emp,tipo_emp, nombre_emp,
+                                apell_emp, cedula_emp, sexo_emp, telefono_emp));
 
                         //Se pasa la informacion de la array de guardao al recycle view
                         build_emp_recycleview();

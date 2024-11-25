@@ -1,9 +1,9 @@
 package com.example.tesis_01;
 
 public class Empleado {
-
+    private int id;
     private String Usuario;
-    private String contraseña;
+    private String contrasena;
     private String tipo;
     private String nombre;
     private String apellido;
@@ -11,17 +11,25 @@ public class Empleado {
     private String sexo;
     private String telf;
 
-    public Empleado(String telf, String sexo, String cedula, String usuario, String contraseña,
-                    String tipo, String nombre, String apellido) {
 
-        this.telf = telf;
-        this.sexo = sexo;
-        this.cedula = cedula;
-        Usuario = usuario;
-        this.contraseña = contraseña;
+    public Empleado(int id, String usuario, String contrasena, String tipo, String nombre, String apellido, String cedula, String sexo, String telf) {
+        this.id = id;
+        this.Usuario = usuario;
+        this.contrasena = contrasena;
         this.tipo = tipo;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.cedula = cedula;
+        this.sexo = sexo;
+        this.telf = telf;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsuario() {
@@ -81,11 +89,11 @@ public class Empleado {
     }
 
     public String getContraseña() {
-        return contraseña;
+        return contrasena;
     }
 
     public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+        this.contrasena = contraseña;
     }
 }
 

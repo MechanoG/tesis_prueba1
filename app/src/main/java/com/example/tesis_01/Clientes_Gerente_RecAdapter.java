@@ -2,12 +2,10 @@ package com.example.tesis_01;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -118,7 +116,7 @@ public class Clientes_Gerente_RecAdapter extends RecyclerView.Adapter<Clientes_G
                         String clie=respuesta.getString("razon_social");;
                         String con = respuesta.getString("gerente");
                         String telf=respuesta.getString("telfefono");
-                        masProDia(rif, clie, con, telf);
+                        datos_cliente(rif, clie, con, telf);
 
 
                     }catch (JSONException e){
@@ -137,7 +135,7 @@ public class Clientes_Gerente_RecAdapter extends RecyclerView.Adapter<Clientes_G
             queue.add(jsonObjectRequest);
         }
 
-        private void masProDia(String rif, String clie, String con,String telf){
+        private void datos_cliente(String rif, String clie, String con, String telf){
 
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Detalles Cliente");

@@ -1,21 +1,38 @@
 package com.example.tesis_01;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.loader.content.CursorLoader;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdapter.ViewHolder> {
 
+    String url_detalles_empleados ="http://192.168.0.4/tesis_con/public/usuarios/detalle";
+
     ////Array en el que se guardaran cada elemento de la lista
     private ArrayList<Empleado> empleados_recyclerview;
     private Context context;
+
 
 
     public Empleados_RecAdapter(ArrayList<Empleado> empleados_recyclerview, Context context) {
@@ -35,14 +52,17 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
 
         Empleado lista = empleados_recyclerview.get(position);
 
-        holder.emp_nombre.setText(lista.getNombre());
-        holder.emp_ape.setText(lista.getApellido());
-        holder.emp_cedula.setText(lista.getCedula());
-        holder.emp_sexo.setText(lista.getSexo());
-        holder.emp_telf.setText(lista.getTelf());
-        holder.emp_usu.setText(lista.getUsuario());
-        holder.emp_cont.setText(lista.getContraseña());
-        holder.emp_tipo.setText(lista.getTipo());
+
+
+        holder.emp_nombre.setText("Empleado: " + lista.getNombre() +" "+ lista.getApellido() );
+
+        holder.emp_cedula.setText( "Cedula: " + lista.getCedula());
+        holder.emp_usu.setText("Usuario" + lista.getUsuario());
+        holder.emp_tipo.setText("Tipo" + lista.getTipo());
+        holder.empleado = lista;
+
+
+
 
     }
 
@@ -52,19 +72,109 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         //Se crean variables para las vistas
-        private TextView emp_nombre, emp_ape, emp_cedula, emp_sexo, emp_telf, emp_usu, emp_cont, emp_tipo;
+        private TextView emp_nombre, emp_cedula, emp_usu, emp_tipo;
+
+        Empleado empleado;
+        Button empInfo;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
-            emp_nombre = itemView.findViewById(R.id.cod_producto);
-            emp_ape = itemView.findViewById(R.id.ape_emp);
+            emp_nombre = itemView.findViewById(R.id.nom_emp);
             emp_cedula = itemView.findViewById(R.id.ced_emp);
-            emp_sexo = itemView.findViewById(R.id.sex_emp);
-            emp_telf = itemView.findViewById(R.id.tel_emp);
             emp_usu = itemView.findViewById(R.id.user_emp);
-            emp_cont = itemView.findViewById(R.id.con_emp);
             emp_tipo = itemView.findViewById(R.id.tipo_emp);
+            empInfo =itemView.findViewById(R.id.infoEmp);
 
+            empInfo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    obtener_detalles();
+                }
+            });
+
+
+        }
+
+        public void obtener_detalles(){
+
+            RequestQueue queue = Volley.newRequestQueue(itemView.getContext());
+
+            //Se crea un JSONObject con los datos que se desean enviar
+            JSONObject jsonObject = new JSONObject();
+            try{
+                jsonObject.put("id",empleado.getId());
+
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+
+            //Crear solicitud post
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.POST, url_detalles_empleados, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+
+                    Log.d("Mensaje", response.toString());
+
+                    try {
+                        Log.d("Mensaje", response.toString());
+
+                        JSONObject respuesta = response;
+
+                        String user = respuesta.getString("usuario");
+                        String cont=respuesta.getString("contraseña");;
+                        String tipo = respuesta.getString("tipo");
+                        String zona=respuesta.getString("zona");
+                        String nombre = respuesta.getString("nombre");
+                        String apellido=respuesta.getString("apellido");;
+                        String ced = respuesta.getString("cedula");
+                        String sex=respuesta.getString("sexo");
+                        String tlfn = respuesta.getString("telefono");
+
+                        datos_empleado(user, cont, tipo, zona, nombre, apellido, ced,sex,tlfn);
+
+                    }catch (JSONException e){
+                        Log.d("Error", "Error " + String.valueOf(e));
+                    }
+
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("Error", error.toString());
+                }
+            });
+            queue.add(jsonObjectRequest);
+        }
+
+
+
+
+        private void datos_empleado(String user, String cont, String tipo, String zona,
+        String nombre, String apellido, String ced, String sex, String tlfn){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("Detalles Cliente");
+
+            StringBuilder message = new StringBuilder();
+            message.append("Nombre: ").append(nombre).append(" ").append(apellido).append("\n");
+            message.append("Cedula: ").append(ced).append("\n");
+            message.append("Genero: ").append(sex).append("\n");
+            message.append("Teléfono: ").append(tlfn).append("\n");
+            message.append("Usuario: ").append(user).append("\n");
+            message.append("Contraseña: ").append(cont).append("\n");
+            message.append("Tipo: ").append(tipo).append("\n");
+            message.append("Zona: ").append(zona);
+
+            builder.setMessage(message.toString());
+
+
+
+
+            builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
+            builder.show();
 
         }
 
