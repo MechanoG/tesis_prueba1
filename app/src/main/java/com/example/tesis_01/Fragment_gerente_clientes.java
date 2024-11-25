@@ -33,7 +33,7 @@ import java.util.ArrayList;
 
 
 public class Fragment_gerente_clientes extends Fragment {
-    TextView cabecera;
+
     Button ingresar_cliente;
     RecyclerView clientes_recy;
 
@@ -74,7 +74,7 @@ public class Fragment_gerente_clientes extends Fragment {
 
         clientes = new ArrayList<Cliente>();
 
-        cabecera = view.findViewById(R.id.emple_head);
+
 
         clientes_recy = view.findViewById(R.id.emple_recy);
 

@@ -75,7 +75,6 @@ public class Fragment_gerente_empleados extends Fragment {
 
         empleados = new ArrayList<Empleado>();
 
-        cabecera = view.findViewById(R.id.emple_head);
 
         empleado_recy = view.findViewById(R.id.emple_recy);
 

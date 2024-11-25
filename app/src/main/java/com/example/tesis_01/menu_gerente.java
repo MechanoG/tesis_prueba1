@@ -1,5 +1,6 @@
 package com.example.tesis_01;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ public class menu_gerente extends AppCompatActivity {
 
     //Inicio textViews
     TextView id, empleado, usuario;
-    Button pedidos, inventario, clientes, empleados, info;
+    Button pedidos, inventario, clientes, empleados, info, perfil, logout;
 
     /*
                                 iMAGEMN
@@ -47,6 +48,8 @@ public class menu_gerente extends AppCompatActivity {
         clientes = findViewById(R.id.boG_Clientes);
         empleados = findViewById(R.id.boG_Empleados);
         info= findViewById(R.id.boG_info);
+        perfil=findViewById(R.id.boG_perfil);
+        logout = findViewById(R.id.loggout);
 
         //Carga informacion del usuario
         SharedPreferences sharedPreferences =
@@ -110,6 +113,22 @@ public class menu_gerente extends AppCompatActivity {
             }
         });
 
+        perfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Perfil", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(menu_gerente.this, Activity_Perfil.class);
+                startActivity(intent);
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Informacion", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

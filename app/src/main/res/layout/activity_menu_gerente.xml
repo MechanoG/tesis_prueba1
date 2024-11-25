@@ -92,7 +92,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mensaje2"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/buttonlayout"
             android:columnCount="2"
             android:rowCount="3"
             >
@@ -179,9 +179,33 @@
                 app:iconSize="50dp" />
 
             <Button
-                android:id="@+id/boG_loggout"
+                android:id="@+id/boG_perfil"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:backgroundTint="#0086C0"
+                android:text="Perfil"
+                app:cornerRadius="30sp"
+                android:textSize="16sp"
+                app:icon="@drawable/baseline_logout_24"
+                app:iconGravity="start"
+                app:iconPadding="2dp"
+                app:iconSize="50dp" />
+
+        </GridLayout>
+
+        <LinearLayout
+            android:id="@+id/buttonlayout"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/loggout"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="5dp"
@@ -192,9 +216,10 @@
                 app:icon="@drawable/baseline_logout_24"
                 app:iconGravity="start"
                 app:iconPadding="2dp"
-                app:iconSize="50dp" />
+                app:iconSize="20dp" />
 
-        </GridLayout>
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

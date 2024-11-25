@@ -12,8 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 
 public class Fragment_gerente_empleados_insertar extends Fragment {
     /*
@@ -37,12 +41,11 @@ public class Fragment_gerente_empleados_insertar extends Fragment {
         }
     */
 
-    private TextView cabezera_nuevo_emp, nom_nuevo_emp,ape_nuevo_emp, ced_nuevo_emp,
-            sex_nuevo_emp, tel_nuevo_emp, usu_nuevo_emp, cont_nuevo_emp,
-            tipo_nuevo_labp;
+    private TextView nom_nuevo_emp,ape_nuevo_emp, ced_nuevo_emp,
+            sex_nuevo_emp, tel_nuevo_emp, usu_nuevo_emp, cont_nuevo_emp;
 
     private EditText nom_inp, ape_inp, ced_inp, sex_inp, tel_inp, usu_inp,
-            cont_inp, tipo_int;
+            cont_inp;
 
     private Button cancelar, ingresar;
 
@@ -66,7 +69,6 @@ public class Fragment_gerente_empleados_insertar extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         //Labels
-        cabezera_nuevo_emp=view.findViewById(R.id.cabecera_nuevo_emp);
         nom_nuevo_emp=view.findViewById(R.id.nom_label);
         ape_nuevo_emp=view.findViewById(R.id.ape_label);
         ced_nuevo_emp=view.findViewById(R.id.ced_label);
@@ -74,7 +76,7 @@ public class Fragment_gerente_empleados_insertar extends Fragment {
         tel_nuevo_emp=view.findViewById(R.id.tel_label);
         usu_nuevo_emp=view.findViewById(R.id.usu_label);
         cont_nuevo_emp=view.findViewById(R.id.cont_label);
-        tipo_nuevo_labp=view.findViewById(R.id.tipo_label);
+
 
         //Inputs
         nom_inp=view.findViewById(R.id.nom_input);
@@ -84,7 +86,30 @@ public class Fragment_gerente_empleados_insertar extends Fragment {
         tel_inp=view.findViewById(R.id.tel_input);
         usu_inp=view.findViewById(R.id.usu_input);
         cont_inp=view.findViewById(R.id.cont_input);
-        tipo_int=view.findViewById(R.id.tipo_input);
+
+        //////////////////////////////////////////////////////////////////////////////////
+        ArrayList<String> tipo_pago =new ArrayList<>();
+
+        tipo_pago.add("Vendedor");
+        tipo_pago.add("Gerente");
+
+        Spinner sel_tipoUser = view.findViewById(R.id.spinner_tipo);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                getContext(),
+                android.R.layout.simple_spinner_item,
+                tipo_pago);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sel_tipoUser.setAdapter(adapter);
+
+        String tipos = "Vendedor";
+
+
+        //////////////////////////////////////////////////////////////////////////////////
+
+
+
 
         navController = Navigation.findNavController(view);
 
@@ -102,14 +127,18 @@ public class Fragment_gerente_empleados_insertar extends Fragment {
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                insertar_empleado();
+                insertar_empleado(tipos);
                 navController.navigate(R.id.action_fragment_gerente_empleados_insertar_to_fragment_gerente_empleados);
 
             }
         });
+
+
+
+
     }
 
-    private void insertar_empleado(){
+    private void insertar_empleado(String tipo){
         //Se declaran los varoles.
         String nom_emp = nom_inp.getText().toString().trim();
         String ape_emp = ape_inp.getText().toString().trim();
@@ -118,7 +147,7 @@ public class Fragment_gerente_empleados_insertar extends Fragment {
         String tel_emp = tel_inp.getText().toString().trim();
         String usu_emp = usu_inp.getText().toString().trim();
         String cont_emp = cont_inp.getText().toString().trim();
-        String tipo_emp = tipo_int.getText().toString().trim();
+        String tipo_emp = tipo;
 
         if(!nom_emp.isEmpty() && !ape_emp.isEmpty() &&
                 !ced_emp.isEmpty() && !sex_emp.isEmpty() && !tel_emp.isEmpty() &&
