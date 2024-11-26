@@ -80,15 +80,8 @@ public class Gerente_Pedido_Main extends Fragment {
         //Se crea el array para los pedidos
         pedidosLista = new ArrayList<Pedidos_lista>();
 
+        mostrar_pedidos();
 
-        //
-        pedidosLista.add(new Pedidos_lista(15, "vigente", "24-05-11", 100.00f,
-                "Divisas","Juan Gomez", "Cocacola"));
-        pedidosLista.add(new Pedidos_lista(15, "vigente", "24-06-11", 100.00f,
-                "Tasa del dia","Juan Gomez", "Cocacola"));
-
-
-        buildRecycleview();
 
 
 
@@ -129,7 +122,7 @@ public class Gerente_Pedido_Main extends Fragment {
     }
 
 
-/*
+
     //funcion que recupera los datos de la base de datos y los muestra en el recycle view
     private void mostrar_pedidos (){
         //Se crea nueva variable para  nuestro request que
@@ -149,23 +142,22 @@ public class Gerente_Pedido_Main extends Fragment {
                         //Obtenemos la respuesta de la api in formato json
                         //abajo extraemos un string con su key value from our json object
                         //extraemos todos los datos from our json
+
                         int pedido_id = responseObj.getInt("id");
-                        int pedido_id_cli = responseObj.getInt("fk_id_cliente");
-                        int pedido_id_user = responseObj.getInt("fk_id_usuario");
-                       String s = responseObj.getString("total");
+                        String ped_clie = responseObj.getString("cliente");
+                        String ven_nom = responseObj.getString("nombre");
+                        String ven_ape = responseObj.getString("apellido");
+                        String ped_ven = ven_nom + "" + ven_ape;
+                        String s = responseObj.getString("total");
                         float pedido_total =  Float.parseFloat(s);
-                                 //String pedido_total = responseObj.getString("estado");
+                        String tipoPago = responseObj.getString("tipo_pago");
+                        String vencimiento = responseObj.getString("vencimiento");
                         String estado = responseObj.getString("estado");
 
-                        pedidosLista.add(new Pedidos_lista(pedido_id, pedido_total, pedido_id_cli, pedido_id_user, estado ));
+                        pedidosLista.add(new Pedidos_lista(pedido_id, estado,vencimiento, pedido_total,
+                                tipoPago,ped_ven,ped_clie));
 
                         buildRecycleview();
-
-                        Log.d("Pedido_id", Integer.toString(pedido_id));
-                        Log.d("Pedido_id_cli", Integer.toString(pedido_id_cli));
-                        Log.d("Pedido_id_user", Integer.toString(pedido_id_user));
-                        Log.d("Pedido Toral", s);
-                        Log.d("Estado", estado);
 
 
                     }catch (JSONException e){
@@ -183,7 +175,7 @@ public class Gerente_Pedido_Main extends Fragment {
         });
         queue.add(jsonArrayRequest);
     }
- */
+
 
     private void buildRecycleview(){
         //se inicia el adaptador de la clase

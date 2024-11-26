@@ -40,7 +40,7 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
     @NonNull
     @Override
     public Pedidos_lista_AdapterVend.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pedidos_cardVendedor, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pedidosvendcard, parent, false);
         return new ViewHolder(view);
     }
 

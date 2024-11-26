@@ -96,9 +96,9 @@ public class Fragment_pedidosDetalles_Dialog extends DialogFragment {
             JSONArray productosA = jsonObject.getJSONArray("productos");
 
 
-            for ( int i = 0; i < productosA.length(); i++ ){
+            for ( int i = 0; i <= productosA.length(); i++ ){
                 JSONObject producto = productosA.getJSONObject(i);
-                Log.d("Producto", producto.getString("id_producto"));
+                Log.d("Producto", producto.getString("des_producto"));
 
                 int id= producto.getInt("id_producto");
                 String codigo_producto = producto.getString("codigo_producto");

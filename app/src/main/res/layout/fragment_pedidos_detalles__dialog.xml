@@ -22,9 +22,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingStart="8dp"
             android:text="Detalles del Pedido"
             android:textAppearance="?attr/textAppearanceHeadlineSmall"
-            android:paddingStart="8dp" />
+            android:textColor="@color/black" />
 
         <ImageView
             android:id="@+id/closeDialog"
@@ -41,7 +42,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:backgroundTint="@color/design_default_color_background">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,6 +57,7 @@
                 android:paddingBottom="8dp"
                 android:text="Pedido- "
                 android:textAppearance="?attr/textAppearanceBodyLarge"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <TextView
@@ -64,6 +67,7 @@
                 android:paddingBottom="8dp"
                 android:text="Vendedor: "
                 android:textAppearance="?attr/textAppearanceBodyLarge"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <TextView
@@ -82,6 +86,7 @@
                 android:paddingBottom="8dp"
                 android:text="Cliente:"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <TextView
@@ -91,6 +96,7 @@
                 android:paddingBottom="8dp"
                 android:text="Pago: "
                 android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <TextView
@@ -100,6 +106,7 @@
                 android:paddingBottom="8dp"
                 android:text="Realizado: "
                 android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <TextView
@@ -109,6 +116,7 @@
                 android:paddingBottom="8dp"
                 android:text="Vence: "
                 android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <TextView
@@ -118,6 +126,7 @@
                 android:paddingBottom="8dp"
                 android:text="Estado: "
                 android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <TextView
@@ -127,6 +136,7 @@
                 android:paddingBottom="8dp"
                 android:text="Subtotal: "
                 android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <TextView
@@ -136,6 +146,7 @@
                 android:paddingBottom="8dp"
                 android:text="Total: "
                 android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <TextView
@@ -145,6 +156,7 @@
                 android:paddingBottom="8dp"
                 android:text="Productos: "
                 android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -152,16 +164,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:scrollbars="vertical"/>
-
-
-
-
-
-
-
-
-
+                android:backgroundTint="@color/cardview_light_background"
+                android:scrollbars="vertical" />
 
 
         </LinearLayout>
