@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vendedor_inv_grah"
+    app:startDestination="@id/fragment_vendedor_inventario">
+
+    <fragment
+        android:id="@+id/fragment_vendedor_inventario"
+        android:name="com.example.tesis_01.Fragment_vendedor_inventario"
+        android:label="fragment_vendedor_inventario"
+        tools:layout="@layout/fragment_vendedor_inventario" >
+        <action
+            android:id="@+id/action_fragment_vendedor_inventario_to_fragment_gerente_inventario_insertar2"
+            app:destination="@id/fragment_gerente_inventario_insertar2" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_gerente_inventario_insertar2"
+        android:name="com.example.tesis_01.Fragment_gerente_inventario_insertar"
+        android:label="fragment_gerente_inventario_insertar"
+        tools:layout="@layout/fragment_gerente_inventario_insertar" />
+</navigation>

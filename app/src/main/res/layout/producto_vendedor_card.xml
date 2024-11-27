@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    app:cardElevation="18dp"
-    app:cardCornerRadius="0dp">
+    android:backgroundTint="#FFFFFFFF"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="18dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,35 +19,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/ape_emp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/ced_emp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/precio_pro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
 
-            </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

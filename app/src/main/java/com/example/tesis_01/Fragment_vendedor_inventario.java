@@ -23,7 +23,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.appbar.MaterialToolbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,93 +30,101 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Fragment_vendedor_pedido_main extends Fragment {
+public class Fragment_vendedor_inventario extends Fragment {
 
-    //Array que almacena los pedidos
-    ArrayList<Pedidos_lista> pedidosLista;
+    Button retroceder, ingresar_producto;
+    RecyclerView inventario_recy;
 
-    RecyclerView lista_pedidos;
-    Button ingresar_pedido;
+    //dECLARA ARRAY DE RECYCLEVIEW
+    ArrayList<Producto> productos;
+
+    //Url para obtener informacion de productos de la base de datos http://10.0.2.2:80/tesis_con/public/productos
+    //"http://192.168.0.4/tesis_con/public/productos";
+    String url_recibir_productos = "http://192.168.0.5/tesis_con/public/productos";
+
 
     //Se inicializan controlle y navhost para fragments
     NavController navController;
     NavHostFragment navHostFragment;
 
-    MaterialToolbar appbar;
-
-    //Variable para la url a donde se realizara la consulta devolvera unicamente pediods de carlos
-    String url="http://192.168.0.5/tesis_con/public/pedidos/pedidosid";
-    //"http://192.168.0.4/tesis_con/public/pedidos";
-//"http://10.0.2.2:80/tesis_con/public/pedidos"
 
 
-
+    /*
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-    }
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }    */
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_vendedor_pedido_main, container, false);
+        return inflater.inflate(R.layout.fragment_vendedor_inventario, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        productos = new ArrayList<Producto>();
 
-        //iNICIALIZA EL RECYCLREVIREW
-        lista_pedidos=view.findViewById(R.id.pedidos_lista_ven);
 
-        //Se crea el array para los pedidos
-        pedidosLista = new ArrayList<Pedidos_lista>();
 
-        mostrar_pedidos();
 
+
+        inventario_recy = view.findViewById(R.id.inven_recyView);
+
+
+        obtener_productos();
+        build_products_recycleview();
+        /*
+        retroceder = view.findViewById(R.id.inv_volver);
+        retroceder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
+
+
+         */
         try{
             //se crea el nav controles
-            navController=NavHostFragment.findNavController(this);
+            //navController=NavHostFragment.findNavController(this);
+            //fragmentContInventarioGerente es el ide del fagmentr view de la activity
+            navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentContInventarioVend);
+            navController = navHostFragment.getNavController();          //se crea el boton
+            ingresar_producto = view.findViewById(R.id.ingresar_pro);
 
-            navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentPedidosVendedor);
-            navController = navHostFragment.getNavController();          //se crea el boton */
-            ingresar_pedido =view.findViewById(R.id.ir_nuevo_pedido_ven);
-
-            ingresar_pedido.setOnClickListener(new View.OnClickListener() {
+            ingresar_producto.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Log.d("Accion", "Se presiono el boton");
-                    navController.navigate(R.id.action_fragment_vendedor_pedido_main_to_pedidos_insertar2);
+                    navController.navigate(R.id.action_fragment_vendedor_inventario_to_fragment_gerente_inventario_insertar2);
                 }
             });
-
-            //manejo del appbar
-            appbar = view.findViewById(R.id.topAppBar);
-
-            appbar.setNavigationOnClickListener(v ->
-                    getActivity().finish()
-            );
-
-
-
 
         }catch (java.lang.IllegalStateException e){
             Toast.makeText(getContext(), "Eror View", Toast.LENGTH_SHORT).show();
             Log.d("Error", e.getMessage());
 
         }
-    }
 
-    //funcion que recupera los datos de la base de datos y los muestra en el recycle view
-    private void mostrar_pedidos (){
+    }
+    //Recibe la informacion de los productos
+    private void obtener_productos(){           // Esto no rompe el spinner
+
         //Se crea nueva variable para  nuestro request que
         RequestQueue queue = Volley.newRequestQueue(getContext());
+
+
         //en forma de un array asi que estamos haciendo un json array quest
         //debajo de esa linea hacemos un json array
         //request y entonces extraemos data de cada objeto json
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url_recibir_productos, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 for(int i = 0; i<response.length(); i++) {
@@ -130,25 +137,28 @@ public class Fragment_vendedor_pedido_main extends Fragment {
                         //abajo extraemos un string con su key value from our json object
                         //extraemos todos los datos from our json
 
-                        int pedido_id = responseObj.getInt("id");
-                        String ped_clie = responseObj.getString("cliente");
-                        String ven_nom = responseObj.getString("nombre");
-                        String ven_ape = responseObj.getString("apellido");
-                        String ped_ven = ven_nom + "" + ven_ape;
-                        String s = responseObj.getString("total");
-                        float pedido_total =  Float.parseFloat(s);
-                        String tipoPago = responseObj.getString("tipo_pago");
-                        String vencimiento = responseObj.getString("vencimiento");
-                        String estado = responseObj.getString("estado");
+                        int id= responseObj.getInt("id");
+                        String codigo_producto = responseObj.getString("codigo");
+                        String descripcion = responseObj.getString("descripcion");
+                        int cantidad = responseObj.getInt("cantidad");
+                        String s = responseObj.getString("precio");
+                        float precio =  Float.parseFloat(s);
+
+                        /*
+                        Log.d("codigo_producto", codigo_producto);
+                        Log.d("descripcion", descripcion);
+                        Log.d("cantidad", Integer.toString(cantidad));
+                        Log.d("precio", s);
+                        */
 
 
 
+                        //Informacion de los productos
+                        productos.add(new Producto(id, precio, cantidad, descripcion, codigo_producto));
 
+                        //Se pasa la informacion de la array de guardao al recycle view
+                        build_products_recycleview();
 
-                        pedidosLista.add(new Pedidos_lista(pedido_id, estado,vencimiento, pedido_total,
-                                tipoPago,ped_ven,ped_clie));
-
-                        buildRecycleview();
 
 
                     }catch (JSONException e){
@@ -161,29 +171,32 @@ public class Fragment_vendedor_pedido_main extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error){
                 Toast.makeText(getContext(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
-                Log.d("Error", "" + error.getMessage());
+                Log.d("Error", error.getMessage());
             }
         });
         queue.add(jsonArrayRequest);
     }
 
+    //Se encvarga de mandar el recycleview
+    private void build_products_recycleview(){
 
-    private void buildRecycleview(){
         //se inicia el adaptador de la clase
-        Pedidos_lista_AdapterVend adaptador_pedidos = new Pedidos_lista_AdapterVend(pedidosLista, getContext(), getParentFragmentManager());
+        Vendedor_Productos_RecAdapter productos_view = new Vendedor_Productos_RecAdapter(productos, getContext());
 
         //agregar layout manager
         //al recycle view
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        lista_pedidos.setHasFixedSize(true);
+        inventario_recy.setHasFixedSize(true);
 
         //se le da el layout managerr al recycle view
-        lista_pedidos.setLayoutManager(manager);
+        inventario_recy.setLayoutManager(manager);
 
         //Se establece el adaptador al recycle View
-        lista_pedidos.setAdapter(adaptador_pedidos);
+        inventario_recy.setAdapter(productos_view);
 
     }
+
+
 
 
 }

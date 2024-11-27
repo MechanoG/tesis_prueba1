@@ -84,7 +84,9 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
             restar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     Log.d("Botton", "Remover existencias");
+                    menosProDia();
                 }
             });
 
@@ -92,6 +94,7 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
                 @Override
                 public void onClick(View view) {
                     Log.d("Botton", "Elimar producto");
+                    elim_but();
                 }
             });
 
@@ -108,11 +111,53 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
             input.setInputType(InputType.TYPE_CLASS_NUMBER);
             builder.setView(input);
 
-            builder.setPositiveButton("Agregar", (dialogInterface, which)->{
+            builder.setPositiveButton("Aceptar", (dialogInterface, which)->{
                 String numero = input.getText().toString();
                 Log.d("Recivido", numero );
 
                     });
+
+            builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
+            builder.show();
+
+        }
+
+        private void menosProDia(){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("Ingrese cantidad a quitar");
+
+            //Cuadro de texto
+            final EditText input = new EditText(context);
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            builder.setView(input);
+
+            builder.setPositiveButton("Aceptar", (dialogInterface, which)->{
+                String numero = input.getText().toString();
+                Log.d("Recivido", numero );
+
+            });
+
+            builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
+            builder.show();
+
+        }
+
+
+
+
+        private void elim_but(){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("¿Eliminar Producto?");
+
+
+
+            builder.setPositiveButton("Eliminar", (dialogInterface, which)->{
+
+                Log.d("Recivido", "Cancelado" );
+
+            });
 
             builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
             builder.show();

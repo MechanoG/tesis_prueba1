@@ -20,9 +20,12 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     /*TextView salida;*/
     EditText user;
     EditText cont;
+
+    String url_seguimieto = "http://192.168.0.5/tesis_con/public/pedidos/seguimiento";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!usuario.isEmpty() && !contra.isEmpty()) {
 
                     //Se declara la url de el archivo php necesario para la conexion
-                    String con =getString(R.string.urlHeader)+"/tesis_con/public/usuarios/login";
-
-                    //"http://192.168.0.4/tesis_con/public/usuarios/login";
-                    /*"http://10.0.2.2:80/tesis_con/public/usuarios/login"
-                    "http://10.0.2.2:80/tesis_con/public"; */
-                    /*"http://10.0.2.2:80/php/db_conexion.php";*/
+                    String con ="http://192.168.0.5/tesis_con/public/usuarios/login";
 
 
                     StringRequest req = new StringRequest(Request.Method.POST, con,
@@ -100,13 +100,21 @@ public class MainActivity extends AppCompatActivity {
                                         //Se determina el tipo de usuario de la aplicacion
                                         String credencial = sharedPreferences.getString("tipo", "");
 
+
+
+
                                         //Comienza nueva actividad en base a las credenciales
                                         if (credencial.equals("vendedor")){
                                             Log.d("Mensaje", "Se verifiva el acceso al vendedor");
                                             Toast.makeText(getApplicationContext(), "Vendedor",
                                                     Toast.LENGTH_LONG).show();
 
+
+
                                             //Aqui se inicia el menu vendedor
+
+                                            seguimiento();
+
                                             Intent intentv = new Intent(MainActivity.this, Menu_Vendedor.class);
                                             startActivity(intentv);
 
@@ -115,8 +123,14 @@ public class MainActivity extends AppCompatActivity {
                                             Toast.makeText(getApplicationContext(), "Gerente",
                                                     Toast.LENGTH_LONG).show();
                                             //Aqui va menu gerente
+
+                                            seguimiento();
+
+
                                             Intent intent = new Intent(MainActivity.this, menu_gerente.class);
                                             startActivity(intent);
+
+
 
                                         }else{
                                             Log.d("Mensaje", "Proceso no completado");
@@ -190,6 +204,40 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    private void seguimiento(){
+        //Se crea nueva variable para  nuestro request que
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        JsonObjectRequest jsonObjectRequest  = new JsonObjectRequest(Request.Method.GET,url_seguimieto , null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                Log.d("Exito", "Exito");
+
+                String i = response.toString();
+
+                Log.d("Mensadje", "Vamos: " + i);
+                JSONObject res = response;
+
+                try {
+                    String toast = res.getString("Mensaje");
+
+                    Toast.makeText(getApplicationContext(), toast, Toast.LENGTH_SHORT).show();
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error){
+                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                Log.d("Error", "Error" + error.getMessage());
+            }
+        });
+        queue.add(jsonObjectRequest);
     }
 
 

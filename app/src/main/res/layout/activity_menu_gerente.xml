@@ -141,7 +141,7 @@
                 android:text="Clientes"
                 app:cornerRadius="30sp"
                 android:textSize="16sp"
-                app:icon="@drawable/baseline_pedidos_24"
+                app:icon="@drawable/baseline_clientes_24"
                 app:iconGravity="start"
                 app:iconPadding="2dp"
                 app:iconSize="50dp" />
@@ -157,7 +157,7 @@
                 android:text="Empleados"
                 app:cornerRadius="30sp"
                 android:textSize="16sp"
-                app:icon="@drawable/baseline_pedidos_24"
+                app:icon="@drawable/worker_svgrepo_com"
                 app:iconGravity="start"
                 app:iconPadding="2dp"
                 app:iconSize="50dp" />
@@ -189,8 +189,8 @@
                 android:text="Perfil"
                 app:cornerRadius="30sp"
                 android:textSize="16sp"
-                app:icon="@drawable/baseline_logout_24"
-                app:iconGravity="start"
+                app:icon="@drawable/baseline_perfil_24"
+                app:iconGravity="textStart"
                 app:iconPadding="2dp"
                 app:iconSize="50dp" />
 

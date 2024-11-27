@@ -22,7 +22,7 @@
             app:layout_anchor="@+id/appBarLayout"
             app:layout_anchorGravity="center"
             app:navigationIcon="@drawable/go_back_24"
-            app:title="Nuevo Cliente"
+            app:title="Nuevo Producto"
             app:titleTextColor="@color/black" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -170,9 +170,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="#7C0000"
+                android:text="Cancelar"
+                android:textSize="16sp"
                 app:icon="@drawable/baseline_cancel_24"
-                app:iconTint="@color/white"
-                android:text="Cancelar" />
+                app:iconGravity="textStart"
+                app:iconTint="@color/white" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/ingresar_cliente"
@@ -181,10 +183,10 @@
                 android:layout_weight="1"
                 android:backgroundTint="#32930F"
                 android:text="Ingresar"
+                android:textSize="16sp"
                 app:icon="@drawable/baseline_check_24"
-                app:iconTint="@color/white"
                 app:iconGravity="textStart"
-                />
+                app:iconTint="@color/white" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

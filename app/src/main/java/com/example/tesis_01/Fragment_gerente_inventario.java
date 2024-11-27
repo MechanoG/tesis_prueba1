@@ -42,7 +42,7 @@ public class Fragment_gerente_inventario extends Fragment {
 
     //Url para obtener informacion de productos de la base de datos http://10.0.2.2:80/tesis_con/public/productos
     //"http://192.168.0.4/tesis_con/public/productos";
-    String url_recibir_productos = "http://192.168.0.4/tesis_con/public/productos";
+    String url_recibir_productos = "http://192.168.0.5/tesis_con/public/productos";
 
 
     //Se inicializan controlle y navhost para fragments
@@ -104,7 +104,7 @@ public class Fragment_gerente_inventario extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Log.d("Accion", "Se presiono el boton");
-                    navController.navigate(R.id.action_fragment_gerente_inventario_to_fragment_gerente_inventario_insertar);
+
                 }
             });
 

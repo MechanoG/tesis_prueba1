@@ -66,7 +66,7 @@ public class Menu_Vendedor extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Inventario", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(Menu_Vendedor.this, Activity_gerente_inventario.class);
+                Intent intent = new Intent(Menu_Vendedor.this, Activity_vendedor_inventario.class);
                 startActivity((intent));
             }
         });

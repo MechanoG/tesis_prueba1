@@ -143,7 +143,7 @@
             android:textColor="@color/white"
             android:textSize="15dp"
             app:backgroundTint="#0089C0"
-            app:icon="@drawable/baseline_delete_24"
+            app:icon="@drawable/baseline_info_24"
             app:iconGravity="textStart"
             app:iconPadding="2dp"
             app:iconSize="20dp"

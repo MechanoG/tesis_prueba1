@@ -21,7 +21,7 @@
             app:layout_anchor="@+id/appBarLayout"
             app:layout_anchorGravity="center"
             app:navigationIcon="@drawable/go_back_24"
-            app:title="Crear Pedido"
+            app:title="Nuevo Pedido"
             app:titleTextColor="@color/black" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -140,6 +140,7 @@
                 android:backgroundTint="#7C0000"
                 android:text="Cancelar"
                 android:textColor="@color/white"
+                android:textSize="16sp"
                 app:icon="@drawable/baseline_cancel_24"
                 app:iconTint="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -155,6 +156,7 @@
                 android:backgroundTint="#32930F"
                 android:text="Registrar"
                 android:textColor="@color/white"
+                android:textSize="16sp"
                 app:icon="@drawable/baseline_check_24"
                 app:iconTint="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"

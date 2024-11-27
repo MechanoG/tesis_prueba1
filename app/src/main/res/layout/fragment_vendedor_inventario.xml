@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment_gerente_inventario">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment_vendedor_inventario">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -47,7 +45,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/inven_linView"
 
-             />
+            />
 
 
         <LinearLayout
@@ -76,11 +74,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Nuevo Producto"
+                android:text="Regresar"
                 android:textColor="@color/white"
                 android:textSize="25dp"
-                app:backgroundTint="#32930F"
-                app:icon="@drawable/agregar_icon"
+                app:backgroundTint="#7C0000"
+                app:icon="@drawable/baseline_back_24"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
                 app:iconSize="40dp"
@@ -89,4 +87,5 @@
                 />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

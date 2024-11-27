@@ -1,11 +1,14 @@
 package com.example.tesis_01;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -84,7 +87,7 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
          Pedidos_lista pedido;
 
-        String url_pedidos_detalle = "http://192.168.0.4/tesis_con/public/pedidos/pedidos_detalle";
+        String url_pedidos_detalle = "http://192.168.0.5/tesis_con/public/pedidos/pedidos_detalle";
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -104,6 +107,81 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
                     obtener_detalles();
                 }
             });
+
+            itemView.findViewById(R.id.pagar_pedido).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pagar_but();
+                }
+            });
+
+            itemView.findViewById(R.id.cancelar_pedido).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    cancel_but();
+                }
+            });
+
+            itemView.findViewById(R.id.elimiar_pedido).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    elim_but();
+                }
+            });
+
+        }
+
+        private void pagar_but(){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("¿Pagar pedido?");
+
+
+
+            builder.setPositiveButton("Pagar", (dialogInterface, which)->{
+
+                Log.d("Recivido", "Pagar" );
+
+            });
+
+            builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
+            builder.show();
+
+        }
+
+        private void cancel_but(){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("¿Cancelar Pedido?");
+
+
+
+            builder.setPositiveButton("Si", (dialogInterface, which)->{
+
+                Log.d("Recivido", "Cancelado" );
+
+            });
+
+            builder.setNegativeButton("No", (dialogInterface, which) -> dialogInterface.dismiss());
+            builder.show();
+
+        }
+
+        private void elim_but(){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("¿Eliminar Pedido?");
+
+
+
+            builder.setPositiveButton("Eliminar", (dialogInterface, which)->{
+
+                Log.d("Recivido", "Cancelado" );
+
+            });
+
+            builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
+            builder.show();
 
         }
 

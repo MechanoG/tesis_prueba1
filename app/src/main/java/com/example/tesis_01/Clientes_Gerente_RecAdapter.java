@@ -31,7 +31,7 @@ public class Clientes_Gerente_RecAdapter extends RecyclerView.Adapter<Clientes_G
     private Context context;
     private  FragmentManager fragmentManager;
 
-    String url_clientes_detalles = "http://192.168.0.4/tesis_con/public/clientes/detalles";
+    String url_clientes_detalles = "http://192.168.0.5/tesis_con/public/clientes/detalles";
 
     public Clientes_Gerente_RecAdapter(ArrayList<Cliente> lista_clientes, Context context, FragmentManager fragmentManager) {
         this.lista_clientes = lista_clientes;

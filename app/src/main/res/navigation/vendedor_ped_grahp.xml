@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vendedor_ped_grahp"
+    app:startDestination="@id/fragment_vendedor_pedido_main">
+
+    <fragment
+        android:id="@+id/fragment_vendedor_pedido_main"
+        android:name="com.example.tesis_01.Fragment_vendedor_pedido_main"
+        android:label="fragment_vendedor_pedido_main"
+        tools:layout="@layout/fragment_vendedor_pedido_main" >
+        <action
+            android:id="@+id/action_fragment_vendedor_pedido_main_to_pedidos_insertar2"
+            app:destination="@id/pedidos_insertar2" />
+    </fragment>
+    <fragment
+        android:id="@+id/pedidos_insertar2"
+        android:name="com.example.tesis_01.Pedidos_insertar"
+        android:label="fragment_pedidos_insertar"
+        tools:layout="@layout/fragment_pedidos_insertar" >
+        <action
+            android:id="@+id/action_pedidos_insertar2_to_fragment_vendedor_pedido_main"
+            app:destination="@id/fragment_vendedor_pedido_main" />
+    </fragment>
+</navigation>
