@@ -22,7 +22,7 @@
             app:layout_anchor="@+id/appBarLayout"
             app:layout_anchorGravity="center"
             app:navigationIcon="@drawable/go_back_24"
-            app:title="Nuevo Producto"
+            app:title="Nuevo Cliente"
             app:titleTextColor="@color/black" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0sp"
                 android:paddingLeft="10sp"
-                android:text="Ingresar descripcion"
+                android:text="Ingresar Descripción"
                 android:textSize="20sp"
                  />
 
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0sp"
                 android:paddingLeft="10sp"
-                android:text="Ingresar encargado"
+                android:text="Ingresar Encargado"
                 android:textSize="20sp"
                  />
 
@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0sp"
                 android:paddingLeft="10sp"
-                android:text="Ingresar encargado num"
+                android:text="Ingresar Telefono Encargado"
                 android:textSize="20sp"
                  />
 
@@ -143,22 +143,24 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="#7C0000"
+                android:text="Cancelar"
+                android:textSize="20sp"
+                app:iconGravity="textStart"
                 app:icon="@drawable/baseline_cancel_24"
-                app:iconTint="@color/white"
-                android:text="Cancelar" />
+                app:iconTint="@color/white" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/ingresar_cliente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Ingresar"
                 android:backgroundTint="#32930F"
+                android:text="Ingresar"
+                android:textSize="20sp"
                 app:icon="@drawable/baseline_check_24"
-                app:iconTint="@color/white"
                 app:iconGravity="textStart"
 
-                />
+                app:iconTint="@color/white" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,7 @@
             app:layout_anchor="@+id/appBarLayout"
             app:layout_anchorGravity="center"
             app:navigationIcon="@drawable/go_back_24"
-            app:title="Pedidos" />
+            app:title="Clientes" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

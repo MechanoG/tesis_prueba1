@@ -157,7 +157,7 @@
                 android:text="Empleados"
                 app:cornerRadius="30sp"
                 android:textSize="16sp"
-                app:icon="@drawable/worker_svgrepo_com"
+                app:icon="@drawable/person_apron_24"
                 app:iconGravity="start"
                 app:iconPadding="2dp"
                 app:iconSize="50dp" />
