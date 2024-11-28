@@ -75,7 +75,7 @@ public class Menu_Vendedor extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Clientes", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(Menu_Vendedor.this,Activity_gerente_clientes.class );
+                Intent intent = new Intent(Menu_Vendedor.this, Activity_vendedor_clientes.class);
                 startActivity(intent);
             }
         });
