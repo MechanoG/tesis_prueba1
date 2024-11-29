@@ -198,7 +198,7 @@ public class Fragment_modificar_empleado extends Fragment {
                     tel_inp.setText(tlfn);
                     usu_inp.setText(user);
                     cont_inp.setText(cont);
-                    zona_inp.setText(zona)
+                    zona_inp.setText(zona);
 
 
 
