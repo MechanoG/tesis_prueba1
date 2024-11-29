@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.loader.content.CursorLoader;
+import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -32,12 +34,17 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
     ////Array en el que se guardaran cada elemento de la lista
     private ArrayList<Empleado> empleados_recyclerview;
     private Context context;
+    private FragmentManager fragmentManager;
+    private NavController navController;
 
 
 
-    public Empleados_RecAdapter(ArrayList<Empleado> empleados_recyclerview, Context context) {
+    public Empleados_RecAdapter(ArrayList<Empleado> empleados_recyclerview, Context context,
+                                FragmentManager fragmentManager, NavController navController) {
         this.empleados_recyclerview = empleados_recyclerview;
         this.context = context;
+        this.fragmentManager=fragmentManager;
+        this.navController=navController;
     }
 
     @NonNull
@@ -75,7 +82,7 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
         private TextView emp_nombre, emp_cedula, emp_usu, emp_tipo;
 
         Empleado empleado;
-        Button empInfo;
+        Button empInfo, empMod;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
@@ -84,13 +91,20 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
             emp_usu = itemView.findViewById(R.id.user_emp);
             emp_tipo = itemView.findViewById(R.id.tipo_emp);
             empInfo =itemView.findViewById(R.id.infoEmp);
+            empMod = itemView.findViewById(R.id.modEmp);
 
             empInfo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     obtener_detalles();
+
                 }
+
+
             });
+
+
 
 
         }

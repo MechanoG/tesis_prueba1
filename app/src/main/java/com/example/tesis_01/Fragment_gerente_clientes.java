@@ -74,8 +74,6 @@ public class Fragment_gerente_clientes extends Fragment {
 
         clientes = new ArrayList<Cliente>();
 
-
-
         clientes_recy = view.findViewById(R.id.emple_recy);
 
         ingresar_cliente = view.findViewById(R.id.bttn_volver);

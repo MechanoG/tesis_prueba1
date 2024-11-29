@@ -170,7 +170,8 @@ public class Fragment_gerente_empleados extends Fragment {
     private void build_emp_recycleview(){
 
         //se inicia el adaptador de la clase
-        Empleados_RecAdapter empleados_view = new Empleados_RecAdapter(empleados, getContext());
+        Empleados_RecAdapter empleados_view = new Empleados_RecAdapter(empleados, getContext(), getParentFragmentManager(),
+                navController);
 
         //agregar layout manager
         //al recycle view

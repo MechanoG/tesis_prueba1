@@ -1,14 +1,308 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment_modificar_empleado">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.appbar.AppBarLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#0089C0"
+            android:backgroundTint="#0089C0"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_anchor="@+id/appBarLayout"
+            app:layout_anchorGravity="center"
+            app:navigationIcon="@drawable/go_back_24"
+            app:title="Modificar Empleado"
+            app:titleTextColor="@color/black" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-</FrameLayout>
+        <ScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/butt_lay"
+
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+
+
+                <TextView
+                    android:id="@+id/nom_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nuevo Nombre"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/editTextText"
+                    app:layout_constraintTop_toBottomOf="@+id/cliente_nuevo"
+                    app:layout_constraintVertical_bias="0.15"
+                    tools:layout_editor_absoluteX="158dp" />
+
+                <EditText
+                    android:id="@+id/nom_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:ems="10"
+                    android:hint="Nombre"
+                    android:inputType="text"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/ape_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.502"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/nom_label" />
+
+                <TextView
+                    android:id="@+id/ape_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="Nuevo Apellido"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/ape_input"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <EditText
+                    android:id="@+id/ape_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="74dp"
+                    android:ems="10"
+                    android:hint="Apellido"
+                    android:inputType="text"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/ced_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/ced_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="Nueva Cedula"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/ced_input"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <EditText
+                    android:id="@+id/ced_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="61dp"
+                    android:ems="10"
+                    android:hint="Cedula"
+                    android:inputType="number"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/tel_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/sex_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+
+                    android:text="Nuevo Sexo"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/sex_input"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+                <EditText
+                    android:id="@+id/sex_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="63dp"
+                    android:ems="10"
+                    android:hint="Sexo"
+                    android:inputType="text"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.497"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="625dp" />
+
+
+                <TextView
+                    android:id="@+id/tel_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+
+                    android:text="Nuevo Telefono"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/sex_input"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <EditText
+                    android:id="@+id/tel_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="63dp"
+                    android:ems="10"
+                    android:hint="Telefono"
+                    android:inputType="number"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.497"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="625dp" />
+
+                <TextView
+                    android:id="@+id/usu_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="Nuevo Usuario"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/sex_input"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+                <EditText
+                    android:id="@+id/usu_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="63dp"
+                    android:ems="10"
+                    android:hint="Usuario"
+                    android:inputType="text"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.497"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="625dp" />
+
+                <TextView
+                    android:id="@+id/cont_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="Nueva Contraseña"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/sex_input"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+                <EditText
+                    android:id="@+id/cont_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="63dp"
+                    android:ems="10"
+                    android:hint="Contraseña"
+                    android:inputType="text"
+                    android:textSize="20sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tipo_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:paddingLeft="10sp"
+                    android:text="Nuevo tipo"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/sex_input"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <Spinner
+                    android:id="@+id/spinner_tipo"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:padding="5sp"
+                    android:layout_marginBottom="20sp"
+                    />
+
+                <TextView
+                    android:id="@+id/zona_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:paddingLeft="10sp"
+                    android:text="Nueva Zona"
+                    android:textSize="20sp"
+                    />
+
+                <EditText
+                    android:id="@+id/zona_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Zona"
+                    android:inputType="text"
+                    android:textSize="20sp"
+                    />
+
+
+
+
+
+            </LinearLayout>
+        </ScrollView>
+
+
+        <LinearLayout
+            android:id="@+id/butt_lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bttnNE_volver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#7C0000"
+                android:text="Cancelar"
+                android:textSize="20sp"
+                app:icon="@drawable/baseline_cancel_24"
+                app:iconGravity="textStart"
+                app:iconTint="@color/white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/nuevo_empleado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#32930F"
+                android:text="Ingresar"
+                android:textSize="20sp"
+                app:icon="@drawable/baseline_check_24"
+                app:iconGravity="textStart"
+                app:iconTint="@color/white" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
