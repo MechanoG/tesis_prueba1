@@ -2,6 +2,7 @@ package com.example.tesis_01;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -30,13 +32,16 @@ public class Clientes_Gerente_RecAdapter extends RecyclerView.Adapter<Clientes_G
     private ArrayList<Cliente> lista_clientes;
     private Context context;
     private  FragmentManager fragmentManager;
+    private NavController navController;
 
     String url_clientes_detalles = "http://192.168.0.5/tesis_con/public/clientes/detalles";
 
-    public Clientes_Gerente_RecAdapter(ArrayList<Cliente> lista_clientes, Context context, FragmentManager fragmentManager) {
+    public Clientes_Gerente_RecAdapter(ArrayList<Cliente> lista_clientes, Context context, FragmentManager fragmentManager,
+                                       NavController navController) {
         this.lista_clientes = lista_clientes;
         this.context = context;
         this.fragmentManager = fragmentManager;
+        this.navController = navController;
     }
 
     @NonNull
@@ -82,6 +87,13 @@ public class Clientes_Gerente_RecAdapter extends RecyclerView.Adapter<Clientes_G
                 @Override
                 public void onClick(View view) {
                     obtener_detalles();
+                }
+            });
+
+            modi.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pasarInfo();
                 }
             });
 
@@ -148,11 +160,16 @@ public class Clientes_Gerente_RecAdapter extends RecyclerView.Adapter<Clientes_G
 
             builder.setMessage(message.toString());
 
-
-
-
             builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
             builder.show();
+
+        }
+
+        private void pasarInfo(){
+            Bundle bundle = new Bundle();
+            bundle.putInt("clienteID", cli.getCliente_id());
+
+            navController.navigate(R.id.action_fragment_gerente_clientes_to_fragment_modificar_clientes, bundle);
 
         }
 

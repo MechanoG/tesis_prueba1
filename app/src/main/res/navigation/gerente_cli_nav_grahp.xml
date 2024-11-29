@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_fragment_gerente_clientes_to_fragment_gerente_clientes_insertar"
             app:destination="@id/fragment_gerente_clientes_insertar" />
+        <action
+            android:id="@+id/action_fragment_gerente_clientes_to_fragment_modificar_clientes"
+            app:destination="@id/fragment_modificar_clientes" />
     </fragment>
     <fragment
         android:id="@+id/fragment_gerente_clientes_insertar"
@@ -23,4 +26,9 @@
             android:id="@+id/action_fragment_gerente_clientes_insertar_to_fragment_gerente_clientes"
             app:destination="@id/fragment_gerente_clientes" />
     </fragment>
+    <fragment
+        android:id="@+id/fragment_modificar_clientes"
+        android:name="com.example.tesis_01.Fragment_modificar_clientes"
+        android:label="fragment_modificar_clientes"
+        tools:layout="@layout/fragment_modificar_clientes" />
 </navigation>

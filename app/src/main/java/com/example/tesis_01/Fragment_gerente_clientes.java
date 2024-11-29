@@ -150,7 +150,8 @@ public class Fragment_gerente_clientes extends Fragment {
 
 
     private void build_clientes_recycleview (){
-        Clientes_Gerente_RecAdapter clientes_view = new Clientes_Gerente_RecAdapter( clientes,getContext(), getParentFragmentManager());
+        Clientes_Gerente_RecAdapter clientes_view = new Clientes_Gerente_RecAdapter( clientes,getContext(), getParentFragmentManager(),
+                navController);
 
         //agregar layout manager
         //al recycle view

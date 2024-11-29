@@ -2,6 +2,8 @@ package com.example.tesis_01;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.os.Bundle;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -156,6 +159,8 @@ public class Clientes_Vendedor_RecAdapter extends RecyclerView.Adapter<Clientes_
             builder.show();
 
         }
+
+
 
 
 
