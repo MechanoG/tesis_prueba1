@@ -2,6 +2,7 @@ package com.example.tesis_01;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.loader.content.CursorLoader;
 import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +27,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdapter.ViewHolder> {
@@ -96,14 +99,17 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
             empInfo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     obtener_detalles();
 
                 }
-
-
             });
 
+            empMod.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pasarInfo();
+                }
+            });
 
 
 
@@ -135,12 +141,14 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
 
                         JSONObject respuesta = response;
 
+
+
                         String user = respuesta.getString("usuario");
-                        String cont=respuesta.getString("contraseña");;
+                        String cont=respuesta.getString("contraseña");
                         String tipo = respuesta.getString("tipo");
                         String zona=respuesta.getString("zona");
                         String nombre = respuesta.getString("nombre");
-                        String apellido=respuesta.getString("apellido");;
+                        String apellido=respuesta.getString("apellido");
                         String ced = respuesta.getString("cedula");
                         String sex=respuesta.getString("sexo");
                         String tlfn = respuesta.getString("telefono");
@@ -162,8 +170,6 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
             });
             queue.add(jsonObjectRequest);
         }
-
-
 
 
         private void datos_empleado(String user, String cont, String tipo, String zona,
@@ -192,6 +198,13 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
 
         }
 
+        private void pasarInfo(){
+            Bundle bundle = new Bundle();
+            bundle.putInt("empID", empleado.getId());
+
+            navController.navigate(R.id.action_fragment_gerente_empleados_to_fragment_modificar_empleado, bundle);
+
+        }
 
 
     }
