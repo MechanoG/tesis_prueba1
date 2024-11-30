@@ -141,25 +141,27 @@
                 android:id="@+id/cancelar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:backgroundTint="#7C0000"
                 android:text="Cancelar"
                 android:textSize="20sp"
-                app:iconGravity="textStart"
                 app:icon="@drawable/baseline_cancel_24"
+                app:iconGravity="textStart"
                 app:iconTint="@color/white" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/ingresar_cliente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:backgroundTint="#32930F"
                 android:text="Ingresar"
                 android:textSize="20sp"
                 app:icon="@drawable/baseline_check_24"
-                app:iconGravity="textStart"
 
+                app:iconGravity="textStart"
                 app:iconTint="@color/white" />
         </LinearLayout>
 

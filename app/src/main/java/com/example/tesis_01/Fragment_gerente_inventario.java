@@ -94,7 +94,7 @@ public class Fragment_gerente_inventario extends Fragment {
          */
         try{
             //se crea el nav controles
-            //navController=NavHostFragment.findNavController(this);
+            navController=NavHostFragment.findNavController(this);
                                                                                                 //fragmentContInventarioGerente es el ide del fagmentr view de la activity
             navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentContInventarioGerente);
             navController = navHostFragment.getNavController();          //se crea el boton
@@ -104,7 +104,7 @@ public class Fragment_gerente_inventario extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Log.d("Accion", "Se presiono el boton");
-
+                    navController.navigate(R.id.action_fragment_gerente_inventario_to_fragment_gerente_inventario_insertar);
                 }
             });
 

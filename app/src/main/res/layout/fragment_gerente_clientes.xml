@@ -50,8 +50,9 @@
                 android:id="@+id/bttn_volver"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:text="Nuevo"
+                android:text="Nuevo Cliente"
                 android:textSize="25dp"
                 app:backgroundTint="#32930F"
                 app:icon="@drawable/agregar_icon"
@@ -59,8 +60,7 @@
                 app:iconSize="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/bttn_nuevo"
-                />
+                app:layout_constraintStart_toEndOf="@+id/bttn_nuevo" />
 
         </LinearLayout>
 

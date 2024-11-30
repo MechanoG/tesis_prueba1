@@ -46,34 +46,24 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             >
+
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/bttn_volver"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="#7C0000"
-                android:text="Cancelar"
-                android:textSize="20sp"
-                app:icon="@drawable/baseline_cancel_24"
-                app:iconGravity="textStart"
-                app:iconTint="@color/white"
-
-                />
-
-            <Button
                 android:id="@+id/bttn_nuevo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nuevo"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
+
                 android:backgroundTint="#32930F"
-                android:textSize="20sp"
-                app:icon="@drawable/baseline_check_24"
+                android:text="Nuevo Empleado"
+                android:textSize="25dp"
+                app:icon="@drawable/agregar_icon"
+
+                app:iconSize="40dp"
+
+
                 app:iconGravity="textStart"
-                app:iconTint="@color/white"
-
-
-            />
+                app:iconTint="@color/white" />
         </LinearLayout>
 
 

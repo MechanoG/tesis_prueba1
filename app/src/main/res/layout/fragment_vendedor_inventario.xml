@@ -73,7 +73,8 @@
                 android:id="@+id/ingresar_pro"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_margin="10sp"
+                android:layout_weight="1"
                 android:text="Regresar"
                 android:textColor="@color/white"
                 android:textSize="25dp"
@@ -82,9 +83,7 @@
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
                 app:iconSize="40dp"
-                app:iconTint="@color/white"
-                android:layout_weight="1"
-                />
+                app:iconTint="@color/white" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

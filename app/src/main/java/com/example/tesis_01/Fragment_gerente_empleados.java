@@ -45,7 +45,7 @@ public class Fragment_gerente_empleados extends Fragment {
 
     //iNICIALIZA ELEMENTOS VISUALES
     TextView cabecera;
-    Button retroceder, ingresar_empleado;
+    Button ingresar_empleado;
     RecyclerView empleado_recy;
 
     //dECLARA ARRAY DE RECYCLEVIEW
@@ -80,7 +80,7 @@ public class Fragment_gerente_empleados extends Fragment {
 
         ingresar_empleado = view.findViewById(R.id.bttn_nuevo);
 
-        retroceder = view.findViewById(R.id.bttn_volver);
+
 
         navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentContEmpleadosGerente);
         navController = navHostFragment.getNavController();
@@ -94,13 +94,14 @@ public class Fragment_gerente_empleados extends Fragment {
             }
         });
 
+        /*
         retroceder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 getActivity().finish();
             }
-        });
+        }); */
 
         obtener_empleados();
         build_emp_recycleview();
