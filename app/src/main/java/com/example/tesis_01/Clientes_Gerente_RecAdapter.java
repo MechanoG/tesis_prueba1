@@ -34,7 +34,7 @@ public class Clientes_Gerente_RecAdapter extends RecyclerView.Adapter<Clientes_G
     private  FragmentManager fragmentManager;
     private NavController navController;
 
-    String url_clientes_detalles = "http://192.168.0.5/tesis_con/public/clientes/detalles";
+    String url_clientes_detalles = "http://192.168.0.7/tesis_con/public/clientes/detalles";
 
     public Clientes_Gerente_RecAdapter(ArrayList<Cliente> lista_clientes, Context context, FragmentManager fragmentManager,
                                        NavController navController) {
@@ -97,7 +97,32 @@ public class Clientes_Gerente_RecAdapter extends RecyclerView.Adapter<Clientes_G
                 }
             });
 
+            eliminar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    elim_but();
+                }
+            });
 
+
+
+        }
+
+        private void elim_but(){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("¿Eliminar Cliente?");
+
+
+
+            builder.setPositiveButton("Eliminar", (dialogInterface, which)->{
+
+                Log.d("Recivido", "Cancelado" );
+
+            });
+
+            builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
+            builder.show();
 
         }
 

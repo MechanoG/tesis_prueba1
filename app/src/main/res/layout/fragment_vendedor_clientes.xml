@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10sp"
                 android:layout_weight="1"
-                android:text="Nuevo"
+                android:text="Nuevo Cliente"
                 android:textSize="25dp"
                 app:backgroundTint="#32930F"
                 app:icon="@drawable/agregar_icon"

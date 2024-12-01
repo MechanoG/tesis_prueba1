@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdapter.ViewHolder> {
 
-    String url_detalles_empleados ="http://192.168.0.5/tesis_con/public/usuarios/detalle";
+    String url_detalles_empleados ="http://192.168.0.7/tesis_con/public/usuarios/detalle";
 
     ////Array en el que se guardaran cada elemento de la lista
     private ArrayList<Empleado> empleados_recyclerview;
@@ -67,8 +67,8 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
         holder.emp_nombre.setText("Empleado: " + lista.getNombre() +" "+ lista.getApellido() );
 
         holder.emp_cedula.setText( "Cedula: " + lista.getCedula());
-        holder.emp_usu.setText("Usuario" + lista.getUsuario());
-        holder.emp_tipo.setText("Tipo" + lista.getTipo());
+        holder.emp_usu.setText("Usuario: " + lista.getUsuario());
+        holder.emp_tipo.setText("Tipo: " + lista.getTipo());
         holder.empleado = lista;
 
 
@@ -85,7 +85,7 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
         private TextView emp_nombre, emp_cedula, emp_usu, emp_tipo;
 
         Empleado empleado;
-        Button empInfo, empMod;
+        Button empEli, empInfo, empMod;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
@@ -95,6 +95,14 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
             emp_tipo = itemView.findViewById(R.id.tipo_emp);
             empInfo =itemView.findViewById(R.id.infoEmp);
             empMod = itemView.findViewById(R.id.modEmp);
+            empEli = itemView.findViewById(R.id.eliminarEmp);
+
+            empEli.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    elim_but();
+                }
+            });
 
             empInfo.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -112,6 +120,24 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
             });
 
 
+
+        }
+
+        private void elim_but(){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("¿Eliminar Empleado?");
+
+
+
+            builder.setPositiveButton("Eliminar", (dialogInterface, which)->{
+
+                Log.d("Recivido", "Cancelado" );
+
+            });
+
+            builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
+            builder.show();
 
         }
 
@@ -176,7 +202,7 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
         String nombre, String apellido, String ced, String sex, String tlfn){
 
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Detalles Cliente");
+            builder.setTitle("Detalles Empleado");
 
             StringBuilder message = new StringBuilder();
             message.append("Nombre: ").append(nombre).append(" ").append(apellido).append("\n");

@@ -46,7 +46,7 @@ public class Fragment_vendedor_clientes extends Fragment {
     //URL para obtener la informacion de clientes de la base de datos http://10.0.2.2:80/tesis_con/public/clientes
     // "http://192.168.0.4/tesis_con/public/clientes";
 
-    String url_recibir_clientes = "http://192.168.0.5/tesis_con/public/clientes";
+    String url_recibir_clientes = "http://192.168.0.7/tesis_con/public/clientes";
 
 
     @Override

@@ -2,6 +2,7 @@ package com.example.tesis_01;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -61,13 +62,35 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
         Pedidos_lista lista = lista_pedidos.get(position);
 
+        String estad;
+
         holder.id_ped.setText("Pedido-" + Integer.toString(lista.getId_pe()));
         holder.raz_cli.setText("Cliente: " + lista.getCliente());
         holder.vend.setText("Vendedor: " + lista.getVendedor());
         holder.total_ped.setText("Total: " + Float.toString(lista.getPe_total()));
         holder.tipo_pago.setText("Tipo de Pago: " + lista.getTi_pago());
         holder.vencimeinto.setText("Se Vence: " + lista.getVencimiento());
-        holder.estado.setText("Estado: " + lista.getEstado());
+
+        // Restablecer colores predeterminados antes de aplicar cambios
+        holder.estado.setBackgroundColor(Color.TRANSPARENT); // Fondo transparente por defecto
+        holder.estado.setTextColor(Color.BLACK); // Texto negro por defecto
+
+
+        estad = lista.getEstado().trim();
+        holder.estado.setText("Estado: " + estad);
+        if (estad.equals("Vencido")){
+            holder.estado.setBackgroundColor(Color.parseColor("#7C0000"));
+            holder.estado.setTextColor(Color.WHITE);
+
+        } else if (estad.equals("Pagado")) {
+            holder.estado.setBackgroundColor(Color.parseColor("#32930F"));
+            holder.estado.setTextColor(Color.WHITE);
+        }else{
+            holder.estado.setBackgroundColor(Color.TRANSPARENT); // Fondo transparente por defecto
+            holder.estado.setTextColor(Color.BLACK); // Texto negro por defecto
+
+        }
+
         holder.pedido=lista;
 
 
@@ -87,7 +110,7 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
          Pedidos_lista pedido;
 
-        String url_pedidos_detalle = "http://192.168.0.5/tesis_con/public/pedidos/pedidos_detalle";
+        String url_pedidos_detalle = "http://192.168.0.7/tesis_con/public/pedidos/pedidos_detalle";
 
 
         public ViewHolder(@NonNull View itemView) {

@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     EditText user;
     EditText cont;
 
-    String url_seguimieto = "http://192.168.0.5/tesis_con/public/pedidos/seguimiento";
+    String url_seguimieto = "http://192.168.0.7/tesis_con/public/pedidos/seguimiento";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!usuario.isEmpty() && !contra.isEmpty()) {
 
                     //Se declara la url de el archivo php necesario para la conexion
-                    String con ="http://192.168.0.5/tesis_con/public/usuarios/login";
+                    String con ="http://192.168.0.7/tesis_con/public/usuarios/login";
 
 
                     StringRequest req = new StringRequest(Request.Method.POST, con,

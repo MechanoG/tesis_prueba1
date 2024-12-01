@@ -93,7 +93,7 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
             eliminar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.d("Botton", "Elimar producto");
+                    Log.d("Botton", "Eliminar producto");
                     elim_but();
                 }
             });
