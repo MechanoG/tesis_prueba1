@@ -111,7 +111,7 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
          Pedidos_lista pedido;
 
         String url_pedidos_detalle = "http://192.168.0.7/tesis_con/public/pedidos/pedidos_detalle";
-
+        String getUrl_pedidos_pagar = "http://192.168.0.7/tesis_con/public/pedidos/pagar";
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -164,6 +164,8 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
             builder.setPositiveButton("Pagar", (dialogInterface, which)->{
 
                 Log.d("Recivido", "Pagar" );
+                pagarPedido();
+
 
             });
 
@@ -223,7 +225,7 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
             //Crear solicitud post
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                    Request.Method.POST, url_pedidos_detalle, jsonObject, new Response.Listener<JSONObject>() {
+                    Request.Method.POST, getUrl_pedidos_pagar, jsonObject, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     Log.d("Mensaje", response.toString());
@@ -243,6 +245,42 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
             });
             queue.add(jsonObjectRequest);
         }
+
+        public void pagarPedido(){
+
+            RequestQueue queue = Volley.newRequestQueue(itemView.getContext());
+
+            //Se crea un JSONObject con los datos que se desean enviar
+            JSONObject jsonObject = new JSONObject();
+            try{
+                jsonObject.put("id_ped",pedido.getId_pe());
+
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+
+            //Crear solicitud post
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.POST, getUrl_pedidos_pagar, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.d("Mensaje", response.toString());
+                    String respuesta = response.toString();
+
+                    Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
+
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("Error", error.toString());
+                }
+            });
+            queue.add(jsonObjectRequest);
+        }
+
 
     }
 }
