@@ -193,4 +193,15 @@ public class Gerente_Pedido_Main extends Fragment {
 
     }
 
+    private void actualizarListaPedidos() {
+        // Limpiar la lista actual de pedidos
+        pedidosLista.clear();
+
+        // Volver a cargar los pedidos desde la base de datos (o desde el backend)
+        mostrar_pedidos();  // Recarga los pedidos desde la API
+    }
+
+
+
+
  }

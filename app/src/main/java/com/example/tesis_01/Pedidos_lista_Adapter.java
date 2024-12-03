@@ -94,6 +94,7 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
         holder.pedido=lista;
 
 
+
     }
 
     @Override
@@ -112,6 +113,9 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
         String url_pedidos_detalle = "http://192.168.0.7/tesis_con/public/pedidos/pedidos_detalle";
         String getUrl_pedidos_pagar = "http://192.168.0.7/tesis_con/public/pedidos/pagar";
+        String getUrl_pedidos_eliminar = "http://192.168.0.7/tesis_con/public/pedidos/eliminar";
+
+        int pos;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -123,6 +127,8 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
             tipo_pago = itemView.findViewById(R.id.tipo_pago);
             vencimeinto = itemView.findViewById(R.id.vencimiento);
             estado=itemView.findViewById(R.id.estado_pedido);
+
+
 
             itemView.findViewById(R.id.informacion_pedido).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -167,6 +173,9 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
                 pagarPedido();
 
 
+
+
+
             });
 
             builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
@@ -184,6 +193,7 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
             builder.setPositiveButton("Si", (dialogInterface, which)->{
 
                 Log.d("Recivido", "Cancelado" );
+                eliminarPedido();
 
             });
 
@@ -202,6 +212,7 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
             builder.setPositiveButton("Eliminar", (dialogInterface, which)->{
 
                 Log.d("Recivido", "Cancelado" );
+                eliminarPedido();
 
             });
 
@@ -225,7 +236,7 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
             //Crear solicitud post
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                    Request.Method.POST, getUrl_pedidos_pagar, jsonObject, new Response.Listener<JSONObject>() {
+                    Request.Method.POST, url_pedidos_detalle, jsonObject, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     Log.d("Mensaje", response.toString());
@@ -280,6 +291,42 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
             });
             queue.add(jsonObjectRequest);
         }
+
+        public void eliminarPedido(){
+
+            RequestQueue queue = Volley.newRequestQueue(itemView.getContext());
+
+            //Se crea un JSONObject con los datos que se desean enviar
+            JSONObject jsonObject = new JSONObject();
+            try{
+                jsonObject.put("id_ped",pedido.getId_pe());
+
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+
+            //Crear solicitud post
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.POST, getUrl_pedidos_eliminar, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.d("Mensaje", response.toString());
+                    String respuesta = response.toString();
+
+                    Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
+
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("Error", error.toString());
+                }
+            });
+            queue.add(jsonObjectRequest);
+        }
+
 
 
     }
