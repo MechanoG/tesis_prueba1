@@ -10,9 +10,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -43,7 +54,7 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
         holder.producto_des.setText("Nombre " + producto.getDescripcion());
         holder.producto_can.setText("Existencias " + Integer.toString(producto.getCantidad()));
         holder.producto_pre.setText("Precio: " + Float.toString(producto.getPrecio()) + "$");
-
+        holder.pro =producto;
 
 
     }
@@ -59,6 +70,9 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
 
         Button restar, sumar, eliminar;
 
+        Producto pro;
+
+        String url_prodcuto_eliminar = "http://192.168.0.7/tesis_con/public/productos/eliminar";
 
         public ViewHolder (@NonNull View itemView){
             super (itemView);
@@ -70,6 +84,8 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
             sumar = itemView.findViewById(R.id.agregar_pro);
             restar = itemView.findViewById(R.id.quitar_pro);
             eliminar = itemView.findViewById(R.id.elimiar_producto);
+
+
 
 
             sumar.setOnClickListener(new View.OnClickListener() {
@@ -156,12 +172,48 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
             builder.setPositiveButton("Eliminar", (dialogInterface, which)->{
 
                 Log.d("Recivido", "Cancelado" );
+                eliminarProducto();
 
             });
 
             builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
             builder.show();
 
+        }
+
+        public void eliminarProducto(){
+
+            RequestQueue queue = Volley.newRequestQueue(itemView.getContext());
+
+            //Se crea un JSONObject con los datos que se desean enviar
+            JSONObject jsonObject = new JSONObject();
+            try{
+                jsonObject.put("id_pro",pro.getId());
+
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+
+            //Crear solicitud post
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.POST, url_prodcuto_eliminar, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.d("Mensaje", response.toString());
+                    String respuesta = response.toString();
+
+                    Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
+
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("Error", error.toString());
+                }
+            });
+            queue.add(jsonObjectRequest);
         }
 
 

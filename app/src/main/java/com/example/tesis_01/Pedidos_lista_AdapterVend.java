@@ -1,12 +1,15 @@
 package com.example.tesis_01;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
@@ -102,8 +105,11 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
 
         Pedidos_lista pedido;
 
-        String url_pedidos_detalle = "http://192.168.0.7/tesis_con/public/pedidos/pedidos_detalle";
 
+
+        String url_pedidos_detalle = "http://192.168.0.7/tesis_con/public/pedidos/pedidos_detalle";
+        String getUrl_pedidos_pagar = "http://192.168.0.7/tesis_con/public/pedidos/pagar";
+        String getUrl_pedidos_eliminar = "http://192.168.0.7/tesis_con/public/pedidos/eliminar";
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -123,7 +129,67 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
                 }
             });
 
+            itemView.findViewById(R.id.pagar_pedido).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pagar_but();
+                }
+            });
+
+            itemView.findViewById(R.id.cancelar_pedido).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    cancel_but();
+                }
+            });
+
+
+
         }
+
+        private void pagar_but(){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("¿Pagar pedido?");
+
+
+
+            builder.setPositiveButton("Pagar", (dialogInterface, which)->{
+
+                Log.d("Recivido", "Pagar" );
+                pagarPedido();
+
+
+
+
+
+            });
+
+            builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
+            builder.show();
+
+        }
+
+        private void cancel_but(){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("¿Cancelar Pedido?");
+
+
+
+            builder.setPositiveButton("Si", (dialogInterface, which)->{
+
+                Log.d("Recivido", "Cancelado" );
+                eliminarPedido();
+
+            });
+
+            builder.setNegativeButton("No", (dialogInterface, which) -> dialogInterface.dismiss());
+            builder.show();
+
+        }
+
+
 
         public void obtener_detalles() {
 
@@ -148,6 +214,76 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
 
                     Fragment_pedidosDetalles_Dialog dialog = Fragment_pedidosDetalles_Dialog.newInstance(respuesta);
                     dialog.show(fragmentManager, "detalles");
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("Error", error.toString());
+                }
+            });
+            queue.add(jsonObjectRequest);
+        }
+
+        public void pagarPedido(){
+
+            RequestQueue queue = Volley.newRequestQueue(itemView.getContext());
+
+            //Se crea un JSONObject con los datos que se desean enviar
+            JSONObject jsonObject = new JSONObject();
+            try{
+                jsonObject.put("id_ped",pedido.getId_pe());
+
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+
+            //Crear solicitud post
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.POST, getUrl_pedidos_pagar, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.d("Mensaje", response.toString());
+                    String respuesta = response.toString();
+
+                    Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
+
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("Error", error.toString());
+                }
+            });
+            queue.add(jsonObjectRequest);
+        }
+
+        public void eliminarPedido(){
+
+            RequestQueue queue = Volley.newRequestQueue(itemView.getContext());
+
+            //Se crea un JSONObject con los datos que se desean enviar
+            JSONObject jsonObject = new JSONObject();
+            try{
+                jsonObject.put("id_ped",pedido.getId_pe());
+
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+
+            //Crear solicitud post
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.POST, getUrl_pedidos_eliminar, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.d("Mensaje", response.toString());
+                    String respuesta = response.toString();
+
+                    Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
+
 
 
                 }
