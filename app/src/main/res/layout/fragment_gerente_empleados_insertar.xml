@@ -43,6 +43,7 @@
             android:layout_height="0sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/butt_lay"
+            android:layout_marginBottom="10sp"
 
             >
 

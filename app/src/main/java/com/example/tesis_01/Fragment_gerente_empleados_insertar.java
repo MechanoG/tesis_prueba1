@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,7 +33,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class Fragment_gerente_empleados_insertar extends Fragment {
+public class Fragment_gerente_empleados_insertar extends Fragment  {
     /*
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class Fragment_gerente_empleados_insertar extends Fragment {
             sex_nuevo_emp, tel_nuevo_emp, usu_nuevo_emp, cont_nuevo_emp;
 
     private EditText nom_inp, ape_inp, ced_inp, sex_inp, tel_inp, usu_inp,
-            cont_inp;
+            cont_inp, zona_inp;
 
     private Button cancelar, ingresar;
 
@@ -56,6 +57,7 @@ public class Fragment_gerente_empleados_insertar extends Fragment {
 
     NavController navController;
 
+    String tipos = "Vendedor";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,6 +88,8 @@ public class Fragment_gerente_empleados_insertar extends Fragment {
         tel_inp=view.findViewById(R.id.tel_input);
         usu_inp=view.findViewById(R.id.usu_input);
         cont_inp=view.findViewById(R.id.cont_input);
+        zona_inp=view.findViewById(R.id.zona_input);
+
 
         //////////////////////////////////////////////////////////////////////////////////
         ArrayList<String> tipo_pago =new ArrayList<>();
@@ -103,7 +107,24 @@ public class Fragment_gerente_empleados_insertar extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sel_tipoUser.setAdapter(adapter);
 
-        String tipos = "Vendedor";
+        sel_tipoUser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                tipos = adapterView.getItemAtPosition(i).toString();
+                Log.d("Spinner secelt:", tipos);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+
+
+
+
 
 
         //////////////////////////////////////////////////////////////////////////////////
@@ -147,7 +168,8 @@ public class Fragment_gerente_empleados_insertar extends Fragment {
         String tel_emp = tel_inp.getText().toString().trim();
         String usu_emp = usu_inp.getText().toString().trim();
         String cont_emp = cont_inp.getText().toString().trim();
-        String tipo_emp = tipo;
+        String tipo_emp = tipos;
+        String zona_emp = zona_inp.getText().toString().trim();
 
         if(!nom_emp.isEmpty() && !ape_emp.isEmpty() &&
                 !ced_emp.isEmpty() && !sex_emp.isEmpty() && !tel_emp.isEmpty() &&
@@ -166,6 +188,7 @@ public class Fragment_gerente_empleados_insertar extends Fragment {
                 jsonObject.put("usu_empleado",usu_emp);
                 jsonObject.put("cont_empleado",cont_emp);
                 jsonObject.put("tipo_empleado",tipo_emp);
+                jsonObject.put("zona_empleado",zona_emp);
             }catch (JSONException e){
                 e.printStackTrace();
             }
