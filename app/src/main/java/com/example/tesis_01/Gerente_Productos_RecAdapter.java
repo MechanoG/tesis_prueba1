@@ -51,8 +51,8 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
         Producto producto =  productos_recyclerview.get(position);
 
         holder.producto_cod.setText("COD: " + producto.getCodigo());
-        holder.producto_des.setText("Nombre " + producto.getDescripcion());
-        holder.producto_can.setText("Existencias " + Integer.toString(producto.getCantidad()));
+        holder.producto_des.setText("Descripcion: " + producto.getDescripcion());
+        holder.producto_can.setText("Existencias: " + Integer.toString(producto.getCantidad()));
         holder.producto_pre.setText("Precio: " + Float.toString(producto.getPrecio()) + "$");
         holder.pro =producto;
 
@@ -72,9 +72,9 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
 
         Producto pro;
 
-        String url_prodcuto_eliminar = "http://192.168.0.7/tesis_con/public/productos/eliminar";
-        String url_producto_aumentar = "http://192.168.0.7/tesis_con/public/productos/aumentar";
-        String url_producto_reducir = "http://192.168.0.7/tesis_con/public/productos/remover";
+        String url_prodcuto_eliminar = "http://192.168.0.5/tesis_con/public/productos/eliminar";
+        String url_producto_aumentar = "http://192.168.0.5/tesis_con/public/productos/aumentar";
+        String url_producto_reducir = "http://192.168.0.5/tesis_con/public/productos/remover";
 
         public ViewHolder (@NonNull View itemView){
             super (itemView);

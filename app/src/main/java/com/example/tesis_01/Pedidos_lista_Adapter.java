@@ -111,9 +111,9 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
          Pedidos_lista pedido;
 
-        String url_pedidos_detalle = "http://192.168.0.7/tesis_con/public/pedidos/pedidos_detalle";
-        String getUrl_pedidos_pagar = "http://192.168.0.7/tesis_con/public/pedidos/pagar";
-        String getUrl_pedidos_eliminar = "http://192.168.0.7/tesis_con/public/pedidos/eliminar";
+        String url_pedidos_detalle = "http://192.168.0.5/tesis_con/public/pedidos/pedidos_detalle";
+        String getUrl_pedidos_pagar = "http://192.168.0.5/tesis_con/public/pedidos/pagar";
+        String getUrl_pedidos_eliminar = "http://192.168.0.5/tesis_con/public/pedidos/eliminar";
 
         int pos;
 

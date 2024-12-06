@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
@@ -34,7 +35,8 @@ public class Clientes_Gerente_RecAdapter extends RecyclerView.Adapter<Clientes_G
     private  FragmentManager fragmentManager;
     private NavController navController;
 
-    String url_clientes_detalles = "http://192.168.0.7/tesis_con/public/clientes/detalles";
+    String url_clientes_detalles = "http://192.168.0.5/tesis_con/public/clientes/detalles";
+    String url_eliminar_clientes = "http://192.168.0.5/tesis_con/public/clientes/eliminar";
 
     public Clientes_Gerente_RecAdapter(ArrayList<Cliente> lista_clientes, Context context, FragmentManager fragmentManager,
                                        NavController navController) {
@@ -118,6 +120,7 @@ public class Clientes_Gerente_RecAdapter extends RecyclerView.Adapter<Clientes_G
             builder.setPositiveButton("Eliminar", (dialogInterface, which)->{
 
                 Log.d("Recivido", "Cancelado" );
+                elimClient();
 
             });
 
@@ -196,6 +199,40 @@ public class Clientes_Gerente_RecAdapter extends RecyclerView.Adapter<Clientes_G
 
             navController.navigate(R.id.action_fragment_gerente_clientes_to_fragment_modificar_clientes, bundle);
 
+        }
+
+        public void elimClient(){
+
+            RequestQueue queue = Volley.newRequestQueue(itemView.getContext());
+
+            //Se crea un JSONObject con los datos que se desean enviar
+            JSONObject jsonObject = new JSONObject();
+            try{
+                jsonObject.put("id_cli",cli.getCliente_id());
+
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+
+            //Crear solicitud post
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.POST, url_eliminar_clientes, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.d("Mensaje", response.toString());
+                    String respuesta = response.toString();
+
+                    Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("Error", error.toString());
+                }
+            });
+            queue.add(jsonObjectRequest);
         }
 
 

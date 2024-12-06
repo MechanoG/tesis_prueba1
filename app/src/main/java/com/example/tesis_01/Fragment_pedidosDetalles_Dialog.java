@@ -26,7 +26,7 @@ public class Fragment_pedidosDetalles_Dialog extends DialogFragment {
     private ImageView cierre;      //Boton para cerrar dialog
 
     //Se declaran los textview;
-    TextView ped_id, vend, clie_rif, clie_raz,form_pag, fec_ini,
+    TextView ped_id, vend, clie_rif, clie_raz, ped_zona,form_pag, fec_ini,
              fec_lim, estado, subtotal, total;
 
     ArrayList<Producto> pro_p_pedido;
@@ -70,6 +70,7 @@ public class Fragment_pedidosDetalles_Dialog extends DialogFragment {
         vend = view.findViewById(R.id.vendedor);
         clie_rif = view.findViewById(R.id.clienteRif);
         clie_raz = view.findViewById(R.id.clienteRaz);
+        ped_zona = view.findViewById(R.id.Zona);
         form_pag = view.findViewById(R.id.forma_pago);
         fec_ini = view.findViewById(R.id.fec_ini);
         fec_lim = view.findViewById(R.id.fec_lim);
@@ -86,6 +87,7 @@ public class Fragment_pedidosDetalles_Dialog extends DialogFragment {
             vend.setText("Vendedor: " + jsonObject.optString("ven_nom", "N/A"));
             clie_rif.setText("Rift Cliente: " + jsonObject.optString("cli_rif", "N/A"));
             clie_raz.setText("Cliente: " + jsonObject.optString("cli_raz", "N/A"));
+            ped_zona.setText("Zona: " + jsonObject.optString("ped_zon", "N/A"));
             form_pag.setText("Tipo Pago: " + jsonObject.optString("ped_pag", "N/A"));
             fec_ini.setText("Realizada: " + jsonObject.optString("fech_rea", "N/A"));
             fec_lim.setText("Vence: " + jsonObject.optString("fech_lim", "N/A"));

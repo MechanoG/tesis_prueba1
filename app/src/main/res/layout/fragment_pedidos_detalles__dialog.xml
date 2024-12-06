@@ -96,6 +96,16 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/Zona"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:text="Zona:"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
                     android:id="@+id/forma_pago"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
