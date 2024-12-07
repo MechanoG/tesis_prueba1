@@ -121,7 +121,7 @@
                 android:layout_marginBottom="30sp"
                 android:ems="10"
                 android:hint="Contacto Encargado"
-                android:inputType="text"
+                android:inputType="number"
                 android:textSize="20sp"
                 />
 

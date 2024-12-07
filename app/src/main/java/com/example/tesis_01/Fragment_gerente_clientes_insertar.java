@@ -103,6 +103,8 @@ public class Fragment_gerente_clientes_insertar extends Fragment {
         //Se declaran los varoles.
         String rif = rif_in.getText().toString().trim();
         String raz_soc = raz_in.getText().toString().trim();
+        String gerent = encar_in.getText().toString().trim();
+        String gerent_num = encar_num_int.getText().toString().trim();
 
 
         if(!rif.isEmpty() && !raz_soc.isEmpty()){
@@ -115,6 +117,8 @@ public class Fragment_gerente_clientes_insertar extends Fragment {
             try{
                 jsonObject.put("rif_cliente",rif);
                 jsonObject.put("razon_social",raz_soc);
+                jsonObject.put("gerente",gerent);
+                jsonObject.put("gerente_num",gerent_num);
 
             }catch (JSONException e){
                 e.printStackTrace();
