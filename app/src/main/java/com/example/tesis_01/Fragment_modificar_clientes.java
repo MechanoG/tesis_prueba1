@@ -33,6 +33,8 @@ public class Fragment_modificar_clientes extends Fragment {
     private int clienteId;
 
     String url_obtener_clie = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/clientes/byId";
+    String url_modificar_clie = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/clientes/mod";
+
 
     private TextView cabezera, rif_lab, raz_lab, encar_lab, encar_num_lab;
 
@@ -89,6 +91,7 @@ public class Fragment_modificar_clientes extends Fragment {
         modificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                modificar_cliente();
 
                 navController.popBackStack();
             }
@@ -136,12 +139,6 @@ public class Fragment_modificar_clientes extends Fragment {
                         e.printStackTrace();
                     }
 
-
-
-
-
-
-
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -153,7 +150,51 @@ public class Fragment_modificar_clientes extends Fragment {
             queue.add(jsonObjectRequest);
 
 
+    }
+    private void modificar_cliente(){
+        //Se declaran los varoles.
 
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+
+        //Se crea un JSONObject con los datos que se desean enviar
+        JSONObject jsonObject = new JSONObject();
+
+        String rif = rif_in.getText().toString().trim();
+        String raz = raz_in.getText().toString().trim();
+        String ger = encar_in.getText().toString().trim();
+        String gerNum = encar_num_int.getText().toString().trim();
+
+        try{
+            jsonObject.put("idCli",clienteId);
+            jsonObject.put("razCli",rif);
+            jsonObject.put("rifCli",raz);
+            jsonObject.put("ger",ger);
+            jsonObject.put("gerNum",gerNum);
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        //Crear solicitud post
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.POST, url_modificar_clie, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                Log.d("Mensaje", response.toString());
+                String respuesta = "Mensaje:" + response.toString();
+
+                Toast.makeText(requireContext(), respuesta, Toast.LENGTH_SHORT).show();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Error", error.toString());
+            }
+        });
+
+        queue.add(jsonObjectRequest);
 
 
     }
