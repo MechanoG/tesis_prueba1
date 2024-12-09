@@ -51,7 +51,7 @@ public class Gerente_Pedido_Main extends Fragment {
 
 
     //Variable para la url a donde se realizara la consulta
-    String url="https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/pedidos";
+    String url = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/pedidos";
     //"http://192.168.0.4/tesis_con/public/pedidos";
 //"http://10.0.2.2:80/tesis_con/public/pedidos"
 
@@ -69,12 +69,13 @@ public class Gerente_Pedido_Main extends Fragment {
         return inflater.inflate(R.layout.fragment_gerente__pedido__main, container, false);
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         //iNICIALIZA EL RECYCLREVIREW
-        lista_pedidos=view.findViewById(R.id.pedidos_lista);
+        lista_pedidos = view.findViewById(R.id.pedidos_lista);
 
         //Se crea el array para los pedidos
         pedidosLista = new ArrayList<Pedidos_lista>();
@@ -82,16 +83,13 @@ public class Gerente_Pedido_Main extends Fragment {
         mostrar_pedidos();
 
 
-
-
-
-        try{
+        try {
             //se crea el nav controles
             //navController=NavHostFragment.findNavController(this);
 
             navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentPedidosGerente);
             navController = navHostFragment.getNavController();          //se crea el boton
-            ingresar_pedido =view.findViewById(R.id.ir_nuevo_pedido);
+            ingresar_pedido = view.findViewById(R.id.ir_nuevo_pedido);
 
             ingresar_pedido.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -109,9 +107,7 @@ public class Gerente_Pedido_Main extends Fragment {
             );
 
 
-
-
-        }catch (java.lang.IllegalStateException e){
+        } catch (java.lang.IllegalStateException e) {
             Toast.makeText(getContext(), "Eror View", Toast.LENGTH_SHORT).show();
             Log.d("Error", e.getMessage());
 
@@ -121,9 +117,8 @@ public class Gerente_Pedido_Main extends Fragment {
     }
 
 
-
     //funcion que recupera los datos de la base de datos y los muestra en el recycle view
-    private void mostrar_pedidos (){
+    private void mostrar_pedidos() {
         //Se crea nueva variable para  nuestro request que
         RequestQueue queue = Volley.newRequestQueue(getContext());
         //en forma de un array asi que estamos haciendo un json array quest
@@ -132,10 +127,10 @@ public class Gerente_Pedido_Main extends Fragment {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                for(int i = 0; i<response.length(); i++) {
+                for (int i = 0; i < response.length(); i++) {
                     //Se crea nuevo objeto json
                     //se toma cada objeto del json array
-                    try{
+                    try {
                         //obtenemos cada objeto del json object
                         JSONObject responseObj = response.getJSONObject(i);
                         //Obtenemos la respuesta de la api in formato json
@@ -148,18 +143,18 @@ public class Gerente_Pedido_Main extends Fragment {
                         String ven_ape = responseObj.getString("apellido");
                         String ped_ven = ven_nom + "" + ven_ape;
                         String s = responseObj.getString("total");
-                        float pedido_total =  Float.parseFloat(s);
+                        float pedido_total = Float.parseFloat(s);
                         String tipoPago = responseObj.getString("tipo_pago");
                         String vencimiento = responseObj.getString("vencimiento");
                         String estado = responseObj.getString("estado");
 
-                        pedidosLista.add(new Pedidos_lista(pedido_id, estado,vencimiento, pedido_total,
-                                tipoPago,ped_ven,ped_clie));
+                        pedidosLista.add(new Pedidos_lista(pedido_id, estado, vencimiento, pedido_total,
+                                tipoPago, ped_ven, ped_clie));
 
                         buildRecycleview();
 
 
-                    }catch (JSONException e){
+                    } catch (JSONException e) {
                         e.printStackTrace();
                         Log.d("Error", e.getMessage());
                     }
@@ -167,7 +162,7 @@ public class Gerente_Pedido_Main extends Fragment {
             }
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error){
+            public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getContext(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
                 Log.d("Error", "" + error.getMessage());
             }
@@ -176,7 +171,7 @@ public class Gerente_Pedido_Main extends Fragment {
     }
 
 
-    private void buildRecycleview(){
+    private void buildRecycleview() {
         //se inicia el adaptador de la clase
         Pedidos_lista_Adapter adaptador_pedidos = new Pedidos_lista_Adapter(pedidosLista, getContext(), getParentFragmentManager());
 
@@ -193,13 +188,8 @@ public class Gerente_Pedido_Main extends Fragment {
 
     }
 
-    private void actualizarListaPedidos() {
-        // Limpiar la lista actual de pedidos
-        pedidosLista.clear();
 
-        // Volver a cargar los pedidos desde la base de datos (o desde el backend)
-        mostrar_pedidos();  // Recarga los pedidos desde la API
-    }
+
 
 
 

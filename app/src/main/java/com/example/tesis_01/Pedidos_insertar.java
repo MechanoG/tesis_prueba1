@@ -234,7 +234,7 @@ public class Pedidos_insertar extends Fragment  {
             @Override
             public void onClick(View view) {
                 realizar_pedido();
-                navController.popBackStack();
+
 
             }
         });

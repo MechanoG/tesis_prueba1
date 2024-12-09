@@ -79,6 +79,10 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
         } else if (estad.equals("Pagado")) {
             holder.estado.setBackgroundColor(Color.parseColor("#32930F"));
             holder.estado.setTextColor(Color.WHITE);
+            holder.itemView.findViewById(R.id.cancelar_pedido).setBackgroundColor(Color.GRAY);
+            holder.itemView.findViewById(R.id.cancelar_pedido).setEnabled(false);
+            holder.itemView.findViewById(R.id.pagar_pedido).setBackgroundColor(Color.GRAY);
+            holder.itemView.findViewById(R.id.pagar_pedido).setEnabled(false);
         }else{
             holder.estado.setBackgroundColor(Color.TRANSPARENT); // Fondo transparente por defecto
             holder.estado.setTextColor(Color.BLACK); // Texto negro por defecto
@@ -109,7 +113,8 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
 
         String url_pedidos_detalle = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/pedidos/pedidos_detalle";
         String getUrl_pedidos_pagar = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/pedidos/pagar";
-        String getUrl_pedidos_eliminar = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/pedidos/eliminar";
+        String getUrl_pedidos_cancelar = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/pedidos/cancel";
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -180,7 +185,7 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
             builder.setPositiveButton("Si", (dialogInterface, which)->{
 
                 Log.d("Recivido", "Cancelado" );
-                eliminarPedido();
+                cancelarPedido();
 
             });
 
@@ -261,14 +266,14 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
             queue.add(jsonObjectRequest);
         }
 
-        public void eliminarPedido(){
+        public void cancelarPedido(){
 
             RequestQueue queue = Volley.newRequestQueue(itemView.getContext());
 
             //Se crea un JSONObject con los datos que se desean enviar
             JSONObject jsonObject = new JSONObject();
             try{
-                jsonObject.put("id_ped",pedido.getId_pe());
+                jsonObject.put("idped",pedido.getId_pe());
 
             }catch (JSONException e){
                 e.printStackTrace();
@@ -276,7 +281,7 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
 
             //Crear solicitud post
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                    Request.Method.POST, getUrl_pedidos_eliminar, jsonObject, new Response.Listener<JSONObject>() {
+                    Request.Method.POST, getUrl_pedidos_cancelar, jsonObject, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     Log.d("Mensaje", response.toString());
