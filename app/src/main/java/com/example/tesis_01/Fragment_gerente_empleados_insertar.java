@@ -52,7 +52,7 @@ public class Fragment_gerente_empleados_insertar extends Fragment  {
 
     //URL PARA INSERTAR EMPLEADO Y USUARIO
     //"http://10.0.2.2:80/tesis_con/public/usuarios/creatEmployUser";
-    String insertar_user_emp = "http://192.168.0.5/tesis_con/public/usuarios/creatEmployUser";
+    String insertar_user_emp = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/usuarios/creatEmployUser";
 
 
     NavController navController;

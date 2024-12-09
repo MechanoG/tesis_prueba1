@@ -83,15 +83,15 @@ public class Pedidos_insertar extends Fragment  {
 
     //Url para obtener informacion de la base de datos http://10.0.2.2:80/tesis_con/public/productos
     //"http://192.168.0.4/tesis_con/public/productos"; -> por local
-    String url_recibir_productos = "http://192.168.0.5/tesis_con/public/productos";
+    String url_recibir_productos = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/productos";
 
     //URL para obtener la informacion de clientes de la base de datos http://10.0.2.2:80/tesis_con/public/clientes
     //"http://192.168.0.4/tesis_con/public/clientes";
-    String url_recibir_clientes = "http://192.168.0.5/tesis_con/public/clientes";
+    String url_recibir_clientes = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/clientes";
 
     //URL para insertar los pedidos  a la base de datos. http://10.0.2.2:80/tesis_con/public/pedidos/create
     // "http://192.168.0.4/tesis_con/public/pedidos/create";
-    String url_insertar_pedido =  "http://192.168.0.5/tesis_con/public/pedidos/create";
+    String url_insertar_pedido =  "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/pedidos/create";
 
 
     //Recycleview

@@ -107,9 +107,9 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
 
 
 
-        String url_pedidos_detalle = "http://192.168.0.5/tesis_con/public/pedidos/pedidos_detalle";
-        String getUrl_pedidos_pagar = "http://192.168.0.5/tesis_con/public/pedidos/pagar";
-        String getUrl_pedidos_eliminar = "http://192.168.0.5/tesis_con/public/pedidos/eliminar";
+        String url_pedidos_detalle = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/pedidos/pedidos_detalle";
+        String getUrl_pedidos_pagar = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/pedidos/pagar";
+        String getUrl_pedidos_eliminar = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/pedidos/eliminar";
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

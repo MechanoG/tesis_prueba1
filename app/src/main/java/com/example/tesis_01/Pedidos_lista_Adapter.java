@@ -85,13 +85,17 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
         } else if (estad.equals("Pagado")) {
             holder.estado.setBackgroundColor(Color.parseColor("#32930F"));
             holder.estado.setTextColor(Color.WHITE);
+            holder.itemView.findViewById(R.id.cancelar_pedido).setBackgroundColor(Color.GRAY);
+            holder.itemView.findViewById(R.id.cancelar_pedido).setEnabled(false);
+
         }else{
             holder.estado.setBackgroundColor(Color.TRANSPARENT); // Fondo transparente por defecto
             holder.estado.setTextColor(Color.BLACK); // Texto negro por defecto
 
         }
 
-        holder.pedido=lista;
+
+
 
 
 
@@ -111,9 +115,11 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
          Pedidos_lista pedido;
 
-        String url_pedidos_detalle = "http://192.168.0.5/tesis_con/public/pedidos/pedidos_detalle";
-        String getUrl_pedidos_pagar = "http://192.168.0.5/tesis_con/public/pedidos/pagar";
-        String getUrl_pedidos_eliminar = "http://192.168.0.5/tesis_con/public/pedidos/eliminar";
+        String url_pedidos_detalle = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/pedidos/pedidos_detalle";
+        String getUrl_pedidos_pagar = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/pedidos/pagar";
+        String getUrl_pedidos_eliminar = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/pedidos/eliminar";
+
+        String riggerBut;
 
         int pos;
 
@@ -127,6 +133,10 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
             tipo_pago = itemView.findViewById(R.id.tipo_pago);
             vencimeinto = itemView.findViewById(R.id.vencimiento);
             estado=itemView.findViewById(R.id.estado_pedido);
+
+
+
+
 
 
 

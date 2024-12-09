@@ -35,7 +35,7 @@ public class Clientes_Vendedor_RecAdapter extends RecyclerView.Adapter<Clientes_
     private Context context;
     private FragmentManager fragmentManager;
 
-    String url_clientes_detalles = "http://192.168.0.5/tesis_con/public/clientes/detalles";
+    String url_clientes_detalles = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/clientes/detalles";
 
     public Clientes_Vendedor_RecAdapter(ArrayList<Cliente> clientes_recyclerview, Context context, FragmentManager fragmentManager) {
         this.clientes_recyclerview = clientes_recyclerview;

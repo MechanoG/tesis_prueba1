@@ -72,9 +72,9 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
 
         Producto pro;
 
-        String url_prodcuto_eliminar = "http://192.168.0.5/tesis_con/public/productos/eliminar";
-        String url_producto_aumentar = "http://192.168.0.5/tesis_con/public/productos/aumentar";
-        String url_producto_reducir = "http://192.168.0.5/tesis_con/public/productos/remover";
+        String url_prodcuto_eliminar = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/productos/eliminar";
+        String url_producto_aumentar = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/productos/aumentar";
+        String url_producto_reducir = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/productos/remover";
 
         public ViewHolder (@NonNull View itemView){
             super (itemView);
