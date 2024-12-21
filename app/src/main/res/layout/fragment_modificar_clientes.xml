@@ -156,7 +156,7 @@
                 android:layout_margin="10sp"
                 android:layout_weight="1"
                 android:backgroundTint="#32930F"
-                android:text="Ingresar"
+                android:text="Modificar"
                 android:textSize="20sp"
                 app:icon="@drawable/baseline_check_24"
 

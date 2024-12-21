@@ -24,6 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,13 +54,15 @@ public class Fragment_gerente_empleados extends Fragment {
 
     //Url para obtener informacion de empleados de la base de datos http://10.0.2.2:80/tesis_con/public/usuarios/user_employ
     //"http://192.168.0.4/tesis_con/public/usuarios/user_employ";
-    String url_recibir_empleados = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/usuarios/user_employ";
+    String url_recibir_empleados = "http://192.168.0.3/tesis_con/public/usuarios/user_employ";
 
 
 
     //Se inicializan controlle y navhost para fragments
     NavController navController;
     NavHostFragment navHostFragment;
+
+    MaterialToolbar appbar;
 
 
     @Override
@@ -105,6 +108,12 @@ public class Fragment_gerente_empleados extends Fragment {
 
         obtener_empleados();
         build_emp_recycleview();
+
+        appbar = view.findViewById(R.id.topAppBar);
+
+        appbar.setNavigationOnClickListener(v ->
+                getActivity().finish()
+        );
 
     }
 

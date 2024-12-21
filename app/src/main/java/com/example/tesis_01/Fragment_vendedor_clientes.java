@@ -23,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,8 +47,9 @@ public class Fragment_vendedor_clientes extends Fragment {
     //URL para obtener la informacion de clientes de la base de datos http://10.0.2.2:80/tesis_con/public/clientes
     // "http://192.168.0.4/tesis_con/public/clientes";
 
-    String url_recibir_clientes = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/clientes";
+    String url_recibir_clientes = "http://192.168.0.3/tesis_con/public/clientes";
 
+    MaterialToolbar appbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,6 +90,12 @@ public class Fragment_vendedor_clientes extends Fragment {
 
         obtener_clientes();
         build_clientes_recycleview();
+
+        appbar = view.findViewById(R.id.topAppBar);
+
+        appbar.setNavigationOnClickListener(v ->
+                getActivity().finish()
+        );
 
     }
 

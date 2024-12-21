@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 
 public class Activity_gerente_info extends AppCompatActivity {
@@ -18,6 +19,8 @@ public class Activity_gerente_info extends AppCompatActivity {
     ViewPager2 viewPager2;
 
     ViewPagerAdapter viewPagerAdapter;
+
+    MaterialToolbar appbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,12 @@ public class Activity_gerente_info extends AppCompatActivity {
 
             }
         });
+
+        appbar = findViewById(R.id.topAppBar);
+
+        appbar.setNavigationOnClickListener(v ->
+                finish()
+        );
 
 
 

@@ -51,7 +51,7 @@ public class Gerente_Pedido_Main extends Fragment {
 
 
     //Variable para la url a donde se realizara la consulta
-    String url = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/pedidos";
+    String url = "http://192.168.0.3/tesis_con/public/pedidos";
     //"http://192.168.0.4/tesis_con/public/pedidos";
 //"http://10.0.2.2:80/tesis_con/public/pedidos"
 

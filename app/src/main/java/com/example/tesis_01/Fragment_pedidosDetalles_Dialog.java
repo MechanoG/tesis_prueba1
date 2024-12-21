@@ -97,6 +97,9 @@ public class Fragment_pedidosDetalles_Dialog extends DialogFragment {
 
             JSONArray productosA = jsonObject.getJSONArray("productos");
 
+            Log.d("elementos en el array", String.valueOf(productosA.length()));
+
+            pro_p_pedido = new ArrayList<Producto>();
 
             for ( int i = 0; i < productosA.length(); i++ ){
                 JSONObject producto = productosA.getJSONObject(i);
@@ -109,8 +112,9 @@ public class Fragment_pedidosDetalles_Dialog extends DialogFragment {
                 String s = producto.getString("pre_producto");
                 float precio =  Float.parseFloat(s);
 
-                pro_p_pedido = new ArrayList<Producto>();
+
                 pro_p_pedido.add(new Producto(id, precio, cantidad, descripcion, codigo_producto));
+                build_products_recycleview();
             }
 
             Log.d("Array", "el lardo del arraylist es:" + Integer.toString(pro_p_pedido.size()));

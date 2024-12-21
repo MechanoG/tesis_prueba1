@@ -39,8 +39,7 @@ public class Info_stat_RecViewApadt extends RecyclerView.Adapter<Info_stat_RecVi
         holder.cod.setText("COD-PRO: " + producto.getCod_pro());
         holder.des.setText("Producto" + producto.getDes_pro());
         holder.cant.setText("Vendidos:" + Integer.toString(producto.getCant_ven()) + " UNI");
-        holder.pre.setText("Precio: " + Float.toString(producto.getPre_pro()));
-        holder.total.setText("Total: " + Float.toString(producto.getCant_ven()));
+        holder.total.setText("Total: " + "1040 $"/*Float.toString(producto.getCant_ven())*/);
 
 
 
@@ -55,7 +54,7 @@ public class Info_stat_RecViewApadt extends RecyclerView.Adapter<Info_stat_RecVi
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         //Variables de las vistas
-        TextView cod, des, cant, pre, total;
+        TextView cod, des, cant, total;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
@@ -63,7 +62,7 @@ public class Info_stat_RecViewApadt extends RecyclerView.Adapter<Info_stat_RecVi
             cod = itemView.findViewById(R.id.cod_pro);
             des = itemView.findViewById(R.id.des_pro);
             cant = itemView.findViewById(R.id.cant_ven);
-            pre = itemView.findViewById(R.id.pre_pro);
+
             total = itemView.findViewById(R.id.total_pro);
 
 

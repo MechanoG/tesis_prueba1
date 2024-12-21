@@ -41,7 +41,7 @@ public class Fragment_gerente_inventario_insertar extends Fragment {
 
     //URL para enviar productos
     //"http://192.168.0.4/tesis_con/public/productos/create";
-    private String url_enviar_pro = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/productos/create";
+    private String url_enviar_pro = "http://192.168.0.3/tesis_con/public/productos/create";
 
     NavController navController;
 
@@ -95,8 +95,7 @@ public class Fragment_gerente_inventario_insertar extends Fragment {
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_fragment_gerente_inventario_insertar_to_fragment_gerente_inventario);
-            }
+                navController.popBackStack();            }
         });
 
     }

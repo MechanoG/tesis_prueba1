@@ -41,7 +41,7 @@ public class Fragment_gerente_clientes_insertar extends Fragment {
     //URL DE CONEXION A BASE DE DATOS "http://10.0.2.2:80/tesis_con/public/clientes/create";
     // "http://192.168.0.4/tesis_con/public/clientes/create";
 
-    String url_insertar_cliente = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/clientes/create";
+    String url_insertar_cliente = "http://192.168.0.3/tesis_con/public/clientes/create";
 
 /*
 
@@ -92,8 +92,7 @@ public class Fragment_gerente_clientes_insertar extends Fragment {
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_fragment_gerente_clientes_insertar_to_fragment_gerente_clientes);
-            }
+                navController.popBackStack();            }
         });
     }
 

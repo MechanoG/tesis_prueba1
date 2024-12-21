@@ -220,8 +220,7 @@
                     android:ems="10"
                     android:hint="Contraseña"
                     android:inputType="text"
-                    android:textSize="20sp"
-                    />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tipo_label"
@@ -298,7 +297,7 @@
                 android:layout_margin="10sp"
                 android:layout_weight="1"
                 android:backgroundTint="#32930F"
-                android:text="Ingresar"
+                android:text="Modificar"
                 android:textSize="20sp"
                 app:icon="@drawable/baseline_check_24"
                 app:iconGravity="textStart"

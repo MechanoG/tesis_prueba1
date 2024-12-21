@@ -35,8 +35,8 @@ public class Clientes_Gerente_RecAdapter extends RecyclerView.Adapter<Clientes_G
     private  FragmentManager fragmentManager;
     private NavController navController;
 
-    String url_clientes_detalles = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/clientes/detalles";
-    String url_eliminar_clientes = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/clientes/eliminar";
+    String url_clientes_detalles = "http://192.168.0.3/tesis_con/public/clientes/detalles";
+    String url_eliminar_clientes =  "http://192.168.0.3/tesis_con/public/clientes/eliminar";
 
     public Clientes_Gerente_RecAdapter(ArrayList<Cliente> lista_clientes, Context context, FragmentManager fragmentManager,
                                        NavController navController) {

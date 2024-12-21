@@ -68,13 +68,13 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
 
         private TextView producto_cod, producto_des, producto_can, producto_pre;
 
-        Button restar, sumar, eliminar;
+        Button restar, sumar, eliminar, modif;
 
         Producto pro;
 
-        String url_prodcuto_eliminar = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/productos/eliminar";
-        String url_producto_aumentar = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/productos/aumentar";
-        String url_producto_reducir = "https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/productos/remover";
+        String url_prodcuto_eliminar = "http://192.168.0.3/tesis_con/public/productos/eliminar";
+        String url_producto_aumentar = "http://192.168.0.3/tesis_con/public/productos/aumentar";
+        String url_producto_reducir = "http://192.168.0.3/tesis_con/public/productos/remover";
 
         public ViewHolder (@NonNull View itemView){
             super (itemView);
@@ -86,6 +86,7 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
             sumar = itemView.findViewById(R.id.agregar_pro);
             restar = itemView.findViewById(R.id.quitar_pro);
             eliminar = itemView.findViewById(R.id.elimiar_producto);
+            modif = itemView.findViewById(R.id.Modificar);
 
 
 
@@ -113,6 +114,13 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
                 public void onClick(View view) {
                     Log.d("Botton", "Eliminar producto");
                     elim_but();
+                }
+            });
+
+            modif.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    modPrecio();
                 }
             });
 
@@ -169,8 +177,6 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
         }
 
 
-
-
         private void elim_but(){
 
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -189,6 +195,31 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
             builder.show();
 
         }
+        private void modPrecio(){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("Ingrese nuevo precio");
+
+            //Cuadro de texto
+            final EditText input = new EditText(context);
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            builder.setView(input);
+
+            builder.setPositiveButton("Aceptar", (dialogInterface, which)->{
+                String numero = input.getText().toString();
+                Log.d("Recivido", numero );
+                int cant = Integer.parseInt(numero);
+
+
+
+
+            });
+
+            builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
+            builder.show();
+
+        }
+
 
         public void eliminarProducto(){
 

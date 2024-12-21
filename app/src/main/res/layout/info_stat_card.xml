@@ -24,7 +24,8 @@
             android:id="@+id/des_pro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/cant_ven"
@@ -34,16 +35,11 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/pre_pro"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-
-        <TextView
             android:id="@+id/total_pro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="16sp" />
 
 
     </LinearLayout>

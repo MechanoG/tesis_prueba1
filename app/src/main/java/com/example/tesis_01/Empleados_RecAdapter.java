@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
@@ -32,7 +33,8 @@ import java.util.ArrayList;
 
 public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdapter.ViewHolder> {
 
-    String url_detalles_empleados ="https://0f1b-212-8-252-183.ngrok-free.app/tesis_con/public/usuarios/detalle";
+    String url_detalles_empleados ="http://192.168.0.3/tesis_con/public/usuarios/detalle";
+    String url_eliminar_empleados ="http://192.168.0.3/tesis_con/public/usuarios/eliminar";
 
     ////Array en el que se guardaran cada elemento de la lista
     private ArrayList<Empleado> empleados_recyclerview;
@@ -133,6 +135,7 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
             builder.setPositiveButton("Eliminar", (dialogInterface, which)->{
 
                 Log.d("Recivido", "Cancelado" );
+                eliminarEmpleado();
 
             });
 
@@ -223,6 +226,43 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
             builder.show();
 
         }
+
+        public void eliminarEmpleado(){
+
+            RequestQueue queue = Volley.newRequestQueue(itemView.getContext());
+
+            //Se crea un JSONObject con los datos que se desean enviar
+            JSONObject jsonObject = new JSONObject();
+            try{
+                jsonObject.put("user_id",empleado.getId());
+
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+
+            //Crear solicitud post
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.POST, url_eliminar_empleados, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.d("Mensaje", response.toString());
+                    String respuesta = response.toString();
+
+                    Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
+
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("Error", error.toString());
+                }
+            });
+            queue.add(jsonObjectRequest);
+        }
+
+
 
         private void pasarInfo(){
             Bundle bundle = new Bundle();
