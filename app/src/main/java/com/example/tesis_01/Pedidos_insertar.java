@@ -167,8 +167,9 @@ public class Pedidos_insertar extends Fragment  {
         //////////////////////////////////////////////////////////////////////////////////
 
         subtotal = view.findViewById(R.id.ped_subtotal);
+        subtotal.setText(" Subtotal: 0.00");
         total_pedidos = view.findViewById(R.id.txtTotalPedido);
-
+        total_pedidos.setText(" Total: 0.00");
 
         //Se crea el autocomplete Text vie2 de pedidos
         pro_ped=view.findViewById(R.id.pruebas_view);
@@ -350,7 +351,7 @@ public class Pedidos_insertar extends Fragment  {
                         Log.d("RAZON SOCIAL CLIENTE", razon_social);
 
 
-                        String insertar =Integer.toString(id_cliente)+ "" + rif + "" + razon_social;
+                        String insertar =" " + rif + "  " + razon_social;
 
                         //Envio la informacion productos al spinner
                         clientes_spinner.add(insertar);

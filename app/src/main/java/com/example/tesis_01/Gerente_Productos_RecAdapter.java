@@ -75,6 +75,7 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
         String url_prodcuto_eliminar = "http://192.168.0.3/tesis_con/public/productos/eliminar";
         String url_producto_aumentar = "http://192.168.0.3/tesis_con/public/productos/aumentar";
         String url_producto_reducir = "http://192.168.0.3/tesis_con/public/productos/remover";
+        String url_producto_cambiar_precio = "http://192.168.0.3/tesis_con/public/productos/precio";
 
         public ViewHolder (@NonNull View itemView){
             super (itemView);
@@ -208,7 +209,9 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
             builder.setPositiveButton("Aceptar", (dialogInterface, which)->{
                 String numero = input.getText().toString();
                 Log.d("Recivido", numero );
-                int cant = Integer.parseInt(numero);
+                int nuePrecio = Integer.parseInt(numero);
+                nuevoPrecio(nuePrecio);
+
 
 
 
@@ -330,10 +333,43 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
             });
             queue.add(jsonObjectRequest);
 
-
-
         }
 
+        public void nuevoPrecio(int precio){
+
+            RequestQueue queue = Volley.newRequestQueue(itemView.getContext());
+
+            //Se crea un JSONObject con los datos que se desean enviar
+            JSONObject jsonObject = new JSONObject();
+            try{
+                jsonObject.put("id_pro",pro.getId());
+                jsonObject.put("new_pre", precio);
+
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+
+            //Crear solicitud post
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.POST, url_producto_cambiar_precio, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.d("Mensaje", response.toString());
+                    String respuesta = response.toString();
+
+                    Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
+
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("Error", error.toString());
+                }
+            });
+            queue.add(jsonObjectRequest);
+        }
 
 
 

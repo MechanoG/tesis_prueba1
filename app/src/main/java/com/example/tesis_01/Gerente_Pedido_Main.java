@@ -141,7 +141,7 @@ public class Gerente_Pedido_Main extends Fragment {
                         String ped_clie = responseObj.getString("cliente");
                         String ven_nom = responseObj.getString("nombre");
                         String ven_ape = responseObj.getString("apellido");
-                        String ped_ven = ven_nom + "" + ven_ape;
+                        String ped_ven = ven_nom + " " + ven_ape;
                         String s = responseObj.getString("total");
                         float pedido_total = Float.parseFloat(s);
                         String tipoPago = responseObj.getString("tipo_pago");

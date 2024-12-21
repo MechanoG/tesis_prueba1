@@ -50,8 +50,8 @@ public class Productos_Insertar_RecAdapter extends
 
         holder.producto_cod.setText("COD: " + lista.getCodigo());
         holder.producto_des.setText(lista.getDescripcion());
-        holder.producto_ex.setText("Existencias: "+Integer.toString((lista.getCantidad()))+"UNI");
-        holder.producto_pre.setText("Precio: "+Float.toString(lista.getPrecio())+"$");
+        holder.producto_ex.setText("Existencias: "+Integer.toString((lista.getCantidad()))+"U NI");
+        holder.producto_pre.setText("Precio: "+Float.toString(lista.getPrecio())+" $");
 
         int cantidad_actual = cantidad_producto.getOrDefault(cod_product, 1);
         holder.cantidad_ped.setText(String.valueOf(cantidad_actual));

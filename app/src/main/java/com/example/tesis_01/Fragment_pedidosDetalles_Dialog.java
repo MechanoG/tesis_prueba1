@@ -83,17 +83,17 @@ public class Fragment_pedidosDetalles_Dialog extends DialogFragment {
             JSONObject jsonObject = new JSONObject(detalles);
 
             //Extraer valores Json y asignarlos a cada textview
-            ped_id.setText("PED-" + jsonObject.optString("id_pedido", "N/A"));
-            vend.setText("Vendedor: " + jsonObject.optString("ven_nom", "N/A"));
-            clie_rif.setText("Rift Cliente: " + jsonObject.optString("cli_rif", "N/A"));
-            clie_raz.setText("Cliente: " + jsonObject.optString("cli_raz", "N/A"));
-            ped_zona.setText("Zona: " + jsonObject.optString("ped_zon", "N/A"));
-            form_pag.setText("Tipo Pago: " + jsonObject.optString("ped_pag", "N/A"));
-            fec_ini.setText("Realizada: " + jsonObject.optString("fech_rea", "N/A"));
-            fec_lim.setText("Vence: " + jsonObject.optString("fech_lim", "N/A"));
-            estado.setText("Estado: " + jsonObject.optString("estado", "N/A"));
-            subtotal.setText("Subtotal: " + jsonObject.optString("subtotal", "N/A"));
-            total.setText("Total: " + jsonObject.optString("total", "N/A"));
+            ped_id.setText("   PED-" + jsonObject.optString("id_pedido", "N/A"));
+            vend.setText("   Vendedor: " + jsonObject.optString("ven_nom", "N/A"));
+            clie_rif.setText("   Rift Cliente: " + jsonObject.optString("cli_rif", "N/A"));
+            clie_raz.setText("   Cliente: " + jsonObject.optString("cli_raz", "N/A"));
+            ped_zona.setText("   Zona: " + jsonObject.optString("ped_zon", "N/A"));
+            form_pag.setText("   Tipo Pago: " + jsonObject.optString("ped_pag", "N/A"));
+            fec_ini.setText("   Realizada: " + jsonObject.optString("fech_rea", "N/A"));
+            fec_lim.setText("   Vence: " + jsonObject.optString("fech_lim", "N/A"));
+            estado.setText("   Estado: " + jsonObject.optString("estado", "N/A"));
+            subtotal.setText("   Subtotal: " + jsonObject.optString("subtotal", "N/A"));
+            total.setText("   Total: " + jsonObject.optString("total", "N/A"));
 
             JSONArray productosA = jsonObject.getJSONArray("productos");
 
