@@ -92,10 +92,9 @@ public class Fragment_modificar_clientes extends Fragment {
             @Override
             public void onClick(View view) {
                 modificar_cliente();
-
-                navController.popBackStack();
             }
         });
+
 
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,11 +179,17 @@ public class Fragment_modificar_clientes extends Fragment {
                 Request.Method.POST, url_modificar_clie, jsonObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                //Motodo a ejecutar cuando se reciba una respuesta
 
-                Log.d("Mensaje", response.toString());
-                String respuesta = "Mensaje:" + response.toString();
+                if (getContext() != null){
+                    Log.d("Mensaje", response.toString());
+                    String respuesta = "Mensaje:" + response.toString();
+                    Toast.makeText(getContext(), respuesta, Toast.LENGTH_SHORT).show();
+                }
+                if (navController != null){
+                    navController.popBackStack();
+                }
 
-                Toast.makeText(requireContext(), respuesta, Toast.LENGTH_SHORT).show();
 
             }
         }, new Response.ErrorListener() {
