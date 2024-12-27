@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,14 +39,14 @@ public class Fragment_modificar_empleado extends Fragment {
     private EditText nom_inp, ape_inp, ced_inp, sex_inp, tel_inp, usu_inp,
             cont_inp, zona_inp;
 
-    private Button cancelar, ingresar;
+    private Button cancelar, modificar;
 
     private int empId;
 
     //URL PARA INSERTAR EMPLEADO Y USUARIO
     //"http://10.0.2.2:80/tesis_con/public/usuarios/creatEmployUser";
     String url_detalles_empleados ="http://192.168.0.3/tesis_con/public/usuarios/detalle";
-
+    String url_detalles_modificar ="http://192.168.0.3/tesis_con/public/usuarios/modEmpUser";
 
     NavController navController;
 
@@ -129,26 +130,24 @@ public class Fragment_modificar_empleado extends Fragment {
         //////////////////////////////////////////////////////////////////////////////////
 
 
-
-
         navController = Navigation.findNavController(view);
 
         //Botones
         cancelar = view.findViewById(R.id.bttnNE_volver);
-        ingresar=view.findViewById(R.id.nuevo_empleado);
+        modificar=view.findViewById(R.id.mod_empleado);
 
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //navController.navigate(R.id.action_fragment_gerente_empleados_insertar_to_fragment_gerente_empleados);
+                navController.popBackStack();
             }
         });
 
-        ingresar.setOnClickListener(new View.OnClickListener() {
+        modificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //insertar_empleado(tipos);
-                //navController.navigate(R.id.action_fragment_gerente_empleados_insertar_to_fragment_gerente_empleados);
+                modificar_empleado(tipos);
+                navController.popBackStack();
 
             }
         });
@@ -200,10 +199,6 @@ public class Fragment_modificar_empleado extends Fragment {
                     cont_inp.setText(cont);
                     zona_inp.setText(zona);
 
-
-
-
-
                 }catch (JSONException e){
                     Log.d("Error", "Error " + String.valueOf(e));
                 }
@@ -219,5 +214,63 @@ public class Fragment_modificar_empleado extends Fragment {
         });
         queue.add(jsonObjectRequest);
     }
+
+    private void modificar_empleado(String tipos){
+        //Se declaran los varoles.
+        String nom_emp = nom_inp.getText().toString().trim();
+        String ape_emp = ape_inp.getText().toString().trim();
+        String ced_emp = ced_inp.getText().toString().trim();
+        String sex_emp = sex_inp.getText().toString().trim();
+        String tel_emp = tel_inp.getText().toString().trim();
+        String usu_emp = usu_inp.getText().toString().trim();
+        String cont_emp = cont_inp.getText().toString().trim();
+        String tipo_emp = tipos;
+        String zona_emp = zona_inp.getText().toString().trim();
+
+        if(!nom_emp.isEmpty() && !ape_emp.isEmpty() &&
+                !ced_emp.isEmpty() && !sex_emp.isEmpty() && !tel_emp.isEmpty() &&
+                !usu_emp.isEmpty() && !cont_emp.isEmpty() && !tipo_emp.isEmpty()){
+
+            RequestQueue queue = Volley.newRequestQueue(getContext());
+
+            //Se crea un JSONObject con los datos que se desean enviar
+            JSONObject jsonObject = new JSONObject();
+            try{
+                jsonObject.put("id_user",empId);
+                jsonObject.put("nom_empleado",nom_emp);
+                jsonObject.put("ape_empleado",ape_emp);
+                jsonObject.put("ced_empleado",ced_emp);
+                jsonObject.put("sex_emp", sex_emp);
+                jsonObject.put("tel_empleado",tel_emp);
+                jsonObject.put("usu_empleado",usu_emp);
+                jsonObject.put("cont_empleado",cont_emp);
+                jsonObject.put("tipo_empleado",tipo_emp);
+                jsonObject.put("zona_empleado",zona_emp);
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+
+            //Crear solicitud post
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.POST, url_detalles_modificar, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.d("Mensaje", response.toString());
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("Error", error.toString());
+                }
+            });
+
+            queue.add(jsonObjectRequest);
+
+        }else {
+            Toast.makeText(getContext(), "Campos Vacios", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
 
 }
