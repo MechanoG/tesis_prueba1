@@ -40,11 +40,10 @@ public class Emp_stat_RecViewAdap extends RecyclerView.Adapter<Emp_stat_RecViewA
         Empleado_statInfo empleado = list_emp.get(position);
 
         holder.namEmp.setText("Empleado:" + empleado.getEmp_nam());
-        holder.useEmp.setText("Usuaio: " + empleado.getEmp_user());
+        holder.useEmp.setText("Usuario: " + empleado.getEmp_user());
         holder.zonEmp.setText("Zona: " + empleado.getZona());
         holder.pedEmp.setText("Pedidos: " + empleado.getEmp_ped());
         holder.totEmp.setText("Total: " + empleado.getEmp_total());
-
     }
 
     @Override

@@ -38,7 +38,7 @@ import java.util.Map;
 public class Fragment_info_clientes extends Fragment {
 
     //Se declaran los elemntos del fragment. botones y listeners
-    private Button sel_fecha;
+    private Button sel_fecha, menosVentas;
     private TextView fecha;
 
     private Spinner meses;
@@ -58,9 +58,7 @@ public class Fragment_info_clientes extends Fragment {
             "2033","2034","2035","2036","2037","2038","2039","2040"};
 
     String url_clie_stats = "http://192.168.0.3/tesis_con/public/clientes/comprasclientes";
-
-
-
+    String getUrl_clie_menosStats = "http://192.168.0.3/tesis_con/public/clientes/comprasMenosclientes";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,8 +82,6 @@ public class Fragment_info_clientes extends Fragment {
         //Se crea el arrau de los pedidos
         list_client = new ArrayList<Cliente_statInfo>();
 
-
-
         // on below line we are initializing our variables.
         sel_fecha = view.findViewById(R.id.masVendidos);
         sel_fecha.setOnClickListener(new View.OnClickListener() {
@@ -94,9 +90,17 @@ public class Fragment_info_clientes extends Fragment {
                 fechConsul = fechaConsulta();
                 Log.d("Fecha", fechConsul);
                 obtener_clientStats();
-                buildRecycleview();
+            }
+        });
 
-
+        // on below line we are initializing our variables.
+        menosVentas = view.findViewById(R.id.menosVendidos);
+        menosVentas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fechConsul = fechaConsulta();
+                Log.d("Fecha", fechConsul);
+                obtener_clientMinusStats();
             }
         });
 
@@ -134,11 +138,16 @@ public class Fragment_info_clientes extends Fragment {
         //Se formatea Fecha como YYYY-MM
 
         return yearElegido + "-" +mesElegido;
-
     }
 
-
     public void obtener_clientStats(){
+
+        //Limpia la lista antes de realizar una nueva consulta
+        list_client.clear();
+        if (clie_statInf.getAdapter() !=null){
+            //Notifica al adaptador para limpiar la vista
+            clie_statInf.getAdapter().notifyDataSetChanged();
+        }
 
         RequestQueue queue = Volley.newRequestQueue(getContext());
 
@@ -150,7 +159,7 @@ public class Fragment_info_clientes extends Fragment {
 
         try {
             //Se agregan los aprasm strinf
-            jsonParam.put("fecha", "2024-11");
+            jsonParam.put("fecha", fechConsul);
 
         }catch (JSONException e){
             e.printStackTrace();
@@ -186,6 +195,7 @@ public class Fragment_info_clientes extends Fragment {
 
 
                                 list_client.add(new Cliente_statInfo(idCli, rifCli, razSoc, canPed, total));
+                                buildRecycleview();
 
                             }
                         }catch (JSONException e){
@@ -229,6 +239,109 @@ public class Fragment_info_clientes extends Fragment {
 
 
     }
+
+
+    public void obtener_clientMinusStats(){
+
+        //Limpia la lista antes de realizar una nueva consulta
+        list_client.clear();
+        if (clie_statInf.getAdapter() !=null){
+            //Notifica al adaptador para limpiar la vista
+            clie_statInf.getAdapter().notifyDataSetChanged();
+        }
+
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+
+        //Se crea json arrau como filtro
+        JSONArray array = new JSONArray();
+
+        //josn objet para fecha
+        JSONObject jsonParam = new JSONObject();
+
+        try {
+            //Se agregan los aprasm strinf
+            jsonParam.put("fecha", fechConsul);
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        array.put(jsonParam);
+
+        JsonArrayRequest request_json = new JsonArrayRequest(Request.Method.POST, getUrl_clie_menosStats, array,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                        try {
+
+                            //Se obtiene respuesta final
+                            if (response != null && response.length() > 0) {
+                                Log.d("Respuesta", response.toString());  // Mostrar la respuesta completa
+                            } else {
+                                Log.d("Respuesta", "Respuesta vacía recibida");
+                            }
+
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject jsonObject = response.getJSONObject(i);
+
+                                Log.d("Objeto", jsonObject.toString() );
+
+                                int idCli = jsonObject.getInt("cli_id");
+                                String rifCli = jsonObject.getString("cli_rif");
+                                String razSoc = jsonObject.getString("raz_soc");
+                                int canPed = jsonObject.getInt("can_ped");
+                                String s = jsonObject.getString("total_com");
+                                float total =  Float.parseFloat(s);
+
+
+                                list_client.add(new Cliente_statInfo(idCli, rifCli, razSoc, canPed, total));
+                                buildRecycleview();
+
+                            }
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> headers = new HashMap<String,String>();
+                //ADD headers
+                return headers;
+            }
+            //Important
+
+            /*
+            @Override
+            protected Response<JSONArray> parseNetworkResponse(NetworkResponse response) {
+                String responseString;
+                JSONArray array = new JSONArray();
+                if (response != null) {
+
+                    try {
+                        responseString = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+                        JSONObject obj = new JSONObject(responseString);
+                        (array).put(obj);
+                    } catch (Exception ex) {
+                    }
+                }
+                //return array;
+                return Response.success(array, HttpHeaderParser.parseCacheHeaders(response));
+            } */
+        };
+        queue.add(request_json);
+
+
+
+    }
+
+
 
     private void buildRecycleview(){
         //se inicia el adaptador de la clase

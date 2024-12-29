@@ -87,7 +87,6 @@ public class Fragment_info_productos extends Fragment {
         sel_fecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 fechConsul = fechaConsulta();
                 Log.d("Fecha", fechConsul);
                 Log.d("Sellama a los productos", "Se obtienen productos");
