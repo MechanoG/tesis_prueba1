@@ -86,13 +86,12 @@ public class Fragment_info_productos extends Fragment {
         sel_fecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 fechConsul = fechaConsulta();
                 Log.d("Fecha", fechConsul);
                 Log.d("Sellama a los productos", "Se obtienen productos");
                 obtener_productosStats();
                 Log.d("Se llamo a los productos", "Se obtuvieron productos");
-                buildRecycleview();
-
             }
         });
 
@@ -141,6 +140,13 @@ public class Fragment_info_productos extends Fragment {
 
     public void obtener_productosStats(){
 
+        //Limpia la lista antes de realizar una nueva consulta
+        list_product.clear();
+        if (pro_statInf.getAdapter() !=null){
+            //Notifica al adaptador para limpiar la vista
+            pro_statInf.getAdapter().notifyDataSetChanged();
+        }
+
         RequestQueue  queue = Volley.newRequestQueue(getContext());
 
         //Se crea json arrau como filtro
@@ -164,9 +170,7 @@ public class Fragment_info_productos extends Fragment {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-
                         try {
-
                             //Se obtiene respuesta final
                             if (response != null && response.length() > 0) {
                                 Log.d("Respuesta", response.toString());  // Mostrar la respuesta completa
@@ -190,6 +194,7 @@ public class Fragment_info_productos extends Fragment {
 
                                 list_product.add(new Producto_statInfo(idPro, codPro, desPro, canVen,
                                         precio,pedido_total));
+                                buildRecycleview();
 
                             }
                         }catch (JSONException e){
