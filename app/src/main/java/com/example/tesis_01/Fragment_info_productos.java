@@ -37,7 +37,7 @@ import java.util.Map;
 public class Fragment_info_productos extends Fragment {
 
     //Se declaran los elemntos del fragment. botones y listeners
-    private Button sel_fecha;
+    private Button sel_fecha, menVendidos;
     private TextView fecha;
 
     private Spinner meses;
@@ -57,6 +57,7 @@ public class Fragment_info_productos extends Fragment {
             "2033","2034","2035","2036","2037","2038","2039","2040"};
 
     String url_masvendidos = "http://192.168.0.3/tesis_con/public/productos/masvendidos";
+    String url_menosVendidos= "http://192.168.0.3/tesis_con/public/productos/menosVendidos";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,6 +96,18 @@ public class Fragment_info_productos extends Fragment {
             }
         });
 
+        menVendidos = view.findViewById(R.id.menosVendidos);
+        menVendidos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fechConsul = fechaConsulta();
+                Log.d("Fecha", fechConsul);
+                Log.d("Sellama a los productos", "Se obtienen productos");
+                obtener_productosStatsMenosVendidos();
+                Log.d("Se llamo a los productos", "Se obtuvieron productos");
+            }
+        });
+
         fecha = view.findViewById(R.id.idTvSelectedate);
 
         //Spinners
@@ -114,10 +127,6 @@ public class Fragment_info_productos extends Fragment {
 
         meses.setAdapter(mesesAd);
         year.setAdapter(yearsAd);
-
-
-
-
 
     }
 
@@ -216,10 +225,90 @@ public class Fragment_info_productos extends Fragment {
 
         };
         queue.add(request_json);
-
-
-
     }
+
+    //Funcion para obtener los productos ordenados del que muestra menos producits al que mestra mas productos
+    public void obtener_productosStatsMenosVendidos(){
+
+        //Limpia la lista antes de realizar una nueva consulta
+        list_product.clear();
+        if (pro_statInf.getAdapter() !=null){
+            //Notifica al adaptador para limpiar la vista
+            pro_statInf.getAdapter().notifyDataSetChanged();
+        }
+
+        RequestQueue  queue = Volley.newRequestQueue(getContext());
+
+        //Se crea json arrau como filtro
+        JSONArray array = new JSONArray();
+
+        //josn objet para fecha
+        JSONObject jsonParam = new JSONObject();
+
+        try {
+            //Se agregan los aprasm strinf
+            jsonParam.put("fecha", fechaConsulta());
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        array.put(jsonParam);
+
+        JsonArrayRequest request_json = new JsonArrayRequest(Request.Method.POST, url_menosVendidos
+                , array,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            //Se obtiene respuesta final
+                            if (response != null && response.length() > 0) {
+                                Log.d("Respuesta", response.toString());  // Mostrar la respuesta completa
+                            } else {
+                                Log.d("Respuesta", "Respuesta vacía recibida");
+                            }
+
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject jsonObject = response.getJSONObject(i);
+
+                                Log.d("Objetio", jsonObject.toString() );
+
+                                int idPro = jsonObject.getInt("id");
+                                String codPro = jsonObject.getString("pro_cod");
+                                String desPro = jsonObject.getString("pro_des");
+                                int canVen = jsonObject.getInt("cantidad_ven");
+                                String s = jsonObject.getString("pre_pro");
+                                String z = jsonObject.getString("total_pro");
+                                float precio =  Float.parseFloat(s);
+                                float pedido_total =  Float.parseFloat(z);
+
+                                list_product.add(new Producto_statInfo(idPro, codPro, desPro, canVen,
+                                        precio,pedido_total));
+                                buildRecycleview();
+
+                            }
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError{
+                Map<String,String> headers = new HashMap<String,String>();
+                //ADD headers
+                return headers;
+            }
+
+        };
+        queue.add(request_json);
+    }
+
+
 
     private void buildRecycleview(){
         //se inicia el adaptador de la clase
