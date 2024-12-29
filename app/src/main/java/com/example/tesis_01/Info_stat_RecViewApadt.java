@@ -39,7 +39,7 @@ public class Info_stat_RecViewApadt extends RecyclerView.Adapter<Info_stat_RecVi
         holder.cod.setText("COD-PRO: " + producto.getCod_pro());
         holder.des.setText("Producto" + producto.getDes_pro());
         holder.cant.setText("Vendidos:" + Integer.toString(producto.getCant_ven()) + " UNI");
-        holder.total.setText("Total: " + "1040 $"/*Float.toString(producto.getCant_ven())*/);
+        holder.total.setText("Total: " + Float.toString(producto.getTotal_pro()) + " $");
 
 
 

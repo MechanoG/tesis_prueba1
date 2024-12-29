@@ -58,7 +58,6 @@ public class Fragment_info_productos extends Fragment {
 
     String url_masvendidos = "http://192.168.0.3/tesis_con/public/productos/masvendidos";
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,18 +75,11 @@ public class Fragment_info_productos extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-
         //Se inicializa recuvler viewoducto_statInfo
         pro_statInf = view.findViewById(R.id.pro_stat_recy);
 
         //Se crea el arrau de los pedidos
         list_product = new ArrayList<Producto_statInfo>();
-
-        list_product.add(new Producto_statInfo(1, "s4d58s", "Cable de carga", 104, 10.00f, 1040.00f ));
-        list_product.add(new Producto_statInfo(5, "isadhygbas", "Secadora", 30, 9874.00f, 296220.00f ));
-
-
 
         // on below line we are initializing our variables.
         sel_fecha = view.findViewById(R.id.masVendidos);
@@ -96,9 +88,10 @@ public class Fragment_info_productos extends Fragment {
             public void onClick(View view) {
                 fechConsul = fechaConsulta();
                 Log.d("Fecha", fechConsul);
+                Log.d("Sellama a los productos", "Se obtienen productos");
                 obtener_productosStats();
+                Log.d("Se llamo a los productos", "Se obtuvieron productos");
                 buildRecycleview();
-
 
             }
         });
@@ -215,25 +208,7 @@ public class Fragment_info_productos extends Fragment {
                 //ADD headers
                 return headers;
             }
-            //Important
 
-            /*
-            @Override
-            protected Response<JSONArray> parseNetworkResponse(NetworkResponse response) {
-                String responseString;
-                JSONArray array = new JSONArray();
-                if (response != null) {
-
-                    try {
-                        responseString = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-                        JSONObject obj = new JSONObject(responseString);
-                        (array).put(obj);
-                    } catch (Exception ex) {
-                    }
-                }
-                //return array;
-                return Response.success(array, HttpHeaderParser.parseCacheHeaders(response));
-            } */
         };
         queue.add(request_json);
 

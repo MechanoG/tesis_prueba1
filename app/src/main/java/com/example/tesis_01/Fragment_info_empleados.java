@@ -60,7 +60,6 @@ public class Fragment_info_empleados extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -74,15 +73,11 @@ public class Fragment_info_empleados extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        super.onViewCreated(view, savedInstanceState);
-
         //Se inicializa recuvler viewoducto_statInfo
         emp_statInf = view.findViewById(R.id.emp_stat_recy);
 
         //Se crea el arrau de los pedidos
         list_emp = new ArrayList<Empleado_statInfo>();
-
-
 
         // on below line we are initializing our variables.
         sel_fecha = view.findViewById(R.id.masVendidos);
@@ -93,8 +88,6 @@ public class Fragment_info_empleados extends Fragment {
                 Log.d("Fecha", fechConsul);
                 obtener_clientStats();
                 buildRecycleview();
-
-
             }
         });
 
@@ -117,7 +110,6 @@ public class Fragment_info_empleados extends Fragment {
 
         meses.setAdapter(mesesAd);
         year.setAdapter(yearsAd);
-
     }
 
     private String fechaConsulta(){
@@ -134,7 +126,6 @@ public class Fragment_info_empleados extends Fragment {
 
     }
 
-
     public void obtener_clientStats(){
 
         RequestQueue queue = Volley.newRequestQueue(getContext());
@@ -147,7 +138,7 @@ public class Fragment_info_empleados extends Fragment {
 
         try {
             //Se agregan los aprasm strinf
-            jsonParam.put("fecha", "2024-11");
+            jsonParam.put("fecha", fechaConsulta());
 
         }catch (JSONException e){
             e.printStackTrace();

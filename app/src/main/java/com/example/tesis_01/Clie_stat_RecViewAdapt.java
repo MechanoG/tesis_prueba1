@@ -57,7 +57,6 @@ public class Clie_stat_RecViewAdapt extends RecyclerView.Adapter<Clie_stat_RecVi
             razSo = itemView.findViewById(R.id.raz_so_cli);
             canPed= itemView.findViewById(R.id.can_ped_clie);
             totalCom = itemView.findViewById(R.id.total_com_cli);
-
         }
     }
 }
