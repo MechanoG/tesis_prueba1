@@ -56,8 +56,8 @@ public class Fragment_info_productos extends Fragment {
     private String[] yearsArray = {"2024","2025","2026","2027","2028","2029","2030","2031","2032",
             "2033","2034","2035","2036","2037","2038","2039","2040"};
 
-    String url_masvendidos = "http://192.168.0.3/tesis_con/public/productos/masvendidos";
-    String url_menosVendidos= "http://192.168.0.3/tesis_con/public/productos/menosVendidos";
+    String url_masvendidos = "http://192.168.0.2/tesis_con/public/productos/masvendidos";
+    String url_menosVendidos= "http://192.168.0.2/tesis_con/public/productos/menosVendidos";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

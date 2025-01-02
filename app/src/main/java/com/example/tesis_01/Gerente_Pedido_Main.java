@@ -51,7 +51,7 @@ public class Gerente_Pedido_Main extends Fragment {
 
 
     //Variable para la url a donde se realizara la consulta
-    String url = "http://192.168.0.3/tesis_con/public/pedidos";
+    String url = "http://192.168.0.2/tesis_con/public/pedidos";
     //"http://192.168.0.4/tesis_con/public/pedidos";
 //"http://10.0.2.2:80/tesis_con/public/pedidos"
 
@@ -116,9 +116,8 @@ public class Gerente_Pedido_Main extends Fragment {
 
     }
 
-
     //funcion que recupera los datos de la base de datos y los muestra en el recycle view
-    private void mostrar_pedidos() {
+     void mostrar_pedidos() {
         //Se crea nueva variable para  nuestro request que
         RequestQueue queue = Volley.newRequestQueue(getContext());
         //en forma de un array asi que estamos haciendo un json array quest
@@ -173,6 +172,7 @@ public class Gerente_Pedido_Main extends Fragment {
 
     private void buildRecycleview() {
         //se inicia el adaptador de la clase
+        Gerente_Pedido_Main fragment = this;
         Pedidos_lista_Adapter adaptador_pedidos = new Pedidos_lista_Adapter(pedidosLista, getContext(), getParentFragmentManager());
 
         //agregar layout manager

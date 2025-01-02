@@ -45,8 +45,8 @@ public class Fragment_modificar_empleado extends Fragment {
 
     //URL PARA INSERTAR EMPLEADO Y USUARIO
     //"http://10.0.2.2:80/tesis_con/public/usuarios/creatEmployUser";
-    String url_detalles_empleados ="http://192.168.0.3/tesis_con/public/usuarios/detalle";
-    String url_detalles_modificar ="http://192.168.0.3/tesis_con/public/usuarios/modEmpUser";
+    String url_detalles_empleados ="http://192.168.0.2/tesis_con/public/usuarios/detalle";
+    String url_detalles_modificar ="http://192.168.0.2/tesis_con/public/usuarios/modEmpUser";
 
     NavController navController;
 

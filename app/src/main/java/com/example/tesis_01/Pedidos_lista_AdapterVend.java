@@ -111,9 +111,9 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
 
 
 
-        String url_pedidos_detalle = "http://192.168.0.3/tesis_con/public/pedidos/pedidos_detalle";
-        String getUrl_pedidos_pagar = "http://192.168.0.3/tesis_con/public/pedidos/pagar";
-        String getUrl_pedidos_cancelar = "http://192.168.0.3/tesis_con/public/pedidos/cancel";
+        String url_pedidos_detalle = "http://192.168.0.2/tesis_con/public/pedidos/pedidos_detalle";
+        String getUrl_pedidos_pagar = "http://192.168.0.2/tesis_con/public/pedidos/pagar";
+        String getUrl_pedidos_cancelar = "http://192.168.0.2/tesis_con/public/pedidos/cancel";
 
 
         public ViewHolder(@NonNull View itemView) {

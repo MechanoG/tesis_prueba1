@@ -44,11 +44,6 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
         this.lista_pedidos = lista_pedidos;
         this.context = context;
         this.fragmentManager = fragmentManager;
-
-    }
-
-    public interface OnActualizarListaListener{
-        void actualizarListaPedidos();
     }
 
 
@@ -65,7 +60,6 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
     public void onBindViewHolder(@NonNull Pedidos_lista_Adapter.ViewHolder holder, int position) {
         //colocando datos para las vistas del recycle view
 
-
         Pedidos_lista lista = lista_pedidos.get(position);
 
         String estad;
@@ -77,10 +71,11 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
         holder.tipo_pago.setText("Tipo de Pago: " + lista.getTi_pago());
         holder.vencimeinto.setText("Se Vence: " + lista.getVencimiento());
 
+        holder.pedido = lista;
+
         // Restablecer colores predeterminados antes de aplicar cambios
         holder.estado.setBackgroundColor(Color.TRANSPARENT); // Fondo transparente por defecto
         holder.estado.setTextColor(Color.BLACK); // Texto negro por defecto
-
 
         estad = lista.getEstado().trim();
         holder.estado.setText("Estado: " + estad);
@@ -99,19 +94,11 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
         }else{
             holder.estado.setBackgroundColor(Color.TRANSPARENT); // Fondo transparente por defecto
             holder.estado.setTextColor(Color.BLACK); // Texto negro por defecto
-
         }
-
-        holder.pedido=lista;
-
-
-
-
     }
 
     @Override
     public int getItemCount() {
-
         return lista_pedidos.size();
     }
 
@@ -123,15 +110,11 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
          Pedidos_lista pedido;
 
-        String url_pedidos_detalle = "http://192.168.0.3/tesis_con/public/pedidos/pedidos_detalle";
-        String getUrl_pedidos_pagar = "http://192.168.0.3/tesis_con/public/pedidos/pagar";
-        String getUrl_pedidos_eliminar = "http://192.168.0.3/tesis_con/public/pedidos/eliminar";
-        String getUrl_pedidos_cancelar = "http://192.168.0.3/tesis_con/public/pedidos/cancel";
+        String url_pedidos_detalle = "http://192.168.0.2/tesis_con/public/pedidos/pedidos_detalle";
+        String getUrl_pedidos_pagar = "http://192.168.0.2/tesis_con/public/pedidos/pagar";
+        String getUrl_pedidos_eliminar = "http://192.168.0.2/tesis_con/public/pedidos/eliminar";
+        String getUrl_pedidos_cancelar = "http://192.168.0.2/tesis_con/public/pedidos/cancel";
 
-
-        String riggerBut;
-
-        int pos;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -143,11 +126,6 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
             tipo_pago = itemView.findViewById(R.id.tipo_pago);
             vencimeinto = itemView.findViewById(R.id.vencimiento);
             estado=itemView.findViewById(R.id.estado_pedido);
-
-
-
-
-
 
 
             itemView.findViewById(R.id.informacion_pedido).setOnClickListener(new View.OnClickListener() {
@@ -285,7 +263,7 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
             //Se crea un JSONObject con los datos que se desean enviar
             JSONObject jsonObject = new JSONObject();
             try{
-                jsonObject.put("id_ped",pedido.getId_pe());
+                jsonObject.put("id_ped", pedido.getId_pe());
 
             }catch (JSONException e){
                 e.printStackTrace();
@@ -300,8 +278,6 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
                     String respuesta = response.toString();
 
                     Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
-
-
 
                 }
             }, new Response.ErrorListener() {
@@ -335,8 +311,6 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
                     String respuesta = response.toString();
 
                     Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
-
-
 
                 }
             }, new Response.ErrorListener() {
