@@ -118,6 +118,15 @@ public class Gerente_Pedido_Main extends Fragment {
 
     //funcion que recupera los datos de la base de datos y los muestra en el recycle view
      void mostrar_pedidos() {
+
+        //limpia la lista antes de llevar a cabo una nueva consulta
+         pedidosLista.clear();
+         if (lista_pedidos.getAdapter() != null){
+             //nitifica al adaptador para limpiar la vista
+             lista_pedidos.getAdapter().notifyDataSetChanged();
+         }
+
+
         //Se crea nueva variable para  nuestro request que
         RequestQueue queue = Volley.newRequestQueue(getContext());
         //en forma de un array asi que estamos haciendo un json array quest
@@ -173,7 +182,7 @@ public class Gerente_Pedido_Main extends Fragment {
     private void buildRecycleview() {
         //se inicia el adaptador de la clase
         Gerente_Pedido_Main fragment = this;
-        Pedidos_lista_Adapter adaptador_pedidos = new Pedidos_lista_Adapter(pedidosLista, getContext(), getParentFragmentManager());
+        Pedidos_lista_Adapter adaptador_pedidos = new Pedidos_lista_Adapter(pedidosLista, getContext(), getParentFragmentManager(), this);
 
         //agregar layout manager
         //al recycle view

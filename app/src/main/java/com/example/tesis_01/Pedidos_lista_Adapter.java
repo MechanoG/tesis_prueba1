@@ -38,12 +38,14 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
     private ArrayList<Pedidos_lista> lista_pedidos;
     private Context context;
     private FragmentManager fragmentManager;
+    private Gerente_Pedido_Main fragment;
 
 
-    public Pedidos_lista_Adapter(ArrayList<Pedidos_lista> lista_pedidos, Context context, FragmentManager fragmentManager) {
+    public Pedidos_lista_Adapter(ArrayList<Pedidos_lista> lista_pedidos, Context context, FragmentManager fragmentManager, Gerente_Pedido_Main frag) {
         this.lista_pedidos = lista_pedidos;
         this.context = context;
         this.fragmentManager = fragmentManager;
+        this.fragment = frag;
     }
 
 
@@ -175,6 +177,7 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
 
 
+
             });
 
             builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
@@ -278,6 +281,7 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
                     String respuesta = response.toString();
 
                     Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
+                    fragment.mostrar_pedidos();
 
                 }
             }, new Response.ErrorListener() {
@@ -312,6 +316,8 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
                     Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
 
+                    fragment.mostrar_pedidos();
+
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -344,6 +350,7 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
                     String respuesta = response.toString();
 
                     Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
+                    fragment.mostrar_pedidos();
 
 
 
