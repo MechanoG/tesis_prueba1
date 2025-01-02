@@ -225,7 +225,7 @@ public class Pedidos_insertar extends Fragment  {
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //navController.navigate(R.id.action_pedidos_insertar_to_gerente_Pedido_Main);
+
                 navController.popBackStack();
             }
         });
@@ -417,6 +417,7 @@ public class Pedidos_insertar extends Fragment  {
 
                 //Se agrega el objeto al  array de producto
                 productos_array.put(productos_pedido);
+
             }
 
             //Se agrega el array de productos al ojeto JSON principal
@@ -434,6 +435,7 @@ public class Pedidos_insertar extends Fragment  {
 
                 Log.d("Mensaje", response.toString());
                 Toast.makeText(getContext(), response.toString(), Toast.LENGTH_SHORT).show();
+                navController.popBackStack();
             }
 
         }, new Response.ErrorListener() {

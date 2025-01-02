@@ -129,7 +129,6 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
             vencimeinto = itemView.findViewById(R.id.vencimiento);
             estado=itemView.findViewById(R.id.estado_pedido);
 
-
             itemView.findViewById(R.id.informacion_pedido).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -172,11 +171,6 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
                 Log.d("Recivido", "Pagar" );
                 pagarPedido();
-
-
-
-
-
 
             });
 

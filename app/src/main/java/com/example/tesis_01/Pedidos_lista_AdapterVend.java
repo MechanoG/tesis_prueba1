@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,11 +34,13 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
     private ArrayList<Pedidos_lista> lista_pedidos;
     private Context context;
     private FragmentManager fragmentManager;
+    private Fragment_vendedor_pedido_main fragment;
 
-    public Pedidos_lista_AdapterVend(ArrayList<Pedidos_lista> lista_pedidos, Context context, FragmentManager fragmentManager) {
+    public Pedidos_lista_AdapterVend(ArrayList<Pedidos_lista> lista_pedidos, Context context, FragmentManager fragmentManager, Fragment_vendedor_pedido_main frag) {
         this.lista_pedidos = lista_pedidos;
         this.context = context;
         this.fragmentManager = fragmentManager;
+        this.fragment = frag;
     }
 
     //Resulta en la referencia a la interfaz "pedidos card de cada" pedidos
@@ -88,8 +91,6 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
             holder.estado.setTextColor(Color.BLACK); // Texto negro por defecto
 
         }
-
-
 
         holder.pedido = lista;
 
@@ -148,8 +149,6 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
                 }
             });
 
-
-
         }
 
         private void pagar_but(){
@@ -158,15 +157,10 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
             builder.setTitle("¿Pagar pedido?");
 
 
-
             builder.setPositiveButton("Pagar", (dialogInterface, which)->{
 
                 Log.d("Recivido", "Pagar" );
                 pagarPedido();
-
-
-
-
 
             });
 
@@ -180,8 +174,6 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("¿Cancelar Pedido?");
 
-
-
             builder.setPositiveButton("Si", (dialogInterface, which)->{
 
                 Log.d("Recivido", "Cancelado" );
@@ -193,7 +185,6 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
             builder.show();
 
         }
-
 
 
         public void obtener_detalles() {
@@ -253,7 +244,7 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
                     String respuesta = response.toString();
 
                     Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
-
+                    fragment.mostrar_pedidos();
 
 
                 }
@@ -288,7 +279,7 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
                     String respuesta = response.toString();
 
                     Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
-
+                    fragment.mostrar_pedidos();
 
 
                 }

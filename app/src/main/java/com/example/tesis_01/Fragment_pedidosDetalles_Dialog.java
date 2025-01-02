@@ -66,6 +66,7 @@ public class Fragment_pedidosDetalles_Dialog extends DialogFragment {
 
         //Se referecian los textview
 
+
         ped_id = view.findViewById(R.id.pedidoId);
         vend = view.findViewById(R.id.vendedor);
         clie_rif = view.findViewById(R.id.clienteRif);
@@ -78,6 +79,15 @@ public class Fragment_pedidosDetalles_Dialog extends DialogFragment {
         subtotal = view.findViewById(R.id.subtotal);
         total = view.findViewById(R.id.total);
         productos_recy = view.findViewById(R.id.pro_lis);
+
+        cierre = view.findViewById(R.id.closeDialog);
+
+        cierre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
 
         try {
             JSONObject jsonObject = new JSONObject(detalles);
