@@ -132,7 +132,14 @@ public class Fragment_gerente_inventario extends Fragment {
     }
 
     //Recibe la informacion de los productos
-    private void obtener_productos(){           // Esto no rompe el spinner
+    void obtener_productos(){           // Esto no rompe el spinner
+        //Limpia lista antes de nueva consulta
+        productos.clear();
+        if (inventario_recy.getAdapter() !=null){
+            //identifica el adaptador para limpiar la vista
+            inventario_recy.getAdapter().notifyDataSetChanged();
+        }
+
 
         //Se crea nueva variable para  nuestro request que
         RequestQueue queue = Volley.newRequestQueue(getContext());
@@ -198,7 +205,7 @@ public class Fragment_gerente_inventario extends Fragment {
     private void build_products_recycleview(){
 
         //se inicia el adaptador de la clase
-        Gerente_Productos_RecAdapter productos_view = new Gerente_Productos_RecAdapter(productos, getContext());
+        Gerente_Productos_RecAdapter productos_view = new Gerente_Productos_RecAdapter(productos, getContext(), this);
 
         //agregar layout manager
         //al recycle view

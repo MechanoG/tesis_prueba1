@@ -32,10 +32,12 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
     //Array en el que se guardaran cada elemento de la lista
     private ArrayList<Producto> productos_recyclerview;
     private Context context;
+    private Fragment_gerente_inventario fragment;
 
-    public Gerente_Productos_RecAdapter(ArrayList<Producto> productos_recyclerview, Context context) {
+    public Gerente_Productos_RecAdapter(ArrayList<Producto> productos_recyclerview, Context context, Fragment_gerente_inventario frag) {
         this.productos_recyclerview = productos_recyclerview;
         this.context = context;
+        this.fragment = frag;
     }
 
     @NonNull
@@ -145,6 +147,7 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
                 int cant = Integer.parseInt(numero);
                 auementarProducto(cant);
 
+
             });
 
             builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
@@ -167,6 +170,7 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
                 Log.d("Recivido", numero );
                 int cant = Integer.parseInt(numero);
                 removerProducto(cant);
+
 
 
 
@@ -196,6 +200,7 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
             builder.show();
 
         }
+
         private void modPrecio(){
 
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -203,13 +208,13 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
 
             //Cuadro de texto
             final EditText input = new EditText(context);
-            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
             builder.setView(input);
 
             builder.setPositiveButton("Aceptar", (dialogInterface, which)->{
                 String numero = input.getText().toString();
                 Log.d("Recivido", numero );
-                int nuePrecio = Integer.parseInt(numero);
+                float nuePrecio = Float.parseFloat(numero);
                 nuevoPrecio(nuePrecio);
 
 
@@ -247,7 +252,7 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
 
                     Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
 
-
+                    fragment.obtener_productos();
 
                 }
             }, new Response.ErrorListener() {
@@ -283,7 +288,7 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
 
                     Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
 
-
+                    fragment.obtener_productos();
 
                 }
             }, new Response.ErrorListener() {
@@ -322,6 +327,7 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
 
                     Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
 
+                    fragment.obtener_productos();
 
 
                 }
@@ -335,7 +341,7 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
 
         }
 
-        public void nuevoPrecio(int precio){
+        public void nuevoPrecio( float precio){
 
             RequestQueue queue = Volley.newRequestQueue(itemView.getContext());
 
@@ -359,7 +365,7 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
 
                     Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
 
-
+                    fragment.obtener_productos();
 
                 }
             }, new Response.ErrorListener() {
