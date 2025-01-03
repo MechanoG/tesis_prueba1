@@ -41,15 +41,16 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
     private Context context;
     private FragmentManager fragmentManager;
     private NavController navController;
-
+    private Fragment_gerente_empleados fragment;
 
 
     public Empleados_RecAdapter(ArrayList<Empleado> empleados_recyclerview, Context context,
-                                FragmentManager fragmentManager, NavController navController) {
+                                FragmentManager fragmentManager, NavController navController, Fragment_gerente_empleados frag) {
         this.empleados_recyclerview = empleados_recyclerview;
         this.context = context;
         this.fragmentManager=fragmentManager;
         this.navController=navController;
+        this.fragment = frag;
     }
 
     @NonNull
@@ -129,8 +130,6 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
 
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("¿Eliminar Empleado?");
-
-
 
             builder.setPositiveButton("Eliminar", (dialogInterface, which)->{
 
@@ -250,6 +249,7 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
 
                     Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
 
+                    fragment.obtener_empleados();
 
 
                 }

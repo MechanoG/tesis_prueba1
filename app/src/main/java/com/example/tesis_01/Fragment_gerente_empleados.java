@@ -118,7 +118,13 @@ public class Fragment_gerente_empleados extends Fragment {
     }
 
     //Recibe la informacion de los productos
-    private void obtener_empleados(){           // Esto no rompe el spinner
+     void obtener_empleados(){           // Esto no rompe el spinner
+        //limpia la lista antes de hacer una consulta
+         empleados.clear();
+         if (empleado_recy.getAdapter()!= null){
+             empleado_recy.getAdapter().notifyDataSetChanged();
+
+         }
 
         //Se crea nueva variable para  nuestro request que
         RequestQueue queue = Volley.newRequestQueue(getContext());
@@ -181,7 +187,7 @@ public class Fragment_gerente_empleados extends Fragment {
 
         //se inicia el adaptador de la clase
         Empleados_RecAdapter empleados_view = new Empleados_RecAdapter(empleados, getContext(), getParentFragmentManager(),
-                navController);
+                navController, this);
 
         //agregar layout manager
         //al recycle view

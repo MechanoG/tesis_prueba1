@@ -146,8 +146,8 @@ public class Fragment_modificar_empleado extends Fragment {
         modificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                modificar_empleado(tipos);
-                navController.popBackStack();
+
+
 
             }
         });
@@ -256,6 +256,7 @@ public class Fragment_modificar_empleado extends Fragment {
                 @Override
                 public void onResponse(JSONObject response) {
                     Log.d("Mensaje", response.toString());
+                    modificar_empleado(tipos);
                 }
             }, new Response.ErrorListener() {
                 @Override
