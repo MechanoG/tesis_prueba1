@@ -26,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,6 +59,8 @@ public class Fragment_gerente_empleados_insertar extends Fragment  {
     NavController navController;
 
     String tipos = "Vendedor";
+
+    MaterialToolbar appbar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -153,7 +156,9 @@ public class Fragment_gerente_empleados_insertar extends Fragment  {
 
             }
         });
-
+        appbar = view.findViewById(R.id.topAppBar);
+        appbar.setNavigationOnClickListener(v->
+                navController.popBackStack());
 
 
 

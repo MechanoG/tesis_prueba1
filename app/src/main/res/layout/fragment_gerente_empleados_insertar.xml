@@ -22,7 +22,7 @@
             app:layout_anchorGravity="center"
             app:navigationIcon="@drawable/go_back_24"
             app:title="Nuevo Empleado"
-            app:titleTextColor="@color/black" />
+            app:titleTextColor="@color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
