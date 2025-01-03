@@ -17,7 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class Menu_Vendedor extends AppCompatActivity {
 
     TextView id, empleado, usuario;
-    Button pedidos, inventario, clientes;
+    Button pedidos, inventario, clientes, perfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class Menu_Vendedor extends AppCompatActivity {
         pedidos = findViewById(R.id.boG_pedidos);
         inventario = findViewById(R.id.boG_Inventario);
         clientes = findViewById(R.id.boG_Clientes);
+        perfil = findViewById(R.id.boG_perfil);
 
 
         //Carga informacion del usuario
@@ -78,6 +79,16 @@ public class Menu_Vendedor extends AppCompatActivity {
                 Intent intent = new Intent(Menu_Vendedor.this, Activity_vendedor_clientes.class);
                 startActivity(intent);
             }
+        });
+
+        perfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Clientes", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Menu_Vendedor.this, Activity_Perfil.class);
+                startActivity(intent);
+            }
+
         });
 
 
