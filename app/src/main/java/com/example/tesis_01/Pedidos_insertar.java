@@ -33,6 +33,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,6 +53,7 @@ public class Pedidos_insertar extends Fragment  {
 
     private HashMap<String, Integer > producto_cantidad = new HashMap<>();
 
+    MaterialToolbar appbar;
 
     //Espiner de Adaptador de espiner de productos
     ArrayAdapter inv_list_adap;
@@ -103,8 +105,6 @@ public class Pedidos_insertar extends Fragment  {
     //autocomplete TextView
     AutoCompleteTextView cli_ped;
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,7 +131,6 @@ public class Pedidos_insertar extends Fragment  {
 
         //Inicializa el array de datos del spinner de productos
         productos_spinner = new ArrayList<String>();
-
 
         //Inicializa el array de datos del spinner de clientes
         clientes_spinner = new ArrayList<String>();
@@ -218,6 +217,10 @@ public class Pedidos_insertar extends Fragment  {
         //Se cra nevegador del fragment
         navController = Navigation.findNavController(view);
 
+        appbar = view.findViewById(R.id.topAppBar);
+        appbar.setNavigationOnClickListener(v ->
+            navController.popBackStack()
+        );
 
         //Se inicializa boton cancelar.
         cancelar = view.findViewById(R.id.Pedido_Cancelar);

@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -23,6 +24,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.button.MaterialButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,6 +40,8 @@ public class Fragment_gerente_clientes_insertar extends Fragment {
     private Button cancelar, ingresar;
 
     NavController navController;
+
+    MaterialToolbar appbar;
 
     //URL DE CONEXION A BASE DE DATOS "http://10.0.2.2:80/tesis_con/public/clientes/create";
     // "http://192.168.0.4/tesis_con/public/clientes/create";
@@ -81,11 +86,16 @@ public class Fragment_gerente_clientes_insertar extends Fragment {
 
         navController = Navigation.findNavController(view);
 
+        appbar= view.findViewById(R.id.topAppBar);
+        appbar.setNavigationOnClickListener(
+                v -> navController.popBackStack()
+        );
+
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 insertar_cliente();
-                navController.navigate(R.id.action_fragment_gerente_clientes_insertar_to_fragment_gerente_clientes);
+
             }
         });
 
@@ -94,6 +104,11 @@ public class Fragment_gerente_clientes_insertar extends Fragment {
             public void onClick(View view) {
                 navController.popBackStack();            }
         });
+
+
+
+
+
     }
 
     //Manda solicitud para insertar nuevo cliente
@@ -129,6 +144,8 @@ public class Fragment_gerente_clientes_insertar extends Fragment {
                 @Override
                 public void onResponse(JSONObject response) {
                     Log.d("Mensaje", response.toString());
+                    navController.popBackStack();
+
                 }
             }, new Response.ErrorListener() {
                 @Override

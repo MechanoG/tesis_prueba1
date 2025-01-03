@@ -217,10 +217,6 @@ public class Gerente_Productos_RecAdapter extends RecyclerView.Adapter<Gerente_P
                 float nuePrecio = Float.parseFloat(numero);
                 nuevoPrecio(nuePrecio);
 
-
-
-
-
             });
 
             builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());

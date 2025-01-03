@@ -82,11 +82,9 @@ public class Fragment_vendedor_clientes extends Fragment {
         ingresar_cliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_fragment_vendedor_clientes_to_fragment_gerente_inventario_insertar3);
+                navController.navigate(R.id.action_fragment_vendedor_clientes_to_fragment_gerente_clientes_insertar2);
             }
         });
-
-
 
         obtener_clientes();
         build_clientes_recycleview();
@@ -96,7 +94,6 @@ public class Fragment_vendedor_clientes extends Fragment {
         appbar.setNavigationOnClickListener(v ->
                 getActivity().finish()
         );
-
     }
 
     //Obtiene la informacion de los clientes

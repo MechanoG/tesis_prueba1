@@ -34,16 +34,18 @@ public class Clientes_Gerente_RecAdapter extends RecyclerView.Adapter<Clientes_G
     private Context context;
     private  FragmentManager fragmentManager;
     private NavController navController;
+    private Fragment_gerente_clientes fragment;
 
     String url_clientes_detalles = "http://192.168.0.2/tesis_con/public/clientes/detalles";
     String url_eliminar_clientes =  "http://192.168.0.2/tesis_con/public/clientes/eliminar";
 
     public Clientes_Gerente_RecAdapter(ArrayList<Cliente> lista_clientes, Context context, FragmentManager fragmentManager,
-                                       NavController navController) {
+                                       NavController navController, Fragment_gerente_clientes frag) {
         this.lista_clientes = lista_clientes;
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.navController = navController;
+        this.fragment = frag;
     }
 
     @NonNull
@@ -106,16 +108,12 @@ public class Clientes_Gerente_RecAdapter extends RecyclerView.Adapter<Clientes_G
                 }
             });
 
-
-
         }
 
         private void elim_but(){
 
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("¿Eliminar Cliente?");
-
-
 
             builder.setPositiveButton("Eliminar", (dialogInterface, which)->{
 
@@ -162,8 +160,6 @@ public class Clientes_Gerente_RecAdapter extends RecyclerView.Adapter<Clientes_G
                     }catch (JSONException e){
                         Log.d("Error", "Error " + String.valueOf(e));
                     }
-
-
 
                 }
             }, new Response.ErrorListener() {
@@ -223,7 +219,7 @@ public class Clientes_Gerente_RecAdapter extends RecyclerView.Adapter<Clientes_G
                     String respuesta = response.toString();
 
                     Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
-
+                    fragment.obtener_clientes();
 
                 }
             }, new Response.ErrorListener() {

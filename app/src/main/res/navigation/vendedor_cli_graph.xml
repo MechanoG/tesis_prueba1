@@ -11,12 +11,11 @@
         android:label="fragment_vendedor_clientes"
         tools:layout="@layout/fragment_vendedor_clientes" >
         <action
-            android:id="@+id/action_fragment_vendedor_clientes_to_fragment_gerente_inventario_insertar3"
-            app:destination="@id/fragment_gerente_inventario_insertar3" />
+            android:id="@+id/action_fragment_vendedor_clientes_to_fragment_gerente_clientes_insertar2"
+            app:destination="@id/fragment_gerente_clientes_insertar2" />
     </fragment>
     <fragment
-        android:id="@+id/fragment_gerente_inventario_insertar3"
-        android:name="com.example.tesis_01.Fragment_gerente_inventario_insertar"
-        android:label="fragment_gerente_clientes_insertar"
-        tools:layout="@layout/fragment_gerente_clientes_insertar" />
+        android:id="@+id/fragment_gerente_clientes_insertar2"
+        android:name="com.example.tesis_01.Fragment_gerente_clientes_insertar"
+        android:label="Fragment_gerente_clientes_insertar" />
 </navigation>

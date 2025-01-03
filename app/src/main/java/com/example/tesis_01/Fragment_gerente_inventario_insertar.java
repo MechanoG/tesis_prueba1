@@ -23,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 
 import org.json.JSONException;
@@ -44,6 +45,8 @@ public class Fragment_gerente_inventario_insertar extends Fragment {
     private String url_enviar_pro = "http://192.168.0.2/tesis_con/public/productos/create";
 
     NavController navController;
+
+    MaterialToolbar appbar;
 
     /*
     @Override
@@ -83,12 +86,15 @@ public class Fragment_gerente_inventario_insertar extends Fragment {
 
         navController = Navigation.findNavController(view);
 
+        appbar = view.findViewById(R.id.topAppBar);
+        appbar.setNavigationOnClickListener(v ->
+                navController.popBackStack());
+
         ingresar=view.findViewById(R.id.ingresar_cliente);
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 insertar_producto();
-                navController.navigate(R.id.action_fragment_gerente_inventario_insertar_to_fragment_gerente_inventario);
             }
         });
 
@@ -131,6 +137,13 @@ public class Fragment_gerente_inventario_insertar extends Fragment {
                 @Override
                 public void onResponse(JSONObject response) {
                     Log.d("Mensaje", response.toString());
+                    Toast.makeText(getContext(),response.toString(), Toast.LENGTH_SHORT).show();
+                    navController.popBackStack();
+
+
+
+
+
                 }
             }, new Response.ErrorListener() {
                 @Override

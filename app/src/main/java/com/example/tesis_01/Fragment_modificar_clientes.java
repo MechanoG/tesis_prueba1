@@ -23,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,7 +34,7 @@ public class Fragment_modificar_clientes extends Fragment {
     private int clienteId;
 
     String url_obtener_clie = "http://192.168.0.2/tesis_con/public/clientes/byId";
-    String url_modificar_clie = "http://192.168.0.2S/tesis_con/public/clientes/mod";
+    String url_modificar_clie = "http://192.168.0.2/tesis_con/public/clientes/mod";
 
 
     private TextView cabezera, rif_lab, raz_lab, encar_lab, encar_num_lab;
@@ -43,6 +44,8 @@ public class Fragment_modificar_clientes extends Fragment {
     private Button cancelar, modificar;
 
     NavController navController;
+
+    MaterialToolbar appbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -103,7 +106,11 @@ public class Fragment_modificar_clientes extends Fragment {
             }
         });
 
-        }
+        appbar = view.findViewById(R.id.topAppBar);
+        appbar.setNavigationOnClickListener( v ->
+                navController.popBackStack());
+
+    }
     private void obtener_cliente(){
         //Se declaran los varoles.
 

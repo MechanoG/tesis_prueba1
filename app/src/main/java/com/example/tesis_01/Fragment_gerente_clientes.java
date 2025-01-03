@@ -105,7 +105,13 @@ public class Fragment_gerente_clientes extends Fragment {
     }
 
     //Obtiene la informacion de los clientes
-    private void obtener_clientes(){           // Esto no rompe el spinner
+    void obtener_clientes(){           // Esto no rompe el spinner
+
+        //limpia la lista antes de una consulta.
+        clientes.clear();
+        if (clientes_recy.getAdapter() != null){
+            clientes_recy.getAdapter().notifyDataSetChanged();
+        }
 
         //Se crea nueva variable para  nuestro request que
         RequestQueue queue = Volley.newRequestQueue(getContext());
@@ -138,6 +144,8 @@ public class Fragment_gerente_clientes extends Fragment {
                         build_clientes_recycleview ();
 
 
+
+
                     }catch (JSONException e){
                         e.printStackTrace();
                         Log.d("Error", e.getMessage());
@@ -158,7 +166,9 @@ public class Fragment_gerente_clientes extends Fragment {
 
     private void build_clientes_recycleview (){
         Clientes_Gerente_RecAdapter clientes_view = new Clientes_Gerente_RecAdapter( clientes,getContext(), getParentFragmentManager(),
-                navController);
+                navController, this);
+
+
 
         //agregar layout manager
         //al recycle view

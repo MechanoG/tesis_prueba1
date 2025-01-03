@@ -113,7 +113,6 @@ public class Gerente_Pedido_Main extends Fragment {
 
         }
 
-
     }
 
     //funcion que recupera los datos de la base de datos y los muestra en el recycle view
