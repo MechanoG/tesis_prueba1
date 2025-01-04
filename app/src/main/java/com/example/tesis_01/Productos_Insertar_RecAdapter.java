@@ -34,6 +34,8 @@ public class Productos_Insertar_RecAdapter extends
         this.fragment = fragment;
     }
 
+
+
     //Referencias a productos_insertar_card
     @NonNull
     @Override
@@ -53,8 +55,12 @@ public class Productos_Insertar_RecAdapter extends
         holder.producto_ex.setText("Existencias: "+Integer.toString((lista.getCantidad()))+"U NI");
         holder.producto_pre.setText("Precio: "+Float.toString(lista.getPrecio())+" $");
 
-        int cantidad_actual = cantidad_producto.getOrDefault(cod_product, 1);
+        int cantidad_actual = cantidad_producto.getOrDefault(cod_product, 0);
         holder.cantidad_ped.setText(String.valueOf(cantidad_actual));
+
+        if (cantidad_actual == 0){
+            holder.cantidad_ped.setError("La cantidad no puede ser 0");
+        }
 
         holder.remo_pro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,13 +90,19 @@ public class Productos_Insertar_RecAdapter extends
                 if(!editable.toString().isEmpty()){
                     int cantidad = Integer.parseInt(editable.toString());
                     int existencias = lista.getCantidad();
-                    if (cantidad >= existencias){
+                    if (cantidad > existencias){
                         holder.cantidad_ped.setError("Execede el inventario");
                         cantidad_producto.remove(lista.getCodigo());
-                    }else{
+
+
+
+                    }else if (cantidad == 0) {
+                        holder.cantidad_ped.setError("La cantidad no puede ser cero");
+                        cantidad_producto.remove(lista.getCodigo());
+                    }
+                    else{
                         cantidad_producto.put(cod_product, cantidad);
                         actualizarTotal();
-
                     }
                 }else{
                     //Si el campo se deja vacio se remueve la cantida del Hashmap

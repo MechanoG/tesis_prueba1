@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -237,7 +238,7 @@ public class Pedidos_insertar extends Fragment  {
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                realizar_pedido();
+                ingresar_pedido();
 
 
             }
@@ -313,7 +314,9 @@ public class Pedidos_insertar extends Fragment  {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error){
-                Toast.makeText(getContext(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
+
+                errorConexion();
+                //Toast.makeText(getContext(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
                 Log.d("Error", error.getMessage());
             }
         });
@@ -373,7 +376,8 @@ public class Pedidos_insertar extends Fragment  {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error){
-                Toast.makeText(getContext(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
+                errorConexion();
+                //Toast.makeText(getContext(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
                 Log.d("Error", error.getMessage());
             }
         });
@@ -382,73 +386,88 @@ public class Pedidos_insertar extends Fragment  {
 
 
     private void realizar_pedido(){
-        String totalText = total_pedidos.getText().toString();
 
-        //Se elimina la parte del texto que no nos compete
-        //
-        String totalSintexto = totalText.replace("Total: ","");
-        float final_pedido = Float.parseFloat(totalSintexto);
+        if(productos_recycleview.isEmpty()){
+            errorProductos();
+        } else if (id_cliente_set==0) {
+            errorClientes();
+        }else{
 
-        RequestQueue queue = Volley.newRequestQueue(getContext());
-
-        //Se crea un JSONObject con los datos que se desean enviar
-        JSONObject jsonObject = new JSONObject();
-        try{
-            jsonObject.put("id_cliente",id_cliente_set);
-            jsonObject.put("id_usuario",id_usuario());
-            jsonObject.put("total_pedido",final_pedido);
-
-            //Se crea un JSONARRAY para los productos en el carrito y agegarcada uno al array
-            JSONArray productos_array = new JSONArray();
-
-            //Recorre la lista de procductos en el carrito y agregar cada uno al array
-            for (Producto producto : productos_recycleview ){
-                //Se crea un JSON para cada producto
-                JSONObject productos_pedido = new JSONObject();
-
-                //De obtiene el ide del producto
-                productos_pedido.put("id_pro", producto.getId());
-
-                //Se obtene el ide del producto
-                productos_pedido.put("codigo", producto.getCodigo());
-
-                //se obtiene la cantidad d producto pedido del hasmap (o se asigna 0 en caso de que no se encuentre)
-                int cantidad = producto_cantidad.getOrDefault(producto.getCodigo(), 0);
-
-                //Se agrega el objeto del producto al array del producto
-                productos_pedido.put("cantidad", cantidad);
-
-                //Se agrega el objeto al  array de producto
-                productos_array.put(productos_pedido);
-
+            if(!validarProductos()){
+                return;
             }
 
-            //Se agrega el array de productos al ojeto JSON principal
-            jsonObject.put("productos",productos_array);
+            String totalText = total_pedidos.getText().toString();
 
-        }catch (JSONException e){
-            e.printStackTrace();
+            //Se elimina la parte del texto que no nos compete
+            //
+            String totalSintexto = totalText.replace("Total: ","");
+            float final_pedido = Float.parseFloat(totalSintexto);
+
+            RequestQueue queue = Volley.newRequestQueue(getContext());
+
+            //Se crea un JSONObject con los datos que se desean enviar
+            JSONObject jsonObject = new JSONObject();
+            try{
+                jsonObject.put("id_cliente",id_cliente_set);
+                jsonObject.put("id_usuario",id_usuario());
+                jsonObject.put("total_pedido",final_pedido);
+
+                //Se crea un JSONARRAY para los productos en el carrito y agegarcada uno al array
+                JSONArray productos_array = new JSONArray();
+
+                //Recorre la lista de procductos en el carrito y agregar cada uno al array
+                for (Producto producto : productos_recycleview ){
+                    //Se crea un JSON para cada producto
+                    JSONObject productos_pedido = new JSONObject();
+
+                    //De obtiene el ide del producto
+                    productos_pedido.put("id_pro", producto.getId());
+
+                    //Se obtene el ide del producto
+                    productos_pedido.put("codigo", producto.getCodigo());
+
+                    //se obtiene la cantidad d producto pedido del hasmap (o se asigna 0 en caso de que no se encuentre)
+                    int cantidad = producto_cantidad.getOrDefault(producto.getCodigo(), 0);
+
+                    //Se agrega el objeto del producto al array del producto
+                    productos_pedido.put("cantidad", cantidad);
+
+                    //Se agrega el objeto al  array de producto
+                    productos_array.put(productos_pedido);
+
+                }
+
+                //Se agrega el array de productos al ojeto JSON principal
+                jsonObject.put("productos",productos_array);
+
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+
+            //Crear solicitud post
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.POST, url_insertar_pedido, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+
+                    Log.d("Mensaje", response.toString());
+                    Toast.makeText(getContext(), response.toString(), Toast.LENGTH_SHORT).show();
+                    navController.popBackStack();
+                }
+
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                    errorConexion();
+                    Log.e("Error", error.toString());
+                }
+            });
+
+            queue.add(jsonObjectRequest);
         }
 
-        //Crear solicitud post
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.POST, url_insertar_pedido, jsonObject, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-
-                Log.d("Mensaje", response.toString());
-                Toast.makeText(getContext(), response.toString(), Toast.LENGTH_SHORT).show();
-                navController.popBackStack();
-            }
-
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Error", error.toString());
-            }
-        });
-
-        queue.add(jsonObjectRequest);
 
     }
 
@@ -500,6 +519,92 @@ public class Pedidos_insertar extends Fragment  {
         Log.d("ID Uduarios", Et_id);
 
         return usuario_id;
+    }
+
+    private void errorProductos(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Error:");
+
+        StringBuilder message = new StringBuilder();
+        message.append("Debe seleccionar al menos un producto.");
+
+        builder.setMessage(message.toString());
+
+        builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.show();
+
+    }
+
+    private void errorConexion(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Error:");
+
+        StringBuilder message = new StringBuilder();
+        message.append("No se pudo establecer conexion.");
+
+        builder.setMessage(message.toString());
+
+        builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.show();
+
+    }
+
+    private void errorClientes(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Error:");
+
+        StringBuilder message = new StringBuilder();
+        message.append("Por favor seleccione un cliente.");
+
+        builder.setMessage(message.toString());
+
+        builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.show();
+
+    }
+
+    private void ingresar_pedido(){
+
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
+        builder.setTitle("Desea realizar el pedido");
+
+
+
+        builder.setPositiveButton("Ingresar", (dialogInterface, which)->{
+
+            Log.d("Recivido", "Cancelado" );
+            realizar_pedido();
+
+        });
+
+        builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
+        builder.show();
+
+    }
+
+    private boolean validarProductos(){
+        boolean hayErrores = false;
+        for (Producto producto : productos_recycleview){
+            int cantidadPedido = producto_cantidad.getOrDefault(producto.getCodigo(),0);
+
+            if(cantidadPedido<= 0 || cantidadPedido > producto.getCantidad()){
+                hayErrores = true;
+            }
+        }
+
+        if(hayErrores){
+            dialogErrorInventario();
+        }
+
+        return !hayErrores;
+    }
+
+    private void dialogErrorInventario(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Error:");
+        builder.setMessage("Cantidad de productos invalida");
+        builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.show();
     }
 
 

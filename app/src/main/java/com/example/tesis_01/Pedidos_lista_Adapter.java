@@ -247,6 +247,8 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+
+                    errorConexion();
                     Log.e("Error", error.toString());
                 }
             });
@@ -281,6 +283,8 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+
+                    errorConexion();
                     Log.e("Error", error.toString());
                 }
             });
@@ -316,6 +320,7 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    errorConexion();
                     Log.e("Error", error.toString());
                 }
             });
@@ -347,20 +352,32 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
                     fragment.mostrar_pedidos();
 
 
-
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+
                     Log.e("Error", error.toString());
+                    errorConexion();
                 }
             });
             queue.add(jsonObjectRequest);
         }
 
 
+        private void errorConexion(){
+            androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(itemView.getContext());
+            builder.setTitle("Error:");
 
+            StringBuilder message = new StringBuilder();
+            message.append("No se pudo establecer conexion.");
 
+            builder.setMessage(message.toString());
+
+            builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
+            builder.show();
+
+        }
 
     }
 }
