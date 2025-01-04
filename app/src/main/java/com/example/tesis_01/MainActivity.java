@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -101,15 +102,11 @@ public class MainActivity extends AppCompatActivity {
                                         String credencial = sharedPreferences.getString("tipo", "");
 
 
-
-
                                         //Comienza nueva actividad en base a las credenciales
                                         if (credencial.equals("vendedor")){
                                             Log.d("Mensaje", "Se verifiva el acceso al vendedor");
                                             Toast.makeText(getApplicationContext(), "Vendedor",
                                                     Toast.LENGTH_LONG).show();
-
-
 
                                             //Aqui se inicia el menu vendedor
 
@@ -154,15 +151,19 @@ public class MainActivity extends AppCompatActivity {
 
                                     }catch (JSONException e){
                                         //JSON error
+                                        errorContUser();
+                                        /*
                                         e.printStackTrace();
                                         Toast.makeText(getApplicationContext(), "Json error" + e.getMessage(),
                                                 Toast.LENGTH_LONG).show();
-                                        Log.d("Json error", e.toString());
+                                        Log.d("Json error", e.toString());*/
                                     }catch (ClassCastException e){
+                                        errorContUser();
+                                        /*
                                         e.printStackTrace();
                                         Toast.makeText(getApplicationContext(), "ClassCastError" + e.getMessage(),
                                                 Toast.LENGTH_LONG).show();
-                                        Log.d("Json error", e.toString());
+                                        Log.d("Json error", e.toString());*/
                                     }
 
                                 }
@@ -193,8 +194,10 @@ public class MainActivity extends AppCompatActivity {
                     queue.add(req);
 
                 }else{
+                    errorEmptyData();
+                    /*
                     Toast.makeText(getApplicationContext(), "No se pueden dejar campos vacios",
-                            Toast.LENGTH_SHORT).show();
+                            Toast.LENGTH_SHORT).show();*/
                 }
             }
         });
@@ -233,11 +236,57 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error){
+                errorConexion();
+                /*
                 Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
-                Log.d("Error", "Error" + error.getMessage());
+                Log.d("Error", "Error" + error.getMessage());*/
+
+
             }
         });
         queue.add(jsonObjectRequest);
+    }
+
+    private void errorContUser(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Error:");
+
+        StringBuilder message = new StringBuilder();
+        message.append("Usuario/Contraseña incorrectos.");
+
+        builder.setMessage(message.toString());
+
+        builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.show();
+
+    }
+
+    private void errorConexion(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Error:");
+
+        StringBuilder message = new StringBuilder();
+        message.append("No se pudo establecer conexion.");
+
+        builder.setMessage(message.toString());
+
+        builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.show();
+
+    }
+
+    private void errorEmptyData(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Error:");
+
+        StringBuilder message = new StringBuilder();
+        message.append("Por Favor rellene todo los campos.");
+
+        builder.setMessage(message.toString());
+
+        builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.show();
+
     }
 
 

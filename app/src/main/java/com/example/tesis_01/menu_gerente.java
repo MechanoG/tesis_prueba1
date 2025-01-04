@@ -125,7 +125,6 @@ public class menu_gerente extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Informacion", Toast.LENGTH_LONG).show();
                 finish();
             }
         });
