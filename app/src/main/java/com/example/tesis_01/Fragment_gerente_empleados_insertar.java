@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -151,8 +152,9 @@ public class Fragment_gerente_empleados_insertar extends Fragment  {
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                insertar_empleado(tipos);
-                navController.navigate(R.id.action_fragment_gerente_empleados_insertar_to_fragment_gerente_empleados);
+                insert_emp();
+
+
 
             }
         });
@@ -178,7 +180,8 @@ public class Fragment_gerente_empleados_insertar extends Fragment  {
 
         if(!nom_emp.isEmpty() && !ape_emp.isEmpty() &&
                 !ced_emp.isEmpty() && !sex_emp.isEmpty() && !tel_emp.isEmpty() &&
-                !usu_emp.isEmpty() && !cont_emp.isEmpty() && !tipo_emp.isEmpty()){
+                !usu_emp.isEmpty() && !cont_emp.isEmpty() && !tipo_emp.isEmpty() &&
+                !zona_emp.isEmpty()){
 
             RequestQueue queue = Volley.newRequestQueue(getContext());
 
@@ -204,10 +207,13 @@ public class Fragment_gerente_empleados_insertar extends Fragment  {
                 @Override
                 public void onResponse(JSONObject response) {
                     Log.d("Mensaje", response.toString());
+                    navController.navigate(R.id.action_fragment_gerente_empleados_insertar_to_fragment_gerente_empleados);
                 }
             }, new Response.ErrorListener() {
                 @Override
-                public void onErrorResponse(VolleyError error) {
+                public void onErrorResponse(VolleyError error)
+                {
+                    errorConexion();
                     Log.e("Error", error.toString());
                 }
             });
@@ -215,8 +221,56 @@ public class Fragment_gerente_empleados_insertar extends Fragment  {
             queue.add(jsonObjectRequest);
 
         }else {
+            errorEmptyData();
             Toast.makeText(getContext(), "Campos Vacios", Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    private void errorConexion(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Error:");
+
+        StringBuilder message = new StringBuilder();
+        message.append("No se pudo establecer conexion.");
+
+        builder.setMessage(message.toString());
+
+        builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.show();
+
+    }
+
+    private void errorEmptyData(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Error:");
+
+        StringBuilder message = new StringBuilder();
+        message.append("Por favor rellene todo los campos.");
+
+        builder.setMessage(message.toString());
+
+        builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.show();
+
+    }
+
+    private void insert_emp(){
+
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
+        builder.setTitle("¿Insertar Empleado?");
+
+
+
+        builder.setPositiveButton("Insertar", (dialogInterface, which)->{
+
+            Log.d("Recivido", "Cancelado" );
+            insertar_empleado(tipos);
+
+        });
+
+        builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
+        builder.show();
 
     }
 

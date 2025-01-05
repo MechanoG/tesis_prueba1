@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,21 +52,7 @@ public class Fragment_modificar_empleado extends Fragment {
 
     NavController navController;
 
-
-     /*
-    public Fragment_modificar_empleado() {
-        // Required empty public constructor
-    }
-
-        public static Fragment_modificar_empleado newInstance(String param1, String param2) {
-        Fragment_modificar_empleado fragment = new Fragment_modificar_empleado();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-     */
+    String tipos = "Vendedor";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -124,6 +112,19 @@ public class Fragment_modificar_empleado extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sel_tipoUser.setAdapter(adapter);
 
+        sel_tipoUser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                tipos = adapterView.getItemAtPosition(i).toString();
+                Log.d("Spinner secelt:", tipos);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         String tipos = "Vendedor";
 
 
@@ -146,9 +147,7 @@ public class Fragment_modificar_empleado extends Fragment {
         modificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
+                dialog_mod();
             }
         });
 
@@ -256,11 +255,12 @@ public class Fragment_modificar_empleado extends Fragment {
                 @Override
                 public void onResponse(JSONObject response) {
                     Log.d("Mensaje", response.toString());
-                    modificar_empleado(tipos);
+                    navController.popBackStack();
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    errorConexion();
                     Log.e("Error", error.toString());
                 }
             });
@@ -268,9 +268,55 @@ public class Fragment_modificar_empleado extends Fragment {
             queue.add(jsonObjectRequest);
 
         }else {
-            Toast.makeText(getContext(), "Campos Vacios", Toast.LENGTH_SHORT).show();
+            errorEmptyData();
+            //Toast.makeText(getContext(), "Campos Vacios", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private void errorConexion(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Error:");
+
+        StringBuilder message = new StringBuilder();
+        message.append("No se pudo establecer conexion.");
+
+        builder.setMessage(message.toString());
+
+        builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.show();
+
+    }
+
+    private void errorEmptyData(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Error:");
+
+        StringBuilder message = new StringBuilder();
+        message.append("Por favor rellene todo los campos.");
+
+        builder.setMessage(message.toString());
+
+        builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.show();
+
+    }
+
+    private void dialog_mod(){
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
+        builder.setTitle("¿Modificar Empleado?");
+
+
+
+        builder.setPositiveButton("Ingresar", (dialogInterface, which)->{
+            modificar_empleado(tipos);
+            Log.d("Recivido", "Cancelado" );
+
+
+        });
+
+        builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
+        builder.show();
     }
 
 
