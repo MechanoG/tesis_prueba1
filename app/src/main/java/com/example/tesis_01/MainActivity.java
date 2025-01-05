@@ -280,7 +280,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setTitle("Error:");
 
         StringBuilder message = new StringBuilder();
-        message.append("Por Favor rellene todo los campos.");
+        message.append("Por favor rellene todo los campos.");
 
         builder.setMessage(message.toString());
 

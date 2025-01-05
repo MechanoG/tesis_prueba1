@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -94,7 +95,7 @@ public class Fragment_gerente_inventario_insertar extends Fragment {
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                insertar_producto();
+                ingresar_productos();
             }
         });
 
@@ -141,13 +142,12 @@ public class Fragment_gerente_inventario_insertar extends Fragment {
                     navController.popBackStack();
 
 
-
-
-
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+
+                    errorConexion();
                     Log.e("Error", error.toString());
                 }
             });
@@ -155,11 +155,60 @@ public class Fragment_gerente_inventario_insertar extends Fragment {
             queue.add(jsonObjectRequest);
 
         }else {
-            Toast.makeText(getContext(), "Campos Vacios", Toast.LENGTH_SHORT).show();
+
+            errorEmptyData();
+            //Toast.makeText(getContext(), "Campos Vacios", Toast.LENGTH_SHORT).show();
         }
 
 
     }
+
+    private void errorConexion(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Error:");
+
+        StringBuilder message = new StringBuilder();
+        message.append("No se pudo establecer conexion.");
+
+        builder.setMessage(message.toString());
+
+        builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.show();
+
+    }
+
+    private void errorEmptyData(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Error:");
+
+        StringBuilder message = new StringBuilder();
+        message.append("Por favor rellene todo los campos.");
+
+        builder.setMessage(message.toString());
+
+        builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.show();
+
+    }
+
+    private void ingresar_productos(){
+
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
+        builder.setTitle("¿Ingresar Producto?");
+
+
+
+        builder.setPositiveButton("Ingresar", (dialogInterface, which)->{
+            Log.d("Recivido", "Cancelado" );
+            insertar_producto();
+
+        });
+
+        builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
+        builder.show();
+
+    }
+
     /*
     private void clear(){
 

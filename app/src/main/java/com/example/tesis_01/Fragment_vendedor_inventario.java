@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -41,7 +42,8 @@ public class Fragment_vendedor_inventario extends Fragment {
 
     //Url para obtener informacion de productos de la base de datos http://10.0.2.2:80/tesis_con/public/productos
     //"http://192.168.0.4/tesis_con/public/productos";
-    String url_recibir_productos = "http://192.168.0.2/tesis_con/public/productos";
+    String url_recibir_productos = "http://192.168.0.2" +
+            "/tesis_con/public/productos";
 
 
     //Se inicializan controlle y navhost para fragments
@@ -176,7 +178,8 @@ public class Fragment_vendedor_inventario extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error){
-                Toast.makeText(getContext(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
+                errorConexion();
+                //Toast.makeText(getContext(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
                 Log.d("Error", error.getMessage());
             }
         });
@@ -202,7 +205,18 @@ public class Fragment_vendedor_inventario extends Fragment {
 
     }
 
+    private void errorConexion(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Error:");
 
+        StringBuilder message = new StringBuilder();
+        message.append("No se pudo establecer conexion.");
 
+        builder.setMessage(message.toString());
+
+        builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.show();
+
+    }
 
 }
