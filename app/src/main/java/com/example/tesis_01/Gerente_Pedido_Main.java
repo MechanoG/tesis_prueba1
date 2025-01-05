@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
@@ -170,6 +171,7 @@ public class Gerente_Pedido_Main extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                errorConexion();
                 Toast.makeText(getContext(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
                 Log.d("Error", "" + error.getMessage());
             }
@@ -193,6 +195,20 @@ public class Gerente_Pedido_Main extends Fragment {
 
         //Se establece el adaptador al recycle View
         lista_pedidos.setAdapter(adaptador_pedidos);
+
+    }
+
+    private void errorConexion(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Error:");
+
+        StringBuilder message = new StringBuilder();
+        message.append("No se pudo establecer conexion.");
+
+        builder.setMessage(message.toString());
+
+        builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.show();
 
     }
 
