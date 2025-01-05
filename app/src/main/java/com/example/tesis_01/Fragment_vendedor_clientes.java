@@ -139,14 +139,13 @@ public class Fragment_vendedor_clientes extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error){
-                Toast.makeText(getContext(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
+                errorConexion();
+                //Toast.makeText(getContext(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
                 Log.d("Error", error.getMessage());
             }
         });
         queue.add(jsonArrayRequest);
     }
-
-
 
     private void build_clientes_recycleview (){
         Clientes_Vendedor_RecAdapter clientes_view = new Clientes_Vendedor_RecAdapter( clientes,getContext(), getParentFragmentManager());
@@ -162,6 +161,19 @@ public class Fragment_vendedor_clientes extends Fragment {
         //Se establece el adaptador al recycle View
         clientes_recy.setAdapter(clientes_view);
 
+    }
+
+    private void errorConexion(){
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getContext());
+        builder.setTitle("Error:");
+
+        StringBuilder message = new StringBuilder();
+        message.append("No se pudo establecer conexion.");
+
+        builder.setMessage(message.toString());
+
+        builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.show();
 
     }
 

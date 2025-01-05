@@ -80,12 +80,7 @@ public class Fragment_gerente_inventario extends Fragment {
 
         productos = new ArrayList<Producto>();
 
-
-
-
-
         inventario_recy = view.findViewById(R.id.inven_recyView);
-
 
         obtener_productos();
         build_products_recycleview();
@@ -195,9 +190,11 @@ public class Fragment_gerente_inventario extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error){
+
                 errorConexion();
                 //Toast.makeText(getContext(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
                 Log.d("Error", error.getMessage());
+
             }
         });
         queue.add(jsonArrayRequest);

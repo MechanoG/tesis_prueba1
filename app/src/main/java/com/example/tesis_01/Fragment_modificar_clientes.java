@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -94,7 +95,7 @@ public class Fragment_modificar_clientes extends Fragment {
         modificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                modificar_cliente();
+                mod_client();
             }
         });
 
@@ -149,6 +150,8 @@ public class Fragment_modificar_clientes extends Fragment {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+
+                    errorConexion();
                     Log.e("Error", error.toString());
                 }
             });
@@ -158,8 +161,9 @@ public class Fragment_modificar_clientes extends Fragment {
 
     }
     private void modificar_cliente(){
-        //Se declaran los varoles.
 
+
+        //Se declaran los varoles.
         RequestQueue queue = Volley.newRequestQueue(getContext());
 
         //Se crea un JSONObject con los datos que se desean enviar
@@ -170,44 +174,99 @@ public class Fragment_modificar_clientes extends Fragment {
         String ger = encar_in.getText().toString().trim();
         String gerNum = encar_num_int.getText().toString().trim();
 
-        try{
-            jsonObject.put("idCli",clienteId);
-            jsonObject.put("razCli",rif);
-            jsonObject.put("rifCli",raz);
-            jsonObject.put("ger",ger);
-            jsonObject.put("gerNum",gerNum);
+        if(!rif.isEmpty() && !raz.isEmpty() && !ger.isEmpty() && !gerNum.isEmpty()){
+            try{
+                jsonObject.put("idCli",clienteId);
+                jsonObject.put("razCli",rif);
+                jsonObject.put("rifCli",raz);
+                jsonObject.put("ger",ger);
+                jsonObject.put("gerNum",gerNum);
 
-        }catch (JSONException e){
-            e.printStackTrace();
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+
+            //Crear solicitud post
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.POST, url_modificar_clie, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    //Motodo a ejecutar cuando se reciba una respuesta
+
+                    if (getContext() != null){
+                        Log.d("Mensaje", response.toString());
+                        String respuesta = "Mensaje:" + response.toString();
+                        Toast.makeText(getContext(), respuesta, Toast.LENGTH_SHORT).show();
+                    }
+                    if (navController != null){
+                        navController.popBackStack();
+                    }
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                    errorConexion();
+                    Log.e("Error", error.toString());
+                }
+            });
+
+            queue.add(jsonObjectRequest);
+        } else{
+            errorEmptyData();
         }
-
-        //Crear solicitud post
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.POST, url_modificar_clie, jsonObject, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                //Motodo a ejecutar cuando se reciba una respuesta
-
-                if (getContext() != null){
-                    Log.d("Mensaje", response.toString());
-                    String respuesta = "Mensaje:" + response.toString();
-                    Toast.makeText(getContext(), respuesta, Toast.LENGTH_SHORT).show();
-                }
-                if (navController != null){
-                    navController.popBackStack();
-                }
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Error", error.toString());
-            }
-        });
-
-        queue.add(jsonObjectRequest);
 
 
     }
+
+    private void errorConexion(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Error:");
+
+        StringBuilder message = new StringBuilder();
+        message.append("No se pudo establecer conexion.");
+
+        builder.setMessage(message.toString());
+
+        builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.show();
+
+    }
+
+    private void errorEmptyData(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Error:");
+
+        StringBuilder message = new StringBuilder();
+        message.append("Por favor rellene todo los campos.");
+
+        builder.setMessage(message.toString());
+
+        builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.show();
+
+    }
+
+    private void mod_client(){
+
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
+        builder.setTitle("¿Modificar Cliente?");
+
+
+
+        builder.setPositiveButton("Modificar", (dialogInterface, which)->{
+            modificar_cliente();
+            Log.d("Recivido", "Cancelado" );
+
+
+        });
+
+        builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
+        builder.show();
+
+    }
+
+
 }

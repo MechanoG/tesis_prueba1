@@ -124,6 +124,7 @@ public class Clientes_Vendedor_RecAdapter extends RecyclerView.Adapter<Clientes_
 
 
                     }catch (JSONException e){
+                        errorConexion();
                         Log.d("Error", "Error " + String.valueOf(e));
                     }
 
@@ -160,7 +161,19 @@ public class Clientes_Vendedor_RecAdapter extends RecyclerView.Adapter<Clientes_
 
         }
 
+        private void errorConexion(){
+            androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(itemView.getContext());
+            builder.setTitle("Error:");
 
+            StringBuilder message = new StringBuilder();
+            message.append("No se pudo establecer conexion.");
+
+            builder.setMessage(message.toString());
+
+            builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
+            builder.show();
+
+        }
 
 
 
