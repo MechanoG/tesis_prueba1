@@ -41,6 +41,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment:2.8.2")
     implementation("androidx.navigation:navigation-ui:2.8.2")
     implementation("com.google.android.material:material:1.13.0-alpha07")
+    implementation("com.itextpdf:itext7-core:7.2.3")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

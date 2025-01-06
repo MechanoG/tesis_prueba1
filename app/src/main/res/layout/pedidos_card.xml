@@ -132,25 +132,50 @@
 
         </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/informacion_pedido"
-            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:text="Informacion"
-            android:textColor="@color/white"
-            android:textSize="15dp"
-            app:backgroundTint="#0089C0"
-            app:icon="@drawable/baseline_info_24"
-            app:iconGravity="textStart"
-            app:iconPadding="2dp"
-            app:iconSize="20dp"
-            app:iconTint="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/informacion_pedido"
+                style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:text="Informacion"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                app:backgroundTint="#0089C0"
+                app:icon="@drawable/baseline_info_24"
+                app:iconGravity="textStart"
+                app:iconPadding="2dp"
+                app:iconSize="20dp"
+                app:iconTint="@color/white"
+                 />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/pedidoReporte"
+                style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:text="Reporte"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                app:backgroundTint="#0089C0"
+                app:icon="@drawable/baseline_info_24"
+                app:iconGravity="textStart"
+                app:iconPadding="2dp"
+                app:iconSize="20dp"
+                app:iconTint="@color/white"
+                />
+
+
+        </LinearLayout>
 
     </LinearLayout>
 
