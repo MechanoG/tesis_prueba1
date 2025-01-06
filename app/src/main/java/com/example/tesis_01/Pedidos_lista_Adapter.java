@@ -104,6 +104,12 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
         holder.pedido = lista;
 
+        //boton de reportes
+        holder.itemView.findViewById(R.id.pedidoReporte).setEnabled(false);
+        holder.itemView.findViewById(R.id.pedidoReporte).setBackgroundColor(Color.GRAY);
+
+
+
         // Restablecer colores predeterminados antes de aplicar cambios
         holder.estado.setBackgroundColor(Color.TRANSPARENT); // Fondo transparente por defecto
         holder.estado.setTextColor(Color.BLACK); // Texto negro por defecto
@@ -114,17 +120,26 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
             holder.estado.setBackgroundColor(Color.parseColor("#7C0000"));
             holder.estado.setTextColor(Color.WHITE);
 
+
         } else if (estad.equals("Pagado")) {
             holder.estado.setBackgroundColor(Color.parseColor("#32930F"));
             holder.estado.setTextColor(Color.WHITE);
             holder.itemView.findViewById(R.id.cancelar_pedido).setBackgroundColor(Color.GRAY);
             holder.itemView.findViewById(R.id.cancelar_pedido).setEnabled(false);
             holder.itemView.findViewById(R.id.pagar_pedido).setBackgroundColor(Color.GRAY);
-            holder.itemView.findViewById(R.id.pagar_pedido).setEnabled(false);
+            holder.itemView.findViewById(R.id.pagar_pedido).setEnabled(false);{}
+
+            //repoters
+            holder.itemView.findViewById(R.id.pedidoReporte).setEnabled(true);
+
+            holder.itemView.findViewById(R.id.pedidoReporte).setBackgroundColor(Color.parseColor("#32930F"));
+
+
 
         }else{
             holder.estado.setBackgroundColor(Color.TRANSPARENT); // Fondo transparente por defecto
             holder.estado.setTextColor(Color.BLACK); // Texto negro por defecto
+
         }
     }
 
@@ -190,7 +205,9 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
             itemView.findViewById(R.id.pedidoReporte).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    reporte_info();
+
+                    hacer_reporte(() -> {
+                       });
                 }
             });
 
@@ -253,6 +270,30 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
         }
 
+        private void hacer_reporte(Runnable onComplete){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("¿Desea descargar la nota de venta?");
+
+            builder.setPositiveButton("Si", (dialogInterface, which)->{
+
+                Log.d("Recivido", "No" );
+                reporte_info();
+
+                if (onComplete!= null){
+                    onComplete.run();
+                }
+
+            });
+
+            builder.setNegativeButton("No", (dialogInterface, which) -> {
+                dialogInterface.dismiss();
+                if (onComplete != null){
+                    onComplete.run();                }
+            });
+            builder.show();
+        }
+
         public void obtener_detalles(){
 
             RequestQueue queue = Volley.newRequestQueue(itemView.getContext());
@@ -312,8 +353,9 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
                     Log.d("Mensaje", response.toString());
                     String respuesta = response.toString();
 
-                    Toast.makeText(context.getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show();
-                    fragment.mostrar_pedidos();
+                    hacer_reporte(() -> {
+                            fragment.mostrar_pedidos();
+                    });
 
                 }
             }, new Response.ErrorListener() {
@@ -763,20 +805,10 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
                 document.add(productTable);
                 document.add(new Paragraph("\n"));
 
-                //Totales
-                Table totalTable = new Table(UnitValue.createPercentArray(new float[]{6, 2}))
-                        .setWidth(UnitValue.createPercentValue(100));
-
-                totalTable.addCell("Subtotal:");
-                totalTable.addCell(String.valueOf(subtotal));
-
-                totalTable.addCell("Total:");
-                totalTable.addCell(total);
-                document.add(totalTable);
-
                 document.close();
                 outputStream.close();
                 Toast.makeText(itemView.getContext(), "PDF generado correctamente", Toast.LENGTH_SHORT).show();
+
 
 
                 //tabla productos
@@ -811,22 +843,20 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
                 Canvas footerCanvas = new Canvas(canvas, pagesize);
 
                 //Tablas de los totales
-               /* Table totalTable = new Table(UnitValue.createPercentArray(new float[]{6, 2}))
+                Table totalTable = new Table(UnitValue.createPercentArray(new float[]{6, 2}))
                         .setWidth(UnitValue.createPercentValue(100));
                 totalTable.addCell("Subtotal:");
                 totalTable.addCell(String.valueOf(sub));
                 totalTable.addCell("Total:");
-                totalTable.addCell(tot);*/
+                totalTable.addCell(tot);
 
                 //Dibujar la tabla en la parte inferior de la pagina
-                footerCanvas.add(new Paragraph("Pie de pagina")
-                        .setFixedPosition(
-                                pagesize.getLeft() +36,
-                                pagesize.getBottom() + 36,
-                                pagesize.getWidth() - 72
-                        ));
+                footerCanvas.add(totalTable.setFixedPosition(
+                        pagesize.getLeft() + 36,
+                        pagesize.getBottom() + 36,
+                        pagesize.getWidth() - 72
+                ));
                 footerCanvas.close();
-
             }
 
         }
