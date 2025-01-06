@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -31,7 +32,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+
+import com.itextpdf.kernel.events.Event;
+import com.itextpdf.kernel.events.IEventHandler;
+import com.itextpdf.kernel.events.PdfDocumentEvent;
+import com.itextpdf.kernel.geom.Rectangle;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
+import com.itextpdf.layout.Canvas;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.borders.Border;
 import com.itextpdf.layout.borders.SolidBorder;
@@ -476,9 +486,42 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
                     ContentResolver resolver = itemView.getContext().getContentResolver();
                     ContentValues contentValues = new ContentValues();
 
-                    contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, "NotaDeVenta.pdf");
+                    contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, "NotadeVenta" +String.valueOf(id)+".pdf");
                     contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "application/pdf");
                     contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOCUMENTS + "/NotasDeVenta");
+
+                    //Verificar si ya esxiste el arcivo
+                    Cursor cursor = resolver.query(
+                            MediaStore.Files.getContentUri("external"),
+                            null,
+                            MediaStore.MediaColumns.RELATIVE_PATH + "=? AND " +
+                                    MediaStore.MediaColumns.DISPLAY_NAME + "=?",
+                            new String[]{Environment.DIRECTORY_DOWNLOADS+"/NotadeVenta", "NotadeVenta.pdf"},
+                            null
+                    );
+
+                    if (cursor !=null && cursor.getCount() > 0){
+                        //Archivo existe
+                        int count = 1;
+                        String newName;
+                        do{
+                            newName = "NotadeVenta" + count +".pdf";
+                            count++;
+                            cursor = resolver.query(
+                                    MediaStore.Files.getContentUri("external"),
+                                    null,
+                                    MediaStore.MediaColumns.RELATIVE_PATH + "=? AND " +
+                                            MediaStore.MediaColumns.DISPLAY_NAME + "=?",
+                                    new String[]{Environment.DIRECTORY_DOWNLOADS+"/NotadeVenta", newName},
+                                    null);
+                        }while (cursor != null && cursor.getCount()>0);
+
+                        contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, newName);
+                    }
+
+                    if (cursor!=null){
+                        cursor.close();
+                    }
 
                     pdfUri= resolver.insert(MediaStore.Files.getContentUri("external"), contentValues);
                     if (pdfUri != null){
@@ -503,6 +546,11 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
                 //Inicializar documento
                 Document document = new Document(pdfDoc);
 
+                //Añadir event handler para pie de paginaa
+                FooterHandler footerHandler = new FooterHandler(subtotal, total);
+                pdfDoc.addEventHandler(PdfDocumentEvent.END_PAGE, footerHandler);
+
+                //Tabla contenerdora
                 Table mainContainer = new Table(UnitValue.createPercentArray(new float[]{1}))
                         .setWidth(UnitValue.createPercentValue(100))
                         .setBorder(new SolidBorder(1)); // agrega borde al cuadro
@@ -735,9 +783,52 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
             }catch (Exception e){
                 e.printStackTrace();
             }
-
-
         }
 
+        //Clase para manejo del pie de pagina
+        class FooterHandler implements IEventHandler{
+            private final float sub;
+            private final String tot;
+
+            public  FooterHandler(float subto, String totalPed){
+                this.sub = subto;
+                this.tot = totalPed;
+            }
+
+            @Override
+            public void handleEvent (Event event) {
+                PdfDocumentEvent pdfEvent = (PdfDocumentEvent) event;
+                PdfPage page = pdfEvent.getPage();
+                PdfDocument pdfDoc = pdfEvent.getDocument();
+
+                //Tamño de la pagina
+                Rectangle pagesize = page.getPageSize();
+
+                // nuevo PdfCanvas para dibujar en la pagina.
+                PdfCanvas canvas = new PdfCanvas(page);
+
+                //Canvas de pie de pagina
+                Canvas footerCanvas = new Canvas(canvas, pagesize);
+
+                //Tablas de los totales
+               /* Table totalTable = new Table(UnitValue.createPercentArray(new float[]{6, 2}))
+                        .setWidth(UnitValue.createPercentValue(100));
+                totalTable.addCell("Subtotal:");
+                totalTable.addCell(String.valueOf(sub));
+                totalTable.addCell("Total:");
+                totalTable.addCell(tot);*/
+
+                //Dibujar la tabla en la parte inferior de la pagina
+                footerCanvas.add(new Paragraph("Pie de pagina")
+                        .setFixedPosition(
+                                pagesize.getLeft() +36,
+                                pagesize.getBottom() + 36,
+                                pagesize.getWidth() - 72
+                        ));
+                footerCanvas.close();
+
+            }
+
+        }
     }
 }
