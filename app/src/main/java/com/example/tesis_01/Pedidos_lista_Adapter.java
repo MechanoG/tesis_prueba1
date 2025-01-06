@@ -131,7 +131,6 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
             //repoters
             holder.itemView.findViewById(R.id.pedidoReporte).setEnabled(true);
-
             holder.itemView.findViewById(R.id.pedidoReporte).setBackgroundColor(Color.parseColor("#32930F"));
 
 
@@ -351,7 +350,7 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
                 @Override
                 public void onResponse(JSONObject response) {
                     Log.d("Mensaje", response.toString());
-                    String respuesta = response.toString();
+
 
                     hacer_reporte(() -> {
                             fragment.mostrar_pedidos();
@@ -369,7 +368,7 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
             queue.add(jsonObjectRequest);
         }
 
-        public void reporte_info(){
+        private void reporte_info(){
 
             RequestQueue queue = Volley.newRequestQueue(itemView.getContext());
 

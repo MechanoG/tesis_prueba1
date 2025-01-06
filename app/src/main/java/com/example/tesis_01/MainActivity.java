@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                                         //Comienza nueva actividad en base a las credenciales
-                                        if (credencial.equals("vendedor")){
+                                        if (credencial.equals("Vendedor")){
                                             Log.d("Mensaje", "Se verifiva el acceso al vendedor");
                                             Toast.makeText(getApplicationContext(), "Vendedor",
                                                     Toast.LENGTH_LONG).show();
