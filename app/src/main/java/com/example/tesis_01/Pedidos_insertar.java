@@ -81,20 +81,21 @@ public class Pedidos_insertar extends Fragment  {
     //Se guarda el id del cliente
     int id_cliente_set;
 
+    private String tipoPagoSel = "Divisas";
 
 
 
     //Url para obtener informacion de la base de datos http://10.0.2.2:80/tesis_con/public/productos
     //"http://192.168.0.4/tesis_con/public/productos"; -> por local
-    String url_recibir_productos = "http://192.168.0.2/tesis_con/public/productos";
+    String url_recibir_productos = "http://192.168.0.5/tesis_con/public/productos";
 
     //URL para obtener la informacion de clientes de la base de datos http://10.0.2.2:80/tesis_con/public/clientes
     //"http://192.168.0.4/tesis_con/public/clientes";
-    String url_recibir_clientes = "http://192.168.0.2/tesis_con/public/clientes";
+    String url_recibir_clientes = "http://192.168.0.5/tesis_con/public/clientes";
 
     //URL para insertar los pedidos  a la base de datos. http://10.0.2.2:80/tesis_con/public/pedidos/create
     // "http://192.168.0.4/tesis_con/public/pedidos/create";
-    String url_insertar_pedido =  "http://192.168.0.2/tesis_con/public/pedidos/create";
+    String url_insertar_pedido =  "http://192.168.0.5/tesis_con/public/pedidos/create";
 
 
     //Recycleview
@@ -163,6 +164,19 @@ public class Pedidos_insertar extends Fragment  {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sel_tip_tipo_pago.setAdapter(adapter);
 
+        sel_tip_tipo_pago.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                tipoPagoSel = tipo_pago.get(i);
+                Log.d("Seleccion", tipoPagoSel);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
 
         //////////////////////////////////////////////////////////////////////////////////
 
@@ -180,6 +194,7 @@ public class Pedidos_insertar extends Fragment  {
 
 
         );
+
         //Se establece el adapter del pro_per
         pro_ped.setAdapter(proped_adapter);
 
@@ -412,6 +427,8 @@ public class Pedidos_insertar extends Fragment  {
                 jsonObject.put("id_cliente",id_cliente_set);
                 jsonObject.put("id_usuario",id_usuario());
                 jsonObject.put("total_pedido",final_pedido);
+                jsonObject.put("tipo_pago", tipoPagoSel);
+                Log.d("Seleccion", tipoPagoSel);
 
                 //Se crea un JSONARRAY para los productos en el carrito y agegarcada uno al array
                 JSONArray productos_array = new JSONArray();

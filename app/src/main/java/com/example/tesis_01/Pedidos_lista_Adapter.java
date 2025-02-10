@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.InputType;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -68,13 +70,15 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
     private FragmentManager fragmentManager;
     private Gerente_Pedido_Main fragment;
     private String archivo_notaVenta = "NotaVenta";
+    private NavController navController;
 
-
-    public Pedidos_lista_Adapter(ArrayList<Pedidos_lista> lista_pedidos, Context context, FragmentManager fragmentManager, Gerente_Pedido_Main frag) {
+    public Pedidos_lista_Adapter(ArrayList<Pedidos_lista> lista_pedidos, Context context, FragmentManager fragmentManager, Gerente_Pedido_Main frag,
+    NavController navController) {
         this.lista_pedidos = lista_pedidos;
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.fragment = frag;
+        this.navController = navController;
     }
 
 
@@ -104,17 +108,27 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
         holder.pedido = lista;
 
-        //boton de reportes
-        holder.itemView.findViewById(R.id.pedidoReporte).setEnabled(false);
-        holder.itemView.findViewById(R.id.pedidoReporte).setBackgroundColor(Color.GRAY);
+        //Se referencian los botones
+        View btnpagar = holder.itemView.findViewById(R.id.pagar_pedido);
+        View btnCancelar = holder.itemView.findViewById(R.id.cancelar_pedido);
+        View btnReporte = holder.itemView.findViewById(R.id.pedidoReporte);
 
+        //Restablecer botones a su estado predeterminado
+        btnpagar.setEnabled(true);
+        btnpagar.setBackgroundColor(Color.parseColor("#32930F"));
 
+        btnCancelar.setEnabled(true);
+        btnCancelar.setBackgroundColor(Color.parseColor("#E68C06"));
+
+        btnReporte.setEnabled(false);
+        btnReporte.setBackgroundColor(Color.GRAY);
 
         // Restablecer colores predeterminados antes de aplicar cambios
         holder.estado.setBackgroundColor(Color.TRANSPARENT); // Fondo transparente por defecto
         holder.estado.setTextColor(Color.BLACK); // Texto negro por defecto
 
         estad = lista.getEstado().trim();
+
         holder.estado.setText("Estado: " + estad);
         if (estad.equals("Vencido")){
             holder.estado.setBackgroundColor(Color.parseColor("#7C0000"));
@@ -131,13 +145,9 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
             //repoters
             holder.itemView.findViewById(R.id.pedidoReporte).setEnabled(true);
-            holder.itemView.findViewById(R.id.pedidoReporte).setBackgroundColor(Color.parseColor("#32930F"));
+            holder.itemView.findViewById(R.id.pedidoReporte).setBackgroundColor(Color.parseColor("#0089C0"));
 
 
-
-        }else{
-            holder.estado.setBackgroundColor(Color.TRANSPARENT); // Fondo transparente por defecto
-            holder.estado.setTextColor(Color.BLACK); // Texto negro por defecto
 
         }
     }
@@ -155,10 +165,10 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
          Pedidos_lista pedido;
 
-        String url_pedidos_detalle = "http://192.168.0.2/tesis_con/public/pedidos/pedidos_detalle";
-        String getUrl_pedidos_pagar = "http://192.168.0.2/tesis_con/public/pedidos/pagar";
-        String getUrl_pedidos_eliminar = "http://192.168.0.2/tesis_con/public/pedidos/eliminar";
-        String getUrl_pedidos_cancelar = "http://192.168.0.2/tesis_con/public/pedidos/cancel";
+        String url_pedidos_detalle = "http://192.168.0.5/tesis_con/public/pedidos/pedidos_detalle";
+        String getUrl_pedidos_pagar = "http://192.168.0.5/tesis_con/public/pedidos/pagar";
+        String getUrl_pedidos_eliminar = "http://192.168.0.5/tesis_con/public/pedidos/eliminar";
+        String getUrl_pedidos_cancelar = "http://192.168.0.5/tesis_con/public/pedidos/cancel";
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -213,7 +223,9 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
         }
 
         private void pagar_but(){
+            pagarPedido();
 
+            /*
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("¿Pagar pedido?");
 
@@ -222,13 +234,13 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
             builder.setPositiveButton("Pagar", (dialogInterface, which)->{
 
                 Log.d("Recivido", "Pagar" );
-                pagarPedido();
+
 
             });
 
             builder.setNegativeButton("Cancelar", (dialogInterface, which) -> dialogInterface.dismiss());
             builder.show();
-
+            */
         }
 
         private void cancel_but(){
@@ -331,7 +343,13 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
             queue.add(jsonObjectRequest);
         }
 
-        public void pagarPedido(){
+        public void pagarPedido() {
+
+            Bundle bundle = new Bundle()
+;           bundle.putInt("pedidoId", pedido.getId_pe());
+            navController.navigate(R.id.action_gerente_Pedido_Main_to_fragment_pantallaPagar2, bundle);
+
+            /*
 
             RequestQueue queue = Volley.newRequestQueue(itemView.getContext());
 
@@ -366,8 +384,8 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
                 }
             });
             queue.add(jsonObjectRequest);
+        }*/
         }
-
         private void reporte_info(){
 
             RequestQueue queue = Volley.newRequestQueue(itemView.getContext());
@@ -498,6 +516,7 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
                 }
             });
             queue.add(jsonObjectRequest);
+
         }
 
 
@@ -598,7 +617,7 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
                 //Agregar encabezado titulo y encabezado
                 Cell titlecell = new Cell()
-                        .add(new Paragraph("EL OLAM TECH"))
+                        .add(new Paragraph("CABS,CA."))
                         .setFontSize(28)
                         .setBold()
                         .setTextAlignment(TextAlignment.LEFT).

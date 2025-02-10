@@ -36,8 +36,8 @@ public class Clientes_Gerente_RecAdapter extends RecyclerView.Adapter<Clientes_G
     private NavController navController;
     private Fragment_gerente_clientes fragment;
 
-    String url_clientes_detalles = "http://192.168.0.2/tesis_con/public/clientes/detalles";
-    String url_eliminar_clientes =  "http://192.168.0.2/tesis_con/public/clientes/eliminar";
+    String url_clientes_detalles = "http://192.168.0.5/tesis_con/public/clientes/detalles";
+    String url_eliminar_clientes =  "http://192.168.0.5/tesis_con/public/clientes/eliminar";
 
     public Clientes_Gerente_RecAdapter(ArrayList<Cliente> lista_clientes, Context context, FragmentManager fragmentManager,
                                        NavController navController, Fragment_gerente_clientes frag) {
@@ -59,7 +59,7 @@ public class Clientes_Gerente_RecAdapter extends RecyclerView.Adapter<Clientes_G
     public void onBindViewHolder(@NonNull Clientes_Gerente_RecAdapter.ViewHolder holder, int position) {
         Cliente cliente = lista_clientes.get(position);
 
-        holder.rif_cli.setText("RIFT: " + cliente.getRif());
+        holder.rif_cli.setText("RIF: " + cliente.getRif());
         holder.raz_soc.setText("Cliente: " + cliente.getRazon_social());
 
         holder.cli=cliente;

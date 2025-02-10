@@ -52,7 +52,7 @@ public class Gerente_Pedido_Main extends Fragment {
 
 
     //Variable para la url a donde se realizara la consulta
-    String url = "http://192.168.0.2/tesis_con/public/pedidos";
+    String url = "http://192.168.0.5/tesis_con/public/pedidos";
     //"http://192.168.0.4/tesis_con/public/pedidos";
 //"http://10.0.2.2:80/tesis_con/public/pedidos"
 
@@ -183,7 +183,8 @@ public class Gerente_Pedido_Main extends Fragment {
     private void buildRecycleview() {
         //se inicia el adaptador de la clase
         Gerente_Pedido_Main fragment = this;
-        Pedidos_lista_Adapter adaptador_pedidos = new Pedidos_lista_Adapter(pedidosLista, getContext(), getParentFragmentManager(), this);
+        Pedidos_lista_Adapter adaptador_pedidos = new Pedidos_lista_Adapter(pedidosLista, getContext(), getParentFragmentManager(), this,
+                navController);
 
         //agregar layout manager
         //al recycle view

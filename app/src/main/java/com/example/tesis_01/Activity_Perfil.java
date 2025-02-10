@@ -31,7 +31,7 @@ public class Activity_Perfil extends AppCompatActivity {
 
     int id_user;
 
-    String url_detalles_empleados ="http://192.168.0.2/tesis_con/public/usuarios/detalle";
+    String url_detalles_empleados ="http://192.168.0.5/tesis_con/public/usuarios/detalle";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -47,9 +47,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="0sp"
                 android:paddingLeft="10sp"
-                android:text="Nuevo Rift"
-                android:textSize="20sp"
-                />
+                android:text="Nuevo Rif"
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/nom_input"
@@ -57,10 +56,9 @@
                 android:layout_height="72dp"
                 android:layout_marginBottom="30sp"
                 android:ems="10"
-                android:hint="Rift"
+                android:hint="Rif"
                 android:inputType="text"
-                android:textSize="20sp"
-                />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/raz_soc_label"

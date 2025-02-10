@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment_pantallaPagar">
+
+    <com.google.android.material.appbar.AppBarLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#0089C0"
+            android:backgroundTint="#0089C0"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_anchor="@+id/appBarLayout"
+            app:layout_anchorGravity="center"
+            app:navigationIcon="@drawable/go_back_24"
+            app:title="Pagar"
+            app:titleTextColor="@color/black" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constrainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/id_linearButtons">
+
+            <TextView
+                android:id="@+id/comp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="Comprobante"
+                android:textSize="20sp"
+                app:layout_constraintVertical_bias="0.15"
+                tools:layout_editor_absoluteX="158dp" />
+                />
+
+            <EditText
+                android:id="@+id/comp_input"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:ems="10"
+                android:hint="Comprobante"
+                android:inputType="text"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.502"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nom_label" />
+
+            <TextView
+                android:id="@+id/nomClient"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="Cliente"
+                android:textSize="20sp"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintTop_toBottomOf="@+id/comp_input"
+                />
+
+            <EditText
+                android:id="@+id/clie_input"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:ems="10"
+                android:hint="Cliente"
+                android:inputType="text"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.502"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nomClient"
+                />
+
+            <TextView
+                android:id="@+id/modPago"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="Modo Pago"
+                android:textSize="20sp"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintTop_toBottomOf="@+id/clie_input"
+                />
+
+            <EditText
+                android:id="@+id/modInput"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:ems="10"
+                android:hint="Modo de Pago"
+                android:inputType="text"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.502"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/modPago"
+                />
+
+            <TextView
+                android:id="@+id/cant"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="Cantidad"
+                android:textSize="20sp"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintTop_toBottomOf="@+id/modInput"
+                />
+
+            <EditText
+                android:id="@+id/cant_input"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:ems="10"
+                android:hint="Cantidad"
+                android:inputType="text"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.502"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cant"
+                />
+
+
+
+            />
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/id_linearButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <Button
+                android:id="@+id/BotonCancelar"
+                style="@style/Widget.Material3.Button.ElevatedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:backgroundTint="#7C0000"
+                android:text="Cancelar"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:icon="@drawable/baseline_cancel_24"
+                app:iconTint="@color/white"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/BotonPagar"
+                style="@style/Widget.Material3.Button.ElevatedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:backgroundTint="#32930F"
+                android:text="Pagar"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:icon="@drawable/baseline_check_24"
+                app:iconTint="@color/white"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

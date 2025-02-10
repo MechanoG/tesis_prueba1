@@ -146,6 +146,27 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/modPag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:text="Modo Pago: "
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/fact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:text="Comprobante: "
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+
+                <TextView
                     android:id="@+id/subtotal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

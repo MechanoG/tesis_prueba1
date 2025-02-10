@@ -97,9 +97,20 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
 
         holder.pedido = lista;
 
-        //boton de reportes
-        holder.itemView.findViewById(R.id.pedidoReporte).setEnabled(false);
-        holder.itemView.findViewById(R.id.pedidoReporte).setBackgroundColor(Color.GRAY);
+        //Se referencian botones
+        View btnpagar = holder.itemView.findViewById(R.id.pagar_pedido);
+        View btnCancelar = holder.itemView.findViewById(R.id.cancelar_pedido);
+        View btnReporte = holder.itemView.findViewById(R.id.pedidoReporte);
+
+        //Restablecer botones a su estado predeterminado
+        btnpagar.setEnabled(true);
+        btnpagar.setBackgroundColor(Color.parseColor("#32930F"));
+
+        btnCancelar.setEnabled(true);
+        btnCancelar.setBackgroundColor(Color.parseColor("#E68C06"));
+
+        btnReporte.setEnabled(false);
+        btnReporte.setBackgroundColor(Color.GRAY);
 
         // Restablecer colores predeterminados antes de aplicar cambios
         holder.estado.setBackgroundColor(Color.TRANSPARENT); // Fondo transparente por defecto
@@ -150,9 +161,9 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
 
 
 
-        String url_pedidos_detalle = "http://192.168.0.2/tesis_con/public/pedidos/pedidos_detalle";
-        String getUrl_pedidos_pagar = "http://192.168.0.2/tesis_con/public/pedidos/pagar";
-        String getUrl_pedidos_cancelar = "http://192.168.0.2/tesis_con/public/pedidos/cancel";
+        String url_pedidos_detalle = "http://192.168.0.5/tesis_con/public/pedidos/pedidos_detalle";
+        String getUrl_pedidos_pagar = "http://192.168.0.5/tesis_con/public/pedidos/pagar";
+        String getUrl_pedidos_cancelar = "http://192.168.0.5/tesis_con/public/pedidos/cancel";
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -474,7 +485,7 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
 
                 //Agregar encabezado titulo y encabezado
                 Cell titlecell = new Cell()
-                        .add(new Paragraph("EL OLAM TECH"))
+                        .add(new Paragraph("CABS,CA."))
                         .setFontSize(28)
                         .setBold()
                         .setTextAlignment(TextAlignment.LEFT).
