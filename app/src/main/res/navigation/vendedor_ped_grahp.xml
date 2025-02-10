@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_fragment_vendedor_pedido_main_to_pedidos_insertar2"
             app:destination="@id/pedidos_insertar2" />
+        <action
+            android:id="@+id/action_fragment_vendedor_pedido_main_to_fragment_pantallaPagar2"
+            app:destination="@id/fragment_pantallaPagar2" />
     </fragment>
     <fragment
         android:id="@+id/pedidos_insertar2"
@@ -23,4 +26,9 @@
             android:id="@+id/action_pedidos_insertar2_to_fragment_vendedor_pedido_main"
             app:destination="@id/fragment_vendedor_pedido_main" />
     </fragment>
+    <fragment
+        android:id="@+id/fragment_pantallaPagar2"
+        android:name="com.example.tesis_01.Fragment_pantallaPagar"
+        android:label="fragment_pantalla_pagar"
+        tools:layout="@layout/fragment_pantalla_pagar" />
 </navigation>

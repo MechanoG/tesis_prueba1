@@ -195,7 +195,7 @@ public class Fragment_modificar_empleado extends Fragment {
                     sex_inp.setText(sex);
                     tel_inp.setText(tlfn);
                     usu_inp.setText(user);
-                    cont_inp.setText(cont);
+
                     zona_inp.setText(zona);
 
                 }catch (JSONException e){

@@ -212,7 +212,7 @@ public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdap
             message.append("Genero: ").append(sex).append("\n");
             message.append("Teléfono: ").append(tlfn).append("\n");
             message.append("Usuario: ").append(user).append("\n");
-            message.append("Contraseña: ").append(cont).append("\n");
+            message.append("Contraseña: ********").append("\n");
             message.append("Tipo: ").append(tipo).append("\n");
             message.append("Zona: ").append(zona);
 

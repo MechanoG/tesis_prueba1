@@ -218,7 +218,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="63dp"
                     android:ems="10"
-                    android:hint="Contraseña"
+                    android:hint="**************"
                     android:inputType="text"
                     android:textSize="20sp" />
 

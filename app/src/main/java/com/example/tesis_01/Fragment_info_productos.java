@@ -334,7 +334,7 @@ public class Fragment_info_productos extends Fragment {
         builder.setTitle("Error:");
 
         StringBuilder message = new StringBuilder();
-        message.append("No se pudo establecer conexion.");
+        message.append("Datos no encontrados.");
 
         builder.setMessage(message.toString());
 

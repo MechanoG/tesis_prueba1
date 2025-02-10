@@ -187,7 +187,8 @@ public class Fragment_vendedor_pedido_main extends Fragment {
 
     private void buildRecycleview(){
         //se inicia el adaptador de la clase
-        Pedidos_lista_AdapterVend adaptador_pedidos = new Pedidos_lista_AdapterVend(pedidosLista, getContext(), getParentFragmentManager(), this);
+        Pedidos_lista_AdapterVend adaptador_pedidos = new Pedidos_lista_AdapterVend(pedidosLista, getContext(), getParentFragmentManager(), this,
+                navController);
 
         //agregar layout manager
         //al recycle view

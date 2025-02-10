@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -62,12 +64,15 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
     private Context context;
     private FragmentManager fragmentManager;
     private Fragment_vendedor_pedido_main fragment;
+    private NavController navController;
 
-    public Pedidos_lista_AdapterVend(ArrayList<Pedidos_lista> lista_pedidos, Context context, FragmentManager fragmentManager, Fragment_vendedor_pedido_main frag) {
+    public Pedidos_lista_AdapterVend(ArrayList<Pedidos_lista> lista_pedidos, Context context, FragmentManager fragmentManager, Fragment_vendedor_pedido_main frag,
+    NavController navController) {
         this.lista_pedidos = lista_pedidos;
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.fragment = frag;
+        this.navController = navController;
     }
 
     //Resulta en la referencia a la interfaz "pedidos card de cada" pedidos
@@ -307,6 +312,13 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
 
         public void pagarPedido(){
 
+            Bundle bundle = new Bundle()
+                    ;           bundle.putInt("pedidoId", pedido.getId_pe());
+            navController.navigate(R.id.action_fragment_vendedor_pedido_main_to_fragment_pantallaPagar2, bundle);
+
+
+
+            /*
             RequestQueue queue = Volley.newRequestQueue(itemView.getContext());
 
             //Se crea un JSONObject con los datos que se desean enviar
@@ -341,6 +353,8 @@ public class Pedidos_lista_AdapterVend extends RecyclerView.Adapter<Pedidos_list
                 }
             });
             queue.add(jsonObjectRequest);
+
+            */
         }
 
         private void reporte_info(){

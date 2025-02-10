@@ -619,7 +619,7 @@ public class Pedidos_insertar extends Fragment  {
     private void dialogErrorInventario(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Error:");
-        builder.setMessage("Cantidad de productos invalida");
+        builder.setMessage("Existencias insuficientes");
         builder.setNegativeButton("Aceptar", (dialogInterface, i) -> dialogInterface.dismiss());
         builder.show();
     }
