@@ -112,6 +112,7 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
         View btnpagar = holder.itemView.findViewById(R.id.pagar_pedido);
         View btnCancelar = holder.itemView.findViewById(R.id.cancelar_pedido);
         View btnReporte = holder.itemView.findViewById(R.id.pedidoReporte);
+        View btnEliminar = holder.itemView.findViewById(R.id.elimiar_pedido);
 
         //Restablecer botones a su estado predeterminado
         btnpagar.setEnabled(true);
@@ -122,6 +123,9 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
         btnReporte.setEnabled(false);
         btnReporte.setBackgroundColor(Color.GRAY);
+
+        btnEliminar.setEnabled(false);
+        btnEliminar.setBackgroundColor(Color.GRAY);
 
         // Restablecer colores predeterminados antes de aplicar cambios
         holder.estado.setBackgroundColor(Color.TRANSPARENT); // Fondo transparente por defecto
@@ -142,6 +146,10 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
             holder.itemView.findViewById(R.id.cancelar_pedido).setEnabled(false);
             holder.itemView.findViewById(R.id.pagar_pedido).setBackgroundColor(Color.GRAY);
             holder.itemView.findViewById(R.id.pagar_pedido).setEnabled(false);{}
+            holder.itemView.findViewById(R.id.elimiar_pedido).setBackgroundColor(Color.parseColor("#7C0000"));
+            holder.itemView.findViewById(R.id.elimiar_pedido).setEnabled(true);{}
+
+
 
             //repoters
             holder.itemView.findViewById(R.id.pedidoReporte).setEnabled(true);
@@ -165,10 +173,10 @@ public class Pedidos_lista_Adapter extends RecyclerView.Adapter<Pedidos_lista_Ad
 
          Pedidos_lista pedido;
 
-        String url_pedidos_detalle = "http://192.168.0.5/tesis_con/public/pedidos/pedidos_detalle";
-        String getUrl_pedidos_pagar = "http://192.168.0.5/tesis_con/public/pedidos/pagar";
-        String getUrl_pedidos_eliminar = "http://192.168.0.5/tesis_con/public/pedidos/eliminar";
-        String getUrl_pedidos_cancelar = "http://192.168.0.5/tesis_con/public/pedidos/cancel";
+        String url_pedidos_detalle = "https://23a8-37-19-221-239.ngrok-free.app/tesis_con/public/pedidos/pedidos_detalle";
+        String getUrl_pedidos_pagar = "https://23a8-37-19-221-239.ngrok-free.app/tesis_con/public/pedidos/pagar";
+        String getUrl_pedidos_eliminar = "https://23a8-37-19-221-239.ngrok-free.app/tesis_con/public/pedidos/eliminar";
+        String getUrl_pedidos_cancelar = "https://23a8-37-19-221-239.ngrok-free.app/tesis_con/public/pedidos/cancel";
 
 
         public ViewHolder(@NonNull View itemView) {

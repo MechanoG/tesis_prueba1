@@ -62,8 +62,8 @@ public class Fragment_pantallaPagar extends Fragment {
 
     private int pedId;
 
-    String url_obtener_inf_ped = "http://192.168.0.5/tesis_con/public/pedidos/pedidos_detalle";
-    String getUrl_pedidos_pagar = "http://192.168.0.5/tesis_con/public/pedidos/pagar";
+    String url_obtener_inf_ped = "https://23a8-37-19-221-239.ngrok-free.app/tesis_con/public/pedidos/pedidos_detalle";
+    String getUrl_pedidos_pagar = "https://23a8-37-19-221-239.ngrok-free.app/tesis_con/public/pedidos/pagar";
 
     private EditText fact, mod_pag, total, client;
     private Button cancelar, pagar;

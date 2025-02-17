@@ -34,8 +34,8 @@ public class Fragment_modificar_clientes extends Fragment {
 
     private int clienteId;
 
-    String url_obtener_clie = "http://192.168.0.5/tesis_con/public/clientes/byId";
-    String url_modificar_clie = "http://192.168.0.5/tesis_con/public/clientes/mod";
+    String url_obtener_clie = "https://23a8-37-19-221-239.ngrok-free.app/tesis_con/public/clientes/byId";
+    String url_modificar_clie = "https://23a8-37-19-221-239.ngrok-free.app/tesis_con/public/clientes/mod";
 
 
     private TextView cabezera, rif_lab, raz_lab, encar_lab, encar_num_lab;

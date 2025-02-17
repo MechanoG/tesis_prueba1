@@ -10,6 +10,6 @@
         <domain includeSubdomains="true">192.168.0.3</domain>
         <domain includeSubdomains="true">192.168.0.2</domain>
         <domain includeSubdomains="true">https://d0bd-149-40-62-32.ngrok-free.app</domain>
-        <domain includeSubdomains="true">https://0f1b-212-8-252-183.ngrok-free.app</domain>
+        <domain includeSubdomains="true">https://23a8-37-19-221-239.ngrok-free.app</domain>
     </domain-config>
 </network-security-config>

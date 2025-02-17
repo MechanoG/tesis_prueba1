@@ -33,8 +33,8 @@ import java.util.ArrayList;
 
 public class Empleados_RecAdapter extends RecyclerView.Adapter<Empleados_RecAdapter.ViewHolder> {
 
-    String url_detalles_empleados ="http://192.168.0.5/tesis_con/public/usuarios/detalle";
-    String url_eliminar_empleados ="http://192.168.0.5/tesis_con/public/usuarios/eliminar";
+    String url_detalles_empleados ="https://23a8-37-19-221-239.ngrok-free.app/tesis_con/public/usuarios/detalle";
+    String url_eliminar_empleados ="https://23a8-37-19-221-239.ngrok-free.app/tesis_con/public/usuarios/eliminar";
 
     ////Array en el que se guardaran cada elemento de la lista
     private ArrayList<Empleado> empleados_recyclerview;

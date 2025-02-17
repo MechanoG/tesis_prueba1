@@ -109,6 +109,19 @@
             app:layout_constraintTop_toBottomOf="@id/recycle_pedidos" />
 
         <TextView
+            android:id="@+id/iva"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="Iva:"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/txtTotalPedido"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ped_subtotal" />
+
+        <TextView
             android:id="@+id/txtTotalPedido"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -119,7 +132,7 @@
             app:layout_constraintBottom_toTopOf="@+id/id_linear2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ped_subtotal" />
+            app:layout_constraintTop_toBottomOf="@id/iva" />
 
 
         <LinearLayout

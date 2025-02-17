@@ -43,12 +43,13 @@ import org.json.JSONObject;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class Pedidos_insertar extends Fragment  {
     NavController navController;
 //
-    TextView  total_pedidos, subtotal;
+    TextView  total_pedidos, subtotal, iva;
 //
     Button cancelar, ingresar;
 
@@ -87,15 +88,15 @@ public class Pedidos_insertar extends Fragment  {
 
     //Url para obtener informacion de la base de datos http://10.0.2.2:80/tesis_con/public/productos
     //"http://192.168.0.4/tesis_con/public/productos"; -> por local
-    String url_recibir_productos = "http://192.168.0.5/tesis_con/public/productos";
+    String url_recibir_productos = "https://23a8-37-19-221-239.ngrok-free.app/tesis_con/public/productos";
 
     //URL para obtener la informacion de clientes de la base de datos http://10.0.2.2:80/tesis_con/public/clientes
     //"http://192.168.0.4/tesis_con/public/clientes";
-    String url_recibir_clientes = "http://192.168.0.5/tesis_con/public/clientes";
+    String url_recibir_clientes = "https://23a8-37-19-221-239.ngrok-free.app/tesis_con/public/clientes";
 
     //URL para insertar los pedidos  a la base de datos. http://10.0.2.2:80/tesis_con/public/pedidos/create
     // "http://192.168.0.4/tesis_con/public/pedidos/create";
-    String url_insertar_pedido =  "http://192.168.0.5/tesis_con/public/pedidos/create";
+    String url_insertar_pedido =  "https://23a8-37-19-221-239.ngrok-free.app/tesis_con/public/pedidos/create";
 
 
     //Recycleview
@@ -182,8 +183,12 @@ public class Pedidos_insertar extends Fragment  {
 
         subtotal = view.findViewById(R.id.ped_subtotal);
         subtotal.setText(" Subtotal: 0.00");
+        iva = view.findViewById(R.id.iva);
+        iva.setText(" Iva: 0.00");
         total_pedidos = view.findViewById(R.id.txtTotalPedido);
         total_pedidos.setText(" Total: 0.00");
+
+
 
         //Se crea el autocomplete Text vie2 de pedidos
         pro_ped=view.findViewById(R.id.pruebas_view);
@@ -519,8 +524,9 @@ public class Pedidos_insertar extends Fragment  {
                 conteo += producto.getPrecio()*cantidad;
             }
 
-            subtotal.setText("Subtotal:" + String.valueOf(conteo));
-            total_pedidos.setText("Total: " + String.valueOf(conteo + conteo*0.16f));
+            subtotal.setText(" Subtotal: " + String.valueOf(conteo));
+            iva.setText(" IVA: " + String.format(Locale.US,"%.2f",conteo*0.16f));
+            total_pedidos.setText(" Total: " + String.valueOf(conteo + conteo*0.16f));
         }
 
     }

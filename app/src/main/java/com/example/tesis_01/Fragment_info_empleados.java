@@ -56,8 +56,8 @@ public class Fragment_info_empleados extends Fragment {
     private String[] yearsArray = {"2024","2025","2026","2027","2028","2029","2030","2031","2032",
             "2033","2034","2035","2036","2037","2038","2039","2040"};
 
-    String url_clie_stats = "http://192.168.0.5/tesis_con/public/usuarios/maseficientes";
-    String url_clie_minus_stats = "http://192.168.0.5/tesis_con/public/usuarios/menosEficientes";
+    String url_clie_stats = "https://23a8-37-19-221-239.ngrok-free.app/tesis_con/public/usuarios/maseficientes";
+    String url_clie_minus_stats = "https://23a8-37-19-221-239.ngrok-free.app/tesis_con/public/usuarios/menosEficientes";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

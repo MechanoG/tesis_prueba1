@@ -43,7 +43,7 @@ public class Fragment_gerente_inventario_insertar extends Fragment {
 
     //URL para enviar productos
     //"http://192.168.0.4/tesis_con/public/productos/create";
-    private String url_enviar_pro = "http://192.168.0.5/tesis_con/public/productos/create";
+    private String url_enviar_pro = "https://23a8-37-19-221-239.ngrok-free.app/tesis_con/public/productos/create";
 
     NavController navController;
 

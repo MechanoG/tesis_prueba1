@@ -27,7 +27,7 @@ public class Fragment_pedidosDetalles_Dialog extends DialogFragment {
 
     //Se declaran los textview;
     TextView ped_id, vend, clie_rif, clie_raz, ped_zona,form_pag, fec_ini,
-             fec_lim, estado, subtotal, total, mod_pag, fact;
+             fec_lim, fec_pag, estado, subtotal, total, mod_pag, fact, iva;
 
     ArrayList<Producto> pro_p_pedido;
 
@@ -75,8 +75,10 @@ public class Fragment_pedidosDetalles_Dialog extends DialogFragment {
         form_pag = view.findViewById(R.id.forma_pago);
         fec_ini = view.findViewById(R.id.fec_ini);
         fec_lim = view.findViewById(R.id.fec_lim);
+        fec_pag = view.findViewById(R.id.fec_pag);
         estado = view.findViewById(R.id.estado);
         subtotal = view.findViewById(R.id.subtotal);
+        iva=view.findViewById(R.id.iva);
         total = view.findViewById(R.id.total);
         productos_recy = view.findViewById(R.id.pro_lis);
         mod_pag= view.findViewById(R.id.modPag);
@@ -104,8 +106,10 @@ public class Fragment_pedidosDetalles_Dialog extends DialogFragment {
             form_pag.setText("   Tipo Pago: " + jsonObject.optString("ped_pag", "N/A"));
             fec_ini.setText("   Realizada: " + jsonObject.optString("fech_rea", "N/A"));
             fec_lim.setText("   Vence: " + jsonObject.optString("fech_lim", "N/A"));
+            fec_pag.setText("   Fecha Pago: " + jsonObject.optString("fech_pag", "N/A"));
             estado.setText("   Estado: " + jsonObject.optString("estado", "N/A"));
             subtotal.setText("   Subtotal: " + jsonObject.optString("subtotal", "N/A"));
+            iva.setText("   IVA: " + jsonObject.optString("IVA", "N/A"));
             total.setText("   Total: " + jsonObject.optString("total", "N/A"));
             mod_pag.setText("   Modo Pago: " + jsonObject.optString("mod_pag", "N/A"));
             fact.setText("   Comprobante: " + jsonObject.optString("comp", "N/A"));;
